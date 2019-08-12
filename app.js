@@ -37,4 +37,8 @@ app.get('*', (req, res) => {
 	res.render("home.ejs");
 });
 
-app.set('port', process.env.PORT || 8081);
+var port = process.env.PORT || 8081;
+
+var server = app.listen(port, function () {
+	console.log('Server running at http://127.0.0.1:' + port + '/');
+});
