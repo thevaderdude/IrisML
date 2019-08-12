@@ -1,8 +1,10 @@
 {
-  "name": "WebProject",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
+  "name": "node-express",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
   "dependencies": {
     "aws-sdk": "^2.507.0",
     "cat-me": "^1.0.3",
