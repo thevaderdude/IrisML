@@ -1,0 +1,16 @@
+body { 
+  background: url(images/coolDemo-bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  
+}
+
+.container{
+	color: white;
+}
+
+#top {
+	margin-top: 4em;
+}
