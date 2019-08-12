@@ -37,6 +37,4 @@ app.get('*', (req, res) => {
 	res.render("home.ejs");
 });
 
-app.listen(8081, () => {
-	console.log('server listening ');
-});
+app.set('port', process.env.PORT || 8081);
