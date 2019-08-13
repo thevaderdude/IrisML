@@ -24,7 +24,6 @@ app.get('/documentation', (req, res) => {
 	res.render("documentation.ejs");
 });
 
-
 app.get('/testing', (req, res) => {
 	res.render("testing.ejs");
 });
