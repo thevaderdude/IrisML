@@ -40,6 +40,10 @@ function setupSquares(){
 				messageDisplay.textContent = "Correct!";
 				resetButton.textContent = "Play Again?"
 				changeColors(clickedColor);
+				setTimeout(function(){
+				reset();	
+			   },1000); //delay is in milliseconds 
+				
 				h1.style.background = clickedColor;
 			} else {
 				this.style.background = "#232323";
