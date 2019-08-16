@@ -36,7 +36,7 @@ app.get('/valen', (req, res) => {
 	res.render("valen.ejs");
 });
 
-app.get('/valen/timing', (req, res) => {
+app.get('/poop', (req, res) => {
 	res.render("timing.ejs")
 	
 	
