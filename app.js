@@ -36,15 +36,15 @@ app.get('/valen', (req, res) => {
 	res.render("valen.ejs");
 });
 
-app.get('/poop', (req, res) => {
-	res.render("timing.ejs")
+app.get('/valen/timing', (req, res) => {
+	res.render("valen/timing.ejs")
 	
 	
 });
 
-app.get('*', (req, res) => {
-	res.render("home.ejs");
-});
+//app.get('*', (req, res) => {
+//	res.render("home.ejs");
+//});
 
 var port = process.env.PORT || 8081;
 
