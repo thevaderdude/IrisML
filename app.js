@@ -29,7 +29,7 @@ app.get('/testing', (req, res) => {
 });
 
 app.get('/color', (req, res) => {
-	res.render("color.ejs");
+	res.render("color/color.ejs");
 });
 
 app.get('/valen', (req, res) => {

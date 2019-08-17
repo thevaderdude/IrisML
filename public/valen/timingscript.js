@@ -8,7 +8,7 @@ appearAfterDelay();
 function makeShapeAppear() {
     var top = Math.random() * 400;
     var left = Math.random() * 400;
-    var w = Math.random() * 400;
+    var w = Math.random() * 400 + 50;
     if (Math.random() > 0.5) {
         document.getElementById("shape").style.borderRadius = "50%"
     }
