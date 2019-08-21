@@ -5,7 +5,7 @@
 	<link rel="stylesheet" type="text/css" href="demos.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
-<body>
+<body class="text-white">
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #c0deed;">
   <a class="navbar-brand" href="/">IrisML</a>
@@ -20,34 +20,88 @@
     </ul>
   </div>
 </nav>
-	
-	
-<div class="container my-5" id="top">
-  <div class="row justify-content-center">
-    <img src='images/tempGraph.png'>
+<br>
+<br> 
+<br>
+
+
+<h1 class="row justify-content-center">
+    This is a classification neural net demo
+</h1>
+
+<div class="container d-flex flex-column" id="round">
+  <div class="row justify-content-center m-5">
+    <img src='images/visual.png'>
   </div>
-  <div class="row justify-content-center">
-    <p class="lead">This is a linear regression demo</p>
+  <div class="row justify-content-center m-5">
+    <img src='images/graph.png'>
+  </div>
+  <div class="row m-auto">
+      <div class="col mx-5">
+        # of epochs: 100
+        <div></div>
+        m = 100000
+      </div>
+      <div class="col mx-5">
+        # of layers: 3
+        <div></div>
+        1st hidden: 20
+      </div>
+      <div class="col mx-5">
+         # of inputs: 10
+         <div></div>
+         # of outputs: 2
+      </div>
   </div>
 </div>
 	
-<div class="container my-5">
-  <div class="row justify-content-center">
-    <img src='images/tempGraph.png'>
+<h1 class="row justify-content-center">
+    This is a linear regression demo
+</h1>
+
+<div class="container my-5" id="round">
+  <div class="row justify-content-center my-5">
+    <img src='images/visual.png'>
   </div>
   <div class="row justify-content-center">
-    <p class="lead">This is a classification demo</p>
+    <img src='images/graph.png'>
   </div>
+  <div class="row justify-content-center">
+    <div class="col-sm">
+      # of epochs: 10000
+    </div>
+    <div class="col-sm">
+        m = 100000
+    </div>
+      div class="col-sm">
+      n = 10
+    </div>
 </div>
+
 	
-<div class="container my-5">
-  <div class="row justify-content-center">
-    <img src='images/tempGraph.png'>
+<h1 class="row justify-content-center">
+    This is a binary classification demo
+</h1>
+
+<div class="container my-5" id="round">
+    <div class="row justify-content-center my-5">
+      <img src='images/visual.png'>
+    </div>
+    <div class="row justify-content-center">
+      <img src='images/graph.png'>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm">
+          # of epochs: 10000
+        </div>
+        <div class="col-sm">
+            m = 100000
+        </div>
+        <div class="col-sm">
+           n = 10
+        </div>
+    </div>
   </div>
-  <div class="row justify-content-center">
-    <p class="lead">This is a neural network demo</p>
-  </div>
-</div>
 	
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
