@@ -29,12 +29,22 @@ app.get('/testing', (req, res) => {
 });
 
 app.get('/color', (req, res) => {
-	res.render("color.ejs");
+	res.render("color/color.ejs");
 });
 
-app.get('*', (req, res) => {
-	res.render("home.ejs");
+app.get('/valen', (req, res) => {
+	res.render("valen.ejs");
 });
+
+app.get('/valen/timing', (req, res) => {
+	res.render("valen/timing.ejs")
+	
+	
+});
+
+//app.get('*', (req, res) => {
+//	res.render("home.ejs");
+//});
 
 var port = process.env.PORT || 8081;
 
