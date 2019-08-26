@@ -4,10 +4,11 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  padding-top: 80px;
 }
 
 .container {
-  background: black;
+  background: rgb(10, 38, 99);
   overflow: hidden;
 }
 

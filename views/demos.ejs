@@ -7,104 +7,272 @@
 </head>
 <body class="text-white">
 
-<nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background-color: #c0deed;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light mb-5" style="background-color: #c0deed;">
   <a class="navbar-brand" href="/">IrisML</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-        <a class="nav-link" href="/demos">Demos</a>
-		<a class="nav-link" href="/documentation">Documentation</a>
-		<a class="nav-link" href="/color">Color</a>
+      <a class="nav-link" href="/demos">Demos</a>
+		  <a class="nav-link" href="/documentation">Documentation</a>
+		  <a class="nav-link" href="/color">Color</a>
     </ul>
   </div>
 </nav>
-<br>
-<br> 
-<br>
 
 
 <h1 class="row justify-content-center">
-    This is a classification neural net demo
+    This is a Classification Neural Network Demo
 </h1>
 
-<div class="container d-flex flex-column" id="round">
-  <div class="row justify-content-center m-5">
+<div class="container mb-5" id="round">
+  
+  <div class="py-4 pl-3">
+    <button type="button" class="btn btn-success mb-3">Start</button>
+    <button type="button" class="btn btn-danger ml-3 mb-3">Reset</button>
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlFile1"></label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
+    </form>
+  </div>
+  
+  <div class="row justify-content-center pb-5">
     <img src='images/visual.png'>
   </div>
-  <div class="row justify-content-center m-5">
+  <div class="row justify-content-center pb-5">
     <img src='images/graph.png'>
   </div>
-  <div class="row m-auto">
-      <div class="col mx-5">
-        # of epochs: 100
-        <div></div>
-        m = 100000
+
+  <div>
+    <div class="row m-auto pb-4">
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Epochs</span>
+          </div>
+          <input type="text" class="form-control" placeholder="100000" aria-label="Epochs" aria-describedby="basic-addon1">
+        </div>
       </div>
-      <div class="col mx-5">
-        # of layers: 3
-        <div></div>
-        1st hidden: 20
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Layers</span>
+          </div>
+          <input type="text" class="form-control" placeholder="3" aria-label="Layers" aria-describedby="basic-addon1">
+        </div>
       </div>
-      <div class="col mx-5">
-         # of inputs: 10
-         <div></div>
-         # of outputs: 2
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Instances</span>
+          </div>
+          <input type="text" class="form-control" placeholder="1000000" aria-label="Instances" aria-describedby="basic-addon1">
+        </div>
       </div>
+    </div>
+    <div class="row m-auto pb-4">
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Learning Rate</span>
+          </div>
+          <input type="text" class="form-control" placeholder="1" aria-label="Alpha" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Layers</span>
+          </div>
+          <input type="text" class="form-control" placeholder="3" aria-label="Layers" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Inputs</span>
+          </div>
+          <input type="text" class="form-control" placeholder="3" aria-label="Inputs" aria-describedby="basic-addon1">
+        </div>
+      </div>
+    </div>
+    <div class="row m-auto pb-4">
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Regularized Rate</span>
+          </div>
+          <input type="text" class="form-control" placeholder="1" aria-label="Lambda" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Layers</span>
+          </div>
+          <input type="text" class="form-control" placeholder="3" aria-label="Layers" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Outputs</span>
+          </div>
+          <input type="text" class="form-control" placeholder="2" aria-label="Outputs" aria-describedby="basic-addon1">
+        </div>
+      </div>
+    </div>
   </div>
+
 </div>
 	
 <h1 class="row justify-content-center">
-    This is a linear regression demo
+    This is a Linear Regression Demo
 </h1>
 
-<div class="container my-5" id="round">
-  <div class="row justify-content-center my-5">
+<div class="container mb-5" id="round">
+
+  <div class="py-4 pl-3">
+    <button type="button" class="btn btn-success mb-3">Start</button>
+    <button type="button" class="btn btn-danger ml-3 mb-3">Reset</button>
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlFile1"></label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
+    </form>
+  </div>
+
+  <div class="row justify-content-center pb-5">
     <img src='images/visual.png'>
   </div>
-  <div class="row justify-content-center">
+  <div class="row justify-content-center pb-5">
     <img src='images/graph.png'>
   </div>
-  <div class="row justify-content-center">
-    <div class="col-sm">
-      # of epochs: 10000
+
+  <div class="row m-auto pb-4">
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"># Epochs</span>
+        </div>
+        <input type="text" class="form-control" placeholder="100000" aria-label="Epochs" aria-describedby="basic-addon1">
+      </div>
     </div>
-    <div class="col-sm">
-        m = 100000
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"># Instances</span>
+        </div>
+        <input type="text" class="form-control" placeholder="1000000" aria-label="Layers" aria-describedby="basic-addon1">
+      </div>
     </div>
-      div class="col-sm">
-      n = 10
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1"># Inputs</span>
+        </div>
+        <input type="text" class="form-control" placeholder="3" aria-label="Instances" aria-describedby="basic-addon1">
+      </div>
     </div>
+  </div>
+  <div class="row m-auto pb-4">
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Learning Rate</span>
+        </div>
+        <input type="text" class="form-control" placeholder="1" aria-label="Alpha" aria-describedby="basic-addon1">
+      </div>
+    </div>
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="basic-addon1">Regularized Rate</span>
+        </div>
+        <input type="text" class="form-control" placeholder="1" aria-label="Lambda" aria-describedby="basic-addon1">
+      </div>
+    </div>
+  </div>
+
 </div>
 
 	
 <h1 class="row justify-content-center">
-    This is a binary classification demo
+    This is a Binary Classification Demo
 </h1>
 
-<div class="container my-5" id="round">
-    <div class="row justify-content-center my-5">
-      <img src='images/visual.png'>
-    </div>
-    <div class="row justify-content-center">
-      <img src='images/graph.png'>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-sm">
-          # of epochs: 10000
-        </div>
-        <div class="col-sm">
-            m = 100000
-        </div>
-        <div class="col-sm">
-           n = 10
-        </div>
-    </div>
+<div class="container mb-5" id="round">
+
+  <div class="py-4 pl-3">
+    <button type="button" class="btn btn-success mb-3">Start</button>
+    <button type="button" class="btn btn-danger ml-3 mb-3">Reset</button>
+    <form>
+      <div class="form-group">
+        <label for="exampleFormControlFile1"></label>
+        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      </div>
+    </form>
   </div>
+
+  <div class="row justify-content-center pb-5">
+    <img src='images/visual.png'>
+  </div>
+  <div class="row justify-content-center pb-5">
+    <img src='images/graph.png'>
+  </div>
+
+  <div class="row m-auto pb-4">
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Epochs</span>
+          </div>
+          <input type="text" class="form-control" placeholder="100000" aria-label="Epochs" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Instances</span>
+          </div>
+          <input type="text" class="form-control" placeholder="1000000" aria-label="Layers" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1"># Inputs</span>
+          </div>
+          <input type="text" class="form-control" placeholder="3" aria-label="Instances" aria-describedby="basic-addon1">
+        </div>
+      </div>
+    </div>
+    <div class="row m-auto pb-4">
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Learning Rate</span>
+          </div>
+          <input type="text" class="form-control" placeholder="1" aria-label="Alpha" aria-describedby="basic-addon1">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">Regularized Rate</span>
+          </div>
+          <input type="text" class="form-control" placeholder="1" aria-label="Lambda" aria-describedby="basic-addon1">
+        </div>
+      </div>
+    </div>
+
+</div>
 	
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
