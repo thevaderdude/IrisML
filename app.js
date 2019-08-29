@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/demos', (req, res) => {
-	res.render("demos.ejs");
+	res.render("demos/demos.ejs");
 });
 
 app.get('/documentation', (req, res) => {
