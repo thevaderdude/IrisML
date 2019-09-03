@@ -13,7 +13,7 @@ mongoose.connect('mongodb+srv://bobbyd:Amonalbus1!@cluster0-saber.mongodb.net/te
 });
 
 app.get('/', (req, res) => {
-	res.render("home.ejs");
+	res.render("home/home.ejs");
 });
 
 app.get('/demos', (req, res) => {
@@ -21,11 +21,7 @@ app.get('/demos', (req, res) => {
 });
 
 app.get('/documentation', (req, res) => {
-	res.render("documentation.ejs");
-});
-
-app.get('/testing', (req, res) => {
-	res.render("testing.ejs");
+	res.render("documentation/documentation.ejs");
 });
 
 app.get('/color', (req, res) => {
@@ -38,8 +34,6 @@ app.get('/valen', (req, res) => {
 
 app.get('/valen/timing', (req, res) => {
 	res.render("valen/timing.ejs")
-	
-	
 });
 
 //app.get('*', (req, res) => {

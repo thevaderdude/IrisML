@@ -5,6 +5,7 @@ body {
   -o-background-size: cover;
   background-size: cover;
   padding-top: 80px;
+  overflow-x: hidden;
 }
 
 .container {
@@ -12,6 +13,6 @@ body {
   overflow: hidden;
 }
 
-#round {
+.round {
   border-radius: 3%;
 }

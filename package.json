@@ -8,6 +8,7 @@
   "dependencies": {
     "aws-sdk": "^2.507.0",
     "cat-me": "^1.0.3",
+    "chart.js": "^2.8.0",
     "ejs": "^2.6.2",
     "express": "^4.17.1",
     "faker": "^4.1.0",
