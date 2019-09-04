@@ -4,6 +4,10 @@ body {
 	font-family: "Montserrat", "Avenir";
 }
 
+.navbar {
+	background-color: rgb(107, 130, 152);
+  }
+
 .square {
 	width: 30%;
 	background: purple;

@@ -15,10 +15,6 @@ body {
 	margin-top: 23em;
 }
 
-.navbar-nav.mr-auto li a {
-    color: white !important;
-}
-
-.navbar-brand {
-    color: white;
+.navbar {
+  background-color: rgb(107, 130, 152);
 }

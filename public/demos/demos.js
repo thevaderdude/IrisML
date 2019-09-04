@@ -1,26 +1,32 @@
+
+
 var startButton = document.querySelector("#start");
 var resetButton = document.querySelector("#stop");
 
+startButton.addEventListener('click', function(){
+    console.log('hello')
+})
+
+var ctx = document.getElementById('myChart').getContext('2d');
+Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
+
 window.onload = function() {
-    var ctx = document.getElementById('myChart').getContext('2d');
-    Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
     var chart = new Chart(ctx, {
-  
+
         type: 'line',
     
-   
         data: {
             labels: ['1','2','3','4','5'],
             datasets: [{
                 borderColor: 'rgb(255,255,255)',
                 data: [1000,500,200,100,50,20],
-
+                pointBorderColor: 'rgb(255,223,0)',
+                borderColor: 'rgb(255,223,0)',
+    
             }],
-            pointHoverBackgroundColor: 'rgb(0,0,0)',
-            pointHoverBorderColor: 'rgb(0,0,0)'
+           
         },
     
-
         options: {
             title:{
                 display: true,
@@ -28,10 +34,7 @@ window.onload = function() {
                 fontSize: 24
             },
             legend:{
-                position:'bottom',
-                labels:{
-                    fontColor: 'rgb(10, 38, 99)'
-                }
+                display: false
             },
             scales:{
                 yAxes:[{
@@ -53,3 +56,4 @@ window.onload = function() {
     });
 
 }
+

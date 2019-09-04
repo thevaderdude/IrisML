@@ -6,3 +6,7 @@ body {
   background-size: cover;
   padding-top: 80px;
 }
+
+.navbar {
+  background-color: rgb(107, 130, 152);
+}

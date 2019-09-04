@@ -8,6 +8,10 @@ body {
   overflow-x: hidden;
 }
 
+.navbar {
+  background-color: rgb(107, 130, 152);
+}
+
 .container {
   background: rgb(10, 38, 99);
   overflow: hidden;
