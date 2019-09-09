@@ -1,8 +1,7 @@
-
 var netStart = document.querySelector("#net-start");
 var netStop = document.querySelector("#net-stop");
 
-var ctx = document.getElementById('myChart').getContext('2d');
+var ctx = document.getElementById('net-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
 var lineChart = new Chart(ctx, {
@@ -68,5 +67,5 @@ netStart.addEventListener('click', function(){
 });
 
 netStop.addEventListener('click', function(){
-    alert('nibba');
+    alert('neural net demo');
 });
