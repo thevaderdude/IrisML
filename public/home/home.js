@@ -1,9 +1,5 @@
-
-var netStart = document.querySelector("#net-start");
-var netStop = document.querySelector("#net-stop");
-
 var ctx = document.getElementById('myChart').getContext('2d');
-Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
+Chart.defaults.global.defaultFontColor = 'rgb(0,0,0)';
 
 var lineChart = new Chart(ctx, {
 
@@ -45,28 +41,4 @@ var lineChart = new Chart(ctx, {
             }],
         }
     }
-});
-
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-}
-
-arrLabels = [6,7,8,9,10,11,12,13,14,15]
-arrData = [100,150,200,300,320,380,400,600,900,1000]
-var delayInMilliseconds = 1000;
-
-netStart.addEventListener('click', function(){
-    for(i = 0; i < arrData.length; i++){
-
-        addData(lineChart,arrLabels[i],arrData[i]);
-        lineChart.update();
-
-    }
-});
-
-netStop.addEventListener('click', function(){
-    alert('nibba');
 });
