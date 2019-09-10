@@ -29,8 +29,8 @@
 <div class="container round mb-5 px-5">
   
   <div class="py-4 pl-3">
-    <button type="button" id="start" class="btn btn-success mb-3">Start</button>
-    <button type="button" id="stop"class="btn btn-danger ml-3 mb-3">Stop</button>
+    <button type="button" id="net-start" class="btn btn-success mb-3">Start</button>
+    <button type="button" id="net-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
     <form>
       <div class="form-group">
         <label for="exampleFormControlFile1"></label>
@@ -40,11 +40,11 @@
   </div>
   
   <div class="row justify-content-center pb-5">
-    <canvas id="myChart" width='100'></canvas>
+    <canvas id="net-chart" width='100'></canvas>
   </div>
 
   <div>
-    <div class="row m-auto pb-4">
+    <div class="row pb-4">
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
@@ -64,13 +64,13 @@
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Instances</span>
+            <span class="input-group-text" id="basic-addon1"># Instances:</span>
           </div>
           <input type="number" class="form-control" placeholder="1000000" aria-label="Instances" aria-describedby="basic-addon1">
         </div>
       </div>
     </div>
-    <div class="row m-auto pb-4">
+    <div class="row pb-4">
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
@@ -96,7 +96,7 @@
         </div>
       </div>
     </div>
-    <div class="row m-auto pb-4">
+    <div class="row pb-4">
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
@@ -133,8 +133,8 @@
 <div class="container round mb-5">
 
   <div class="py-4 pl-3">
-    <button type="button" id="start" class="btn btn-success mb-3">Start</button>
-    <button type="button" id="stop"class="btn btn-danger ml-3 mb-3">Stop</button>
+    <button type="button" id="lin-start" class="btn btn-success mb-3">Start</button>
+    <button type="button" id="lin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
     <form>
       <div class="form-group">
         <label for="exampleFormControlFile1"></label>
@@ -143,8 +143,8 @@
     </form>
   </div>
 
-  <div class="row justify-content-center pb-5">
-    <img src='images/graph.png'>
+  <div class="row justify-content-center pb-5 px-4">
+    <canvas id="lin-chart" width='100'></canvas>
   </div>
 
   <div class="row m-auto pb-4">
@@ -202,8 +202,8 @@
 <div class="container round mb-5">
 
   <div class="py-4 pl-3">
-    <button type="button" id="start" class="btn btn-success mb-3">Start</button>
-    <button type="button" id="stop"class="btn btn-danger ml-3 mb-3">Stop</button>
+    <button type="button" id="bin-start" class="btn btn-success mb-3">Start</button>
+    <button type="button" id="bin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
     <form>
       <div class="form-group">
         <label for="exampleFormControlFile1"></label>
@@ -212,8 +212,8 @@
     </form>
   </div>
 
-  <div class="row justify-content-center pb-5">
-    <img src='images/graph.png'>
+  <div class="row justify-content-center pb-5 px-4">
+    <canvas id="bin-chart" width='100'></canvas>
   </div>
 
   <div class="row m-auto pb-4">
@@ -264,8 +264,10 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="demos.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="net-demo.js"></script>
+<script src="lin-demo.js"></script>
+<script src="bin-demo.js"></script>
 </body>
 </html>
