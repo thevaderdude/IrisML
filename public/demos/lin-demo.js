@@ -4,7 +4,7 @@ var linStop = document.querySelector("#lin-stop");
 var ctx = document.getElementById('lin-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
-var lineChart = new Chart(ctx, {
+var linChart = new Chart(ctx, {
 
     type: 'line',
 
@@ -48,4 +48,24 @@ var lineChart = new Chart(ctx, {
 
 linStop.addEventListener('click',function(){
     alert('linear demo');
+});
+
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+}
+
+arrLabels = [6,7,8,9,10,11,12,13,14,15]
+arrData = [100,150,200,300,320,380,400,600,900,1000]
+var delayInMilliseconds = 1000;
+
+linStart.addEventListener('click', function(){
+    for(i = 0; i < arrData.length; i++){
+
+        addData(linChart,arrLabels[i],arrData[i]);
+        linChart.update();
+
+    }
 });

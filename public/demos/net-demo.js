@@ -4,7 +4,7 @@ var netStop = document.querySelector("#net-stop");
 var ctx = document.getElementById('net-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
-var lineChart = new Chart(ctx, {
+var netChart = new Chart(ctx, {
 
     type: 'line',
 
@@ -60,8 +60,8 @@ var delayInMilliseconds = 1000;
 netStart.addEventListener('click', function(){
     for(i = 0; i < arrData.length; i++){
 
-        addData(lineChart,arrLabels[i],arrData[i]);
-        lineChart.update();
+        addData(netChart,arrLabels[i],arrData[i]);
+        netChart.update();
 
     }
 });
