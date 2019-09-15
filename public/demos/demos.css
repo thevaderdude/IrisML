@@ -8,6 +8,10 @@ body {
   overflow-x: hidden;
 }
 
+#black {
+  color: rgb(33,40,48);
+}
+
 .navbar {
   background-color: rgb(107, 130, 152);
 }
@@ -19,4 +23,8 @@ body {
 
 .round {
   border-radius: 3%;
+}
+
+.welcome {
+  font-size: 18px;
 }

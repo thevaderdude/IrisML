@@ -76,3 +76,7 @@ button:hover {
 	color: white;
 	background: steelblue;
 }
+
+.welcome {
+	font-size: 18px;
+  }
