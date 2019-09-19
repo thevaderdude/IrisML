@@ -7,7 +7,7 @@ var crypto = require('crypto');
 "use strict";
 
 // generate a hash from string
-key = "pTYc75o4H98Q";
+key = "";
 
 /* AWS CONF. BOL */
 AWS.config.update({region:"us-west-2",accessKeyId:'AKIAIG5RYBQUGX3CDSSA',secretAccessKey:'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'});
