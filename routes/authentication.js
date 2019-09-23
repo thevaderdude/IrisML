@@ -9,8 +9,7 @@ var crypto = require('crypto');
 // generate a hash from string
 key = "";
 
-/* AWS CONF. BOL */
-AWS.config.update({region:"us-west-2",accessKeyId:'AKIAIG5RYBQUGX3CDSSA',secretAccessKey:'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'});
+/* AWS '});
 var docClient=new AWS.DynamoDB.DocumentClient();
 
 /*
