@@ -10,6 +10,7 @@ var crypto = require('crypto');
 key = "";
 
 /* AWS '});
+AWS.config.update({region:"us-west-2",accessKeyId:'',secretAccessKey:''});
 var docClient=new AWS.DynamoDB.DocumentClient();
 
 /*
