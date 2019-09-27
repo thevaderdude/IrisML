@@ -1,4 +1,10 @@
-var AWS = require("aws-sdk");
+var express = require('express');
+var router = express.Router();
+var AWS = require('aws-sdk');
+/* GET home page. */
+router.get('/', function(req, res) {
+	res.render("home/home.ejs");
+});
 
 AWS.config.update({
   region: "us-west-2",

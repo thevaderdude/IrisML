@@ -1,23 +1,26 @@
 const express = require('express');
+
+var	  index = require('./routes/index'),
+	  demos = require('./routes/demos'),
+	  documentation = require('./routes/documentation'),
+	  color = require('./routes/color'),
+	  valen = require('./routes/valen');
+console.log("Did requires");
 const app = express();
 
 app.use(express.static('public'));
 
-app.get('/', (req, res) => {
-	res.render("home/home.ejs");
-});
+app.use('/', index);
+app.use('/demos', demos);
+app.use('/documentation', documentation);
+console.log("Passed");
+app.use('/color', color);
+app.use('/valen', valen);
+console.log("Used");
 
-app.get('/demos', (req, res) => {
-	res.render("demos/demos.ejs");
-});
-
-app.get('/documentation', (req, res) => {
-	res.render("documentation/documentation.ejs");
-});
-
-app.get('/color', (req, res) => {
-	res.render("color/color.ejs");
-});
+/*
+app.use('/signup', require('./routes/authentication'));
+app.use('/login', require('./routes/authentication'));
 
 app.get('/login', (req, res) => {
 	res.render("users/login.ejs");
@@ -30,17 +33,11 @@ app.get('/profile', (req, res) => {
 app.get('/signup', (req, res) => {
 	res.render("users/signup.ejs");
 });
-
-app.get('/valen', (req, res) => {
-	res.render("valen.ejs");
-});
-
-app.get('/valen/timing', (req, res) => {
-	res.render("valen/timing.ejs")
-});
+*/
 
 app.get('*', (req, res) => {
 	res.render("home/home.ejs");
+	console.log('404');
 });
 
 var port = process.env.PORT || 8081;
