@@ -1,16 +1,9 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');
-app.use(express.static('public'));
+const authentication = require('./routes/authentication');
 
-mongoose.connect('mongodb+srv://bobbyd:Amonalbus1!@cluster0-saber.mongodb.net/test?retryWrites=true&w=majority', {
-	useNewUrlParser: true,
-	useCreateIndex: true
-}).then(() => {
-	console.log('connected to db!?!');
-}).catch(err => {
-	console.log('error:', err.message);
-});
+app.use(authentication);
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
 	res.render("home/home.ejs");
