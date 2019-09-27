@@ -7,18 +7,9 @@ var	  index = require('./routes/index'),
 	  valen = require('./routes/valen');
 console.log("Did requires");
 const app = express();
-console.log("Initted express");
-const mongoose = require('mongoose');
-app.use(express.static('public'));
 
-mongoose.connect('mongodb+srv://bobbyd:Amonalbus1!@cluster0-saber.mongodb.net/test?retryWrites=true&w=majority', {
-	useNewUrlParser: true,
-	useCreateIndex: true
-}).then(() => {
-	console.log('connected to db!?!');
-}).catch(err => {
-	console.log('error:', err.message);
-});
+app.use(authentication);
+app.use(express.static('public'));
 
 app.use('/', index);
 app.use('/demos', demos);
