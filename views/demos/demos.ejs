@@ -40,14 +40,30 @@
   <div class="py-4 pl-3">
     <button type="button" id="net-start" class="btn btn-success mb-3">Start</button>
     <button type="button" id="net-stop" class="btn btn-danger ml-3 mb-3">Stop</button>
-    <form>
-      <div class="form-group">
-        <label for="exampleFormControlFile1"></label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-      </div>
-    </form>
   </div>
   
+  <div class="row justify-content-center pb-5">
+    <canvas id="myCanvas" width="28" height="28" style="border:2px solid black"></canvas>
+    <div class="col d-flex flex-row justify-content-center mx-5"><img src="guess.png"></div>
+  </div>
+
+  <form class="pb-5 col-3">
+    Choose Number to Guess
+    <div class="input-group mb-auto">
+      <label for="exampleFormControlSelect1"></label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        <option>0</option>
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+        <option>6</option>
+        <option>7</option>
+      </select>
+    </div>
+  </form>
+
   <div class="row justify-content-center pb-5">
     <canvas id="net-chart" width='100'></canvas>
   </div>
@@ -59,23 +75,49 @@
           <div class="input-group-prepend">
             <span class="input-group-text"># Epochs</span>
           </div>
-          <input type="number" class="form-control" id="epoch-net" placeholder="100000" aria-label="Epochs" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="100" id="net-epochs">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Layers</span>
+            <span class="input-group-text"># Inputs</span>
           </div>
-          <input type="number" class="form-control" placeholder="3" aria-label="Layers" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="100" id="net-inputs">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Instances:</span>
+            <span class="input-group-text"># Outputs</span>
           </div>
-          <input type="number" class="form-control" placeholder="1000000" aria-label="Instances" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="10"id="net-outputs">
+        </div>
+      </div>
+    </div>
+    <div class="row pb-4">
+<div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text"># Instances</span>
+          </div>
+          <input type="number" class="form-control" placeholder="1000000" id="net-instances">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Learning Rate</span>
+          </div>
+          <input type="number" class="form-control" placeholder="1" id="net-alpha">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-5">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Regularized Rate</span>
+          </div>
+          <input type="number" class="form-control" placeholder="0" id="net-lambda">
         </div>
       </div>
     </div>
@@ -83,51 +125,21 @@
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Learning Rate</span>
+            <span class="input-group-text"># Layers</span>
           </div>
-          <input type="number" class="form-control" placeholder="1" aria-label="Alpha" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="4" id="layers">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Layers</span>
+              <label for="exampleFormControlSelect1"></label>
+              <select class="form-control" id="exampleFormControlSelect1">
+                <option># Nodes in Hidden Layer 1</option>
+                <option># Nodes in Hidden Layer 2</option>
+              </select>
           </div>
-          <input type="number" class="form-control" placeholder="3" aria-label="Layers" aria-describedby="basic-addon1">
-        </div>
-      </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
-        <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Inputs</span>
-          </div>
-          <input type="number" class="form-control" placeholder="3" aria-label="Inputs" aria-describedby="basic-addon1">
-        </div>
-      </div>
-    </div>
-    <div class="row pb-4">
-      <div class="col d-flex flex-row justify-content-center mx-5">
-        <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Regularized Rate</span>
-          </div>
-          <input type="number" class="form-control" placeholder="1" aria-label="Lambda" aria-describedby="basic-addon1">
-        </div>
-      </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
-        <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Layers</span>
-          </div>
-          <input type="number" class="form-control" placeholder="3" aria-label="Layers" aria-describedby="basic-addon1">
-        </div>
-      </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
-        <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Outputs</span>
-          </div>
-          <input type="number" class="form-control" placeholder="2" aria-label="Outputs" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="1" id="node-layers">
         </div>
       </div>
     </div>
@@ -160,25 +172,25 @@
     <div class="col d-flex flex-row justify-content-center mx-5">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"># Epochs</span>
+          <span class="input-group-text">Inputs</span>
         </div>
-        <input type="number" class="form-control" placeholder="100000" aria-label="Epochs" aria-describedby="basic-addon1">
+        <input type="number" class="form-control" placeholder="100" id="lin-inputs">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-5">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"># Instances</span>
+          <span class="input-group-text">Learning Rate</span>
         </div>
-        <input type="number" class="form-control" placeholder="1000000" aria-label="Layers" aria-describedby="basic-addon1">
+        <input type="number" class="form-control" placeholder="1" id="lin-alpha">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-5">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1"># Inputs</span>
+          <span class="input-group-text">Regularized Rate</span>
         </div>
-        <input type="number" class="form-control" placeholder="3" aria-label="Instances" aria-describedby="basic-addon1">
+        <input type="number" class="form-control" placeholder="0" id="lin-lambda">
       </div>
     </div>
   </div>
@@ -186,17 +198,17 @@
     <div class="col d-flex flex-row justify-content-center mx-5">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Learning Rate</span>
+          <span class="input-group-text"># Epochs</span>
         </div>
-        <input type="number" class="form-control" placeholder="1" aria-label="Alpha" aria-describedby="basic-addon1">
+        <input type="number" class="form-control" placeholder="10000" id="lin-epochs">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-5">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Regularized Rate</span>
+          <span class="input-group-text"># Instances</span>
         </div>
-        <input type="number" class="form-control" placeholder="1" aria-label="Lambda" aria-describedby="basic-addon1">
+        <input type="number" class="form-control" placeholder="1000000" id="lin-instances">
       </div>
     </div>
   </div>
@@ -229,25 +241,25 @@
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Epochs</span>
+            <span class="input-group-text">Inputs</span>
           </div>
-          <input type="number" class="form-control" placeholder="100000" aria-label="Epochs" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="100" id="bin-inputs">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Instances</span>
+            <span class="input-group-text">Learning Rate</span>
           </div>
-          <input type="number" class="form-control" placeholder="1000000" aria-label="Layers" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="1" id="bin-alpha">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1"># Inputs</span>
+            <span class="input-group-text">Regularized Rate</span>
           </div>
-          <input type="number" class="form-control" placeholder="3" aria-label="Instances" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="0" id="bin-lambda">
         </div>
       </div>
     </div>
@@ -255,17 +267,17 @@
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Learning Rate</span>
+            <span class="input-group-text"># Epochs</span>
           </div>
-          <input type="number" class="form-control" placeholder="1" aria-label="Alpha" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="10000" id="bin-epochs">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon1">Regularized Rate</span>
+            <span class="input-group-text"># Instances</span>
           </div>
-          <input type="number" class="form-control" placeholder="1" aria-label="Lambda" aria-describedby="basic-addon1">
+          <input type="number" class="form-control" placeholder="1000000" id="bin-instances">
         </div>
       </div>
     </div>

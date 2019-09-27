@@ -59,13 +59,22 @@ var delayInMilliseconds = 1000;
 
 netStart.addEventListener('click', function(){
     for(i = 0; i < arrData.length; i++){
-
         addData(netChart,arrLabels[i],arrData[i]);
         netChart.update();
-
     }
+
+    var epochs = document.getElementById("net-epochs").value;
+    var alpha = document.getElementById("net-alpha").value;
+    var lambda = document.getElementById("net-lambda").value;
+    var inputs = document.getElementById("net-inputs").value;
+    var outputs = document.getElementById("net-outputs").value;
+    var instances = document.getElementById("net-instances").value;
+    var layers = document.getElementById("layers").value;
+
+    
 });
 
+
 netStop.addEventListener('click', function(){
-    alert('neural net demo');
+    alert("Neural Net Demo");
 });

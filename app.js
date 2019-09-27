@@ -1,8 +1,6 @@
 const express = require('express');
 const app = express();
-const authentication = require('./routes/authentication');
 
-app.use(authentication);
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
