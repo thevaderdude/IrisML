@@ -37,4 +37,4 @@ dynamodb.createTable(params, function(err, data) {
     }
 });
 
-module.exports = route
+module.exports = router;
