@@ -36,3 +36,5 @@ dynamodb.createTable(params, function(err, data) {
         console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
     }
 });
+
+module.exports = router;

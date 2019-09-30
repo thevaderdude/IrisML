@@ -19,15 +19,6 @@
 		<a class="nav-link current" href="/documentation">Documentation</a>
 		<a class="nav-link current" href="/color">Color</a>
 	</div>
-	<div class="d-flex align-items-center" id="black">
-		<div class="welcome">Welcome Back!</div>
-	</div>
-	<div class="navbar-nav">
-		<a class="nav-link current" id="notLogged" href="/profile">Profile</a>
-		<a class="nav-link current" id="logged" href="/login">Log in</a>
-		<a class="nav-link current" id="logged" href="/signup">Sign up</a>
-	</div>
-  </div>
 </nav>
 
 
@@ -42,27 +33,18 @@
     <button type="button" id="net-stop" class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
   
-  <div class="row justify-content-center pb-5">
-    <canvas id="myCanvas" width="28" height="28" style="border:2px solid black"></canvas>
-    <div class="col d-flex flex-row justify-content-center mx-5"><img src="guess.png"></div>
-  </div>
-
-  <form class="pb-5 col-3">
-    Choose Number to Guess
-    <div class="input-group mb-auto">
-      <label for="exampleFormControlSelect1"></label>
-      <select class="form-control" id="exampleFormControlSelect1">
-        <option>0</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-        <option>6</option>
-        <option>7</option>
-      </select>
+  <div class="row d-flex justify-content-between">
+    <div class="col-4" id='draw'>
+      <div class="mb-2 ml-5" id='container'>
+        <canvas id='canvas' width='300' height='300'></canvas>
+        <div id='currentColor'></div>
+      </div>
+      <div class="ml-5" id='buttons'>
+        <button type="button" id="clear" value='Clear Canvas' onclick='clearCanvas()' class="btn btn-success mb-3">Clear</button>
+      </div>
     </div>
-  </form>
+    <div class="col-4 mr-5 mb-5 flex-row align-self-center"><img src="guess.png"></div>
+  </div>
 
   <div class="row justify-content-center pb-5">
     <canvas id="net-chart" width='100'></canvas>
@@ -127,19 +109,18 @@
           <div class="input-group-prepend">
             <span class="input-group-text"># Layers</span>
           </div>
-          <input type="number" class="form-control" placeholder="4" id="layers">
+          <input type="number" class="form-control" placeholder="3" id="layers">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-5">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
               <label for="exampleFormControlSelect1"></label>
-              <select class="form-control" id="exampleFormControlSelect1">
+              <select id="nodes" class="form-control" id="exampleFormControlSelect1">
                 <option># Nodes in Hidden Layer 1</option>
-                <option># Nodes in Hidden Layer 2</option>
               </select>
           </div>
-          <input type="number" class="form-control" placeholder="1" id="node-layers">
+          <input id="nodesLayer" type="number" class="form-control" placeholder="1" id="node-layers">
         </div>
       </div>
     </div>
@@ -285,10 +266,11 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="net-demo.js"></script>
 <script src="lin-demo.js"></script>
 <script src="bin-demo.js"></script>
+<script src="canvas-demo.js"></script>
 </body>
 </html>

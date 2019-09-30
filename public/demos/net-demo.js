@@ -1,5 +1,10 @@
 var netStart = document.querySelector("#net-start");
 var netStop = document.querySelector("#net-stop");
+var numLayers = document.getElementById('layers');
+var nodes = document.getElementById("nodes");
+var nodesLayer = document.getElementById("nodesLayer");
+var nodesArray = [];
+var initialized = false;
 
 var ctx = document.getElementById('net-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
@@ -78,3 +83,73 @@ netStart.addEventListener('click', function(){
 netStop.addEventListener('click', function(){
     alert("Neural Net Demo");
 });
+
+//handles num of layers
+numLayers.addEventListener('input', function(){
+    nodesArray.length = 0
+    num = numLayers.value;
+    nodes.innerHTML = '';
+    initialized = true;
+
+    //makes sure layers is greater than 3
+    if(num < 3){
+      num = 3;
+      numLayers.value = 3;
+      alert("# Hidden Layers has to be > 3");
+    }
+
+    //updates layers in other inputs to match
+    for(var i = 1; i < num - 1; i++){
+      var node = document.createElement("option"); 
+      var textnode = document.createTextNode("# Nodes in Hidden Layer " + i);  
+      node.appendChild(textnode);                              
+      document.getElementById("nodes").appendChild(node);
+      nodesArray.push(1) 
+    } 
+});
+
+//handles dropdown menu
+nodes.addEventListener('input', function(){
+    //creats array of dropdown menu values
+    var arr = [];
+    for (var i = nodes.length >>> 0; i--;) { 
+      arr[i] = nodes[i].value;
+    }
+
+    //Checks to see if nodesArray is initialized
+    if(!initialized){
+        initialized = true;
+        for(var i = 0; i < numLayers.placeholder - 2; i++){
+            nodesArray.push(1);            
+        }
+    }
+
+    //updates shown value to match stored value
+    var index = arr.indexOf(nodes.value)
+    nodesLayer.value = nodesArray[index]
+});
+
+//handles num of nodes in each hidden layer
+nodesLayer.addEventListener('input', function(){
+    //creats array of dropdown menu values
+    var arr = [];
+    for (var i = nodes.length >>> 0; i--;) { 
+      arr[i] = nodes[i].value;
+    }
+
+    //Checks to see if nodesArray is initialized
+    if(!initialized){
+        initialized = true;
+        for(var i = 0; i < numLayers.placeholder - 2; i++){
+            nodesArray.push(1);            
+        }
+    }
+
+    //keeps track of nodes in each hiden layer
+    var index = arr.indexOf(nodes.value)
+    if(nodesArray[index] === undefined){
+        alert('yo')
+    }
+    nodesArray[index] = Number(nodesLayer.value)
+});
+
