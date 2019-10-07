@@ -23,7 +23,7 @@
 
 
 <h1 class="row justify-content-center">
-    This is a Classification Neural Network Demo
+    Classification Neural Network Demo
 </h1>
 
 <div class="container round mb-5 px-5">
@@ -33,17 +33,21 @@
     <button type="button" id="net-stop" class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
   
-  <div class="row d-flex justify-content-between">
-    <div class="col-4" id='draw'>
-      <div class="mb-2 ml-5" id='container'>
+  <div class="d-flex justify-content-between">
+    <div class="col-4">
+      <div class="mb-2 ml-4" id='container'>
         <canvas id='canvas' width='300' height='300'></canvas>
-        <div id='currentColor'></div>
       </div>
-      <div class="ml-5" id='buttons'>
-        <button type="button" id="clear" value='Clear Canvas' onclick='clearCanvas()' class="btn btn-success mb-3">Clear</button>
+      <div class="d-flex justify-content-between">
+        <div class="ml-4" id='buttons'>            
+          <button type="button" id="guess" value='Clear Canvas' class="btn btn-success mb-3">Guess</button>
+        </div>
+        <div class="" id='buttons'>
+          <button type="button" id="clear" value='Clear Canvas' class="btn btn-danger mb-3">Clear</button>
+        </div>
       </div>
     </div>
-    <div class="col-4 mr-5 mb-5 flex-row align-self-center"><img src="guess.png"></div>
+    <div class="col-4 mr-5 mb-5 align-self-center"><img src="guess.png"></div>
   </div>
 
   <div class="row justify-content-center pb-5">
@@ -129,7 +133,7 @@
 </div>
 	
 <h1 class="row justify-content-center">
-    This is a Linear Regression Demo
+    Linear Regression Demo
 </h1>
 
 <div class="container round mb-5">
@@ -198,7 +202,7 @@
 
 	
 <h1 class="row justify-content-center">
-    This is a Binary Classification Demo
+    Binary Classification Demo
 </h1>
 
 <div class="container round mb-5">
@@ -266,11 +270,12 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.4.0/fabric.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="net-demo.js"></script>
-<script src="lin-demo.js"></script>
-<script src="bin-demo.js"></script>
-<script src="canvas-demo.js"></script>
+<script src="javascript/net-demo.js"></script>
+<script src="javascript/lin-demo.js"></script>
+<script src="javascript/bin-demo.js"></script>
+<script src="javascript/canvas-demo.js"></script>
 </body>
 </html>

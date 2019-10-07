@@ -29,13 +29,6 @@ body {
   font-size: 18px;
 }
 
-#draw {
-  border-radius: 5px;
-  display: inline-block;
-  margin: 5px;
-  padding: 10px;
-}
-
 #container {
   width: 300px;
   height: 300px;
@@ -45,12 +38,4 @@ body {
 #canvas {
   position: absolute;
   background-color: white;
-}
-
-#current {
-  height: 100%;
-  width: 10%;
-  display: inline;
-  position: relative;
-  margin-left: 25px;
 }

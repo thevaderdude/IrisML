@@ -1,5 +1,6 @@
 var netStart = document.querySelector("#net-start");
 var netStop = document.querySelector("#net-stop");
+var guess = document.getElementById("guess");
 var numLayers = document.getElementById('layers');
 var nodes = document.getElementById("nodes");
 var nodesLayer = document.getElementById("nodesLayer");
