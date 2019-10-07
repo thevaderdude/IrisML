@@ -4,8 +4,8 @@ body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  padding-top: 80px;
   overflow-x: hidden;
+  padding-top: 80px
 }
 
 #black {

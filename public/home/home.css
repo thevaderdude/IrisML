@@ -26,13 +26,3 @@ body {
   background-color: rgb(107, 130, 152);
 }
 
-.welcome {
-  font-size: 18px;
-}
-
-.round {
-  border-radius: 3%;
-  background: rgb(10, 38, 99);
-  overflow: hidden;
-}
-
