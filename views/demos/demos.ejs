@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>IrisML</title>
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="demos.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
@@ -54,7 +54,11 @@
         </div>
       </div>
     </div>
-    <div class="col-4 mr-5 mb-5 align-self-center"><img src="guess.png"></div>
+    <div class="col-8">
+      <div class="row justify-content-center pb-5">
+        <canvas id="bar-chart" width='100'></canvas>
+      </div>
+    </div>
   </div>
 
   <div class="row justify-content-center pb-5">
@@ -140,24 +144,18 @@
 </div>
 	
 <h1 class="row justify-content-center">
-    Linear Regression Demo
+    Single-Variable Linear Regression Demo
 </h1>
 
 <div class="container round mb-5">
 
   <div class="py-4 pl-3">
-    <button type="button" id="lin-start" class="btn btn-success mb-3">Start</button>
-    <button type="button" id="lin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
-    <form>
-      <div class="form-group">
-        <label for="exampleFormControlFile1"></label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-      </div>
-    </form>
+    <button type="button" id="slin-start" class="btn btn-success mb-3">Start</button>
+    <button type="button" id="slin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
 
   <div class="row justify-content-center pb-5 px-4">
-    <canvas id="lin-chart" width='100'></canvas>
+    <canvas id="slin-chart" width='100'></canvas>
   </div>
 
   <div class="row m-auto pb-4">
@@ -166,7 +164,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Inputs</span>
         </div>
-        <input type="number" class="form-control" placeholder="100" id="lin-inputs">
+        <input type="number" class="form-control" placeholder="100" id="slin-inputs">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-5">
@@ -174,7 +172,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Learning Rate</span>
         </div>
-        <input type="number" class="form-control" placeholder="1" id="lin-alpha">
+        <input type="number" class="form-control" placeholder="1" id="slin-alpha">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-5">
@@ -182,7 +180,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Regularized Rate</span>
         </div>
-        <input type="number" class="form-control" placeholder="0" id="lin-lambda">
+        <input type="number" class="form-control" placeholder="0" id="slin-lambda">
       </div>
     </div>
   </div>
@@ -192,7 +190,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text"># Epochs</span>
         </div>
-        <input type="number" class="form-control" placeholder="10000" id="lin-epochs">
+        <input type="number" class="form-control" placeholder="10000" id="slin-epochs">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-5">
@@ -200,13 +198,74 @@
         <div class="input-group-prepend">
           <span class="input-group-text"># Instances</span>
         </div>
-        <input type="number" class="form-control" placeholder="1000000" id="lin-instances">
+        <input type="number" class="form-control" placeholder="1000000" id="slin-instances">
       </div>
     </div>
   </div>
 
 </div>
 
+<h1 class="row justify-content-center">
+    Multi-Variable Linear Regression Demo
+</h1>
+
+<div class="container round mb-5">
+
+  <div class="py-4 pl-3">
+    <button type="button" id="mlin-start" class="btn btn-success mb-3">Start</button>
+    <button type="button" id="mlin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
+  </div>
+
+  <div class="row justify-content-center pb-5 px-4">
+    <canvas id="mlin-chart" width='100'></canvas>
+  </div>
+
+  <div class="row m-auto pb-4">
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Inputs</span>
+        </div>
+        <input type="number" class="form-control" placeholder="100" id="mlin-inputs">
+      </div>
+    </div>
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Learning Rate</span>
+        </div>
+        <input type="number" class="form-control" placeholder="1" id="mlin-alpha">
+      </div>
+    </div>
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Regularized Rate</span>
+        </div>
+        <input type="number" class="form-control" placeholder="0" id="mlin-lambda">
+      </div>
+    </div>
+  </div>
+  <div class="row m-auto pb-4">
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text"># Epochs</span>
+        </div>
+        <input type="number" class="form-control" placeholder="10000" id="mlin-epochs">
+      </div>
+    </div>
+    <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text"># Instances</span>
+        </div>
+        <input type="number" class="form-control" placeholder="1000000" id="mlin-instances">
+      </div>
+    </div>
+  </div>
+
+</div>
 	
 <h1 class="row justify-content-center">
     Binary Classification Demo
@@ -217,12 +276,6 @@
   <div class="py-4 pl-3">
     <button type="button" id="bin-start" class="btn btn-success mb-3">Start</button>
     <button type="button" id="bin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
-    <form>
-      <div class="form-group">
-        <label for="exampleFormControlFile1"></label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
-      </div>
-    </form>
   </div>
 
   <div class="row justify-content-center pb-5 px-4">
@@ -282,7 +335,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="javascript/net-demo.js"></script>
-<script src="javascript/lin-demo.js"></script>
+<script src="javascript/mlin-demo.js"></script>
+<script src="javascript/slin-demo.js"></script>
 <script src="javascript/bin-demo.js"></script>
 <script src="javascript/canvas-demo.js"></script>
 </body>

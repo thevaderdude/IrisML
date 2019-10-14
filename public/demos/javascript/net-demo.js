@@ -7,10 +7,11 @@ var nodesLayer = document.getElementById("nodesLayer");
 var nodesArray = [];
 var initialized = false;
 
-var ctx = document.getElementById('net-chart').getContext('2d');
+var netctx = document.getElementById('net-chart').getContext('2d');
+var barctx = document.getElementById('bar-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
-var netChart = new Chart(ctx, {
+var netChart = new Chart(netctx, {
 
     type: 'line',
 
@@ -45,6 +46,46 @@ var netChart = new Chart(ctx, {
                 scaleLabel: {
                     display: true,
                     labelString: 'Epoch',
+                    fontSize: 18
+                },
+            }],
+        }
+    }
+});
+
+var barChart = new Chart(barctx, {
+    type: 'bar',
+    data: {
+        labels: ['0','1','2','3','4','5','6','7','8','9'],
+        datasets: [{
+            data: [4,23,11,5,1,3,3,87,8,1],
+            backgroundColor: 'rgba(255,223,0,0.7)',
+            borderColor: 'rgb(255,255,255)',
+        }],
+        
+    },
+    options: {
+        title:{
+            display: true,
+            text: 'Guess',
+            fontSize: 24
+        },
+        legend:{
+            display: false
+        },
+        scales:{
+            yAxes:[{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Probability',
+                    fontSize: 18
+                },
+                interval: 20
+            }],
+            xAxes:[{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Number Guessed',
                     fontSize: 18
                 },
             }],
