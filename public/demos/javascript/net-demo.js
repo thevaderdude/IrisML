@@ -143,7 +143,7 @@ numLayers.addEventListener('input', function(){
     //updates layers in other inputs to match
     for(var i = 1; i < num - 1; i++){
       var node = document.createElement("option"); 
-      var textnode = document.createTextNode("# Nodes in Hidden Layer " + i);  
+      var textnode = document.createTextNode("Nodes in Hidden Layer " + i);  
       node.appendChild(textnode);                              
       document.getElementById("nodes").appendChild(node);
       nodesArray.push(1) 

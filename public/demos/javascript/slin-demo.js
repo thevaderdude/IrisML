@@ -46,6 +46,11 @@ var slinChart = new Chart(ctx, {
             }, ],
             pointBorderColor: 'rgb(255,223,0)',
             borderColor: 'rgb(255,223,0)',
+            trendlineLinear: {
+                style: "rgba(255,105,180, .8)",
+                lineStyle: "dotted|solid",
+                width: 2
+            }
         }],
         
     },
@@ -76,24 +81,17 @@ var slinChart = new Chart(ctx, {
                     position: 'bottom'
                 },
             }],
-        }
+        },
+        tooltips: {
+            mode: 'index',
+            intersect: true
+        },
     }
 });
 
 slinStop.addEventListener('click',function(){
     alert('single-var linear demo');
 });
-
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-}
-
-arrLabels = [6,7,8,9,10,11,12,13,14,15]
-arrData = [100,150,200,300,320,380,400,600,900,1000]
-var delayInMilliseconds = 1000;
 
 slinStart.addEventListener('click', function(){
     for(i = 0; i < arrData.length; i++){

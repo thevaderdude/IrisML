@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Iris ML</title>
+  <title>IrisML</title>
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="demos.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -9,7 +9,7 @@
 <body class="text-white">
 
 <nav class="navbar fixed-top navbar-expand-lg navbar-light">
-  <a class="navbar-brand mx-auto" href="/">IrisML</a>
+  <a class="navbar-brand" href="/">IrisML</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -28,7 +28,6 @@
   </div>
 </nav>
 
-
 <h1 class="row justify-content-center">
     Classification Neural Network Demo
 </h1>
@@ -42,20 +41,20 @@
   
   <div class="d-flex justify-content-between">
     <div class="col-4">
-      <div class="mb-2 ml-4" id='container'>
-        <canvas id='canvas' width='240' height='280'></canvas>
+      <div class="mb-2" id='container'>
+        <canvas id='canvas' width='280' height='280'></canvas>
       </div>
       <div class="d-flex">
-        <div class="ml-4" id='buttons'>            
+        <div id='buttons'>            
           <button type="button" id="guess" value='Clear Canvas' class="btn btn-success mb-3">Guess</button>
         </div>
-        <div class="ml-4" id='buttons'>
+        <div class='ml-4' id='buttons'>
           <button type="button" id="clear" value='Clear Canvas' class="btn btn-danger mb-3">Clear</button>
         </div>
       </div>
     </div>
-    <div class="col-8">
-      <div class="row justify-content-center pb-5">
+    <div class="col-7 pl-5">
+      <div class="row justify-content-center">
         <canvas id="bar-chart" width='100'></canvas>
       </div>
     </div>
@@ -67,72 +66,72 @@
 
   <div>
     <div class="row pb-4">
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text"># Epochs</span>
+            <span class="input-group-text">Epochs</span>
           </div>
           <input type="number" class="form-control" placeholder="100" id="net-epochs">
         </div>
       </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text"># Inputs</span>
+            <span class="input-group-text">Inputs</span>
           </div>
           <input type="number" class="form-control" placeholder="100" id="net-inputs">
         </div>
       </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text"># Outputs</span>
+            <span class="input-group-text">Outputs</span>
           </div>
           <input type="number" class="form-control" placeholder="10"id="net-outputs">
         </div>
       </div>
     </div>
     <div class="row pb-4">
-<div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text"># Instances</span>
+            <span class="input-group-text">Instances</span>
           </div>
           <input type="number" class="form-control" placeholder="1000000" id="net-instances">
         </div>
       </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text">Learning Rate</span>
+            <span class="input-group-text">Alpha</span>
           </div>
           <input type="number" class="form-control" placeholder="1" id="net-alpha">
         </div>
       </div>
-      <div class="col-6 justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text">Regularized Rate</span>
+            <span class="input-group-text">Lambda</span>
           </div>
           <input type="number" class="form-control" placeholder="0" id="net-lambda">
         </div>
       </div>
     </div>
     <div class="row pb-4">
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text"># Layers</span>
+            <span class="input-group-text">Layers</span>
           </div>
           <input type="number" class="form-control" placeholder="3" id="layers">
         </div>
       </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
               <label for="exampleFormControlSelect1"></label>
               <select id="nodes" class="form-control" id="exampleFormControlSelect1">
-                <option># Nodes in Hidden Layer 1</option>
+                <option>Nodes in Hidden Layer 1</option>
               </select>
           </div>
           <input id="nodesLayer" type="number" class="form-control" placeholder="1" id="node-layers">
@@ -159,7 +158,7 @@
   </div>
 
   <div class="row m-auto pb-4">
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
           <span class="input-group-text">Inputs</span>
@@ -167,36 +166,36 @@
         <input type="number" class="form-control" placeholder="100" id="slin-inputs">
       </div>
     </div>
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text">Learning Rate</span>
+          <span class="input-group-text">Alpha</span>
         </div>
         <input type="number" class="form-control" placeholder="1" id="slin-alpha">
       </div>
     </div>
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text">Regularized Rate</span>
+          <span class="input-group-text">Lambda</span>
         </div>
         <input type="number" class="form-control" placeholder="0" id="slin-lambda">
       </div>
     </div>
   </div>
   <div class="row m-auto pb-4">
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text"># Epochs</span>
+          <span class="input-group-text">Epochs</span>
         </div>
         <input type="number" class="form-control" placeholder="10000" id="slin-epochs">
       </div>
     </div>
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text"># Instances</span>
+          <span class="input-group-text">Instances</span>
         </div>
         <input type="number" class="form-control" placeholder="1000000" id="slin-instances">
       </div>
@@ -221,7 +220,7 @@
   </div>
 
   <div class="row m-auto pb-4">
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
           <span class="input-group-text">Inputs</span>
@@ -229,36 +228,36 @@
         <input type="number" class="form-control" placeholder="100" id="mlin-inputs">
       </div>
     </div>
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text">Learning Rate</span>
+          <span class="input-group-text">Alpha</span>
         </div>
         <input type="number" class="form-control" placeholder="1" id="mlin-alpha">
       </div>
     </div>
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text">Regularized Rate</span>
+          <span class="input-group-text">Lambda</span>
         </div>
         <input type="number" class="form-control" placeholder="0" id="mlin-lambda">
       </div>
     </div>
   </div>
   <div class="row m-auto pb-4">
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text"># Epochs</span>
+          <span class="input-group-text">Epochs</span>
         </div>
         <input type="number" class="form-control" placeholder="10000" id="mlin-epochs">
       </div>
     </div>
-    <div class="col d-flex flex-row justify-content-center mx-5">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text"># Instances</span>
+          <span class="input-group-text">Instances</span>
         </div>
         <input type="number" class="form-control" placeholder="1000000" id="mlin-instances">
       </div>
@@ -283,7 +282,7 @@
   </div>
 
   <div class="row m-auto pb-4">
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
             <span class="input-group-text">Inputs</span>
@@ -291,36 +290,36 @@
           <input type="number" class="form-control" placeholder="100" id="bin-inputs">
         </div>
       </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text">Learning Rate</span>
+            <span class="input-group-text">Alpha</span>
           </div>
           <input type="number" class="form-control" placeholder="1" id="bin-alpha">
         </div>
       </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text">Regularized Rate</span>
+            <span class="input-group-text">Lambda</span>
           </div>
           <input type="number" class="form-control" placeholder="0" id="bin-lambda">
         </div>
       </div>
     </div>
     <div class="row m-auto pb-4">
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text"># Epochs</span>
+            <span class="input-group-text">Epochs</span>
           </div>
           <input type="number" class="form-control" placeholder="10000" id="bin-epochs">
         </div>
       </div>
-      <div class="col d-flex flex-row justify-content-center mx-5">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text"># Instances</span>
+            <span class="input-group-text">Instances</span>
           </div>
           <input type="number" class="form-control" placeholder="1000000" id="bin-instances">
         </div>
