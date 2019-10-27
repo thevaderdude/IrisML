@@ -4,6 +4,8 @@ var guess = document.getElementById("guess");
 var numLayers = document.getElementById('layers');
 var nodes = document.getElementById("nodes");
 var nodesLayer = document.getElementById("nodesLayer");
+var activation = document.getElementById("net-activation");
+var net_dataset = document.getElementById("net-dataset");
 var nodesArray = [];
 var initialized = false;
 
@@ -22,7 +24,6 @@ var netChart = new Chart(netctx, {
             pointBorderColor: 'rgb(255,223,0)',
             borderColor: 'rgb(255,223,0)',
         }],
-        
     },
 
     options: {
@@ -105,25 +106,40 @@ arrData = [100,150,200,300,320,380,400,600,900,1000]
 var delayInMilliseconds = 1000;
 
 netStart.addEventListener('click', function(){
+    $.post("demos/net", function(nodesArray) {
+        $( ".result" ).html(nodesArray);
+      });
     for(i = 0; i < arrData.length; i++){
         addData(netChart,arrLabels[i],arrData[i]);
         netChart.update();
     }
-
-    var epochs = document.getElementById("net-epochs").value;
-    var alpha = document.getElementById("net-alpha").value;
-    var lambda = document.getElementById("net-lambda").value;
-    var inputs = document.getElementById("net-inputs").value;
-    var outputs = document.getElementById("net-outputs").value;
-    var instances = document.getElementById("net-instances").value;
-    var layers = document.getElementById("layers").value;
-
-    
 });
-
 
 netStop.addEventListener('click', function(){
     alert("Neural Net Demo");
+});
+
+
+net_dataset.addEventListener('change', function(){
+    net_dataName = document.getElementById("net-datasetName");
+    var arr = [];
+    for (var i = net_dataset.length >>> 0; i--;) { 
+      arr[i] = net_dataset[i].value;
+    }
+
+    var index = arr.indexOf(net_dataset.value)
+    net_dataName.value = net_dataset[index].value
+});
+
+activation.addEventListener('change', function(){
+    activationName = document.getElementById("net-activationName");
+    var arr = [];
+    for (var i = activation.length >>> 0; i--;) { 
+      arr[i] = activation[i].value;
+    }
+
+    var index = arr.indexOf(activation.value)
+    activationName.value = activation[index].value
 });
 
 //handles num of layers
@@ -137,7 +153,7 @@ numLayers.addEventListener('input', function(){
     if(num < 3){
       num = 3;
       numLayers.value = 3;
-      alert("# Hidden Layers has to be > 3");
+      alert("# Layers has to be > 3");
     }
 
     //updates layers in other inputs to match
@@ -194,4 +210,3 @@ nodesLayer.addEventListener('input', function(){
     }
     nodesArray[index] = Number(nodesLayer.value)
 });
-

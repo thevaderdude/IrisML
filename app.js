@@ -1,13 +1,23 @@
 const express = require('express');
 
-var	  index = require('./routes/index'),
+var	  bodyParser = require('body-parser'),
+	  index = require('./routes/index'),
 	  demos = require('./routes/demos'),
 	  documentation = require('./routes/documentation'),
 	  color = require('./routes/color'),
+	  netTrain = require('./routes/netTrain'),
+	  slinTrain = require('./routes/slinTrain'),
+	  mlinTrain = require('./routes/mlinTrain'),
+	  binTrain = require('./routes/binTrain.js'),
 	  valen = require('./routes/valen');
 console.log("Did requires");
 const app = express();
 
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.json());
+app.use(express.json({
+	type: 'application/json',
+}));
 app.use(express.static('public'));
 
 app.use('/', index);
@@ -16,24 +26,11 @@ app.use('/documentation', documentation);
 console.log("Passed");
 app.use('/color', color);
 app.use('/valen', valen);
+app.use('/demos/net', netTrain);
+app.use('/demos/slin', slinTrain);
+app.use('/demos/mlin', mlinTrain);
+app.use('/demos/bin', binTrain);
 console.log("Used");
-
-/*
-app.use('/signup', require('./routes/authentication'));
-app.use('/login', require('./routes/authentication'));
-
-app.get('/login', (req, res) => {
-	res.render("users/login.ejs");
-});
-
-app.get('/profile', (req, res) => {
-	res.render("users/profile.ejs");
-});
-
-app.get('/signup', (req, res) => {
-	res.render("users/signup.ejs");
-});
-*/
 
 app.get('*', (req, res) => {
 	res.render("home/home.ejs");

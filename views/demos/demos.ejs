@@ -34,8 +34,10 @@
 
 <div class="container round mb-5 px-5">
   
-  <div class="py-4">
-    <button type="button" id="net-start" class="btn btn-success mb-3">Start</button>
+  <div class="py-4 d-flex">
+    <form class="form" id="net-training" action="/demos/net" method="POST">
+      <button type="submit" id="net-start" class="btn btn-success mb-3">Start</button>
+    </form>
     <button type="button" id="net-stop" class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
   
@@ -71,33 +73,41 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Epochs</span>
           </div>
-          <input type="number" class="form-control" placeholder="100" id="net-epochs">
+          <input form="net-training" type="number" class="form-control" placeholder="1000" name="net[epochs]">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text">Inputs</span>
+            <span class="input-group-text">Batch Size</span>
           </div>
-          <input type="number" class="form-control" placeholder="100" id="net-inputs">
+          <input form="net-training" type="number" class="form-control" placeholder="30" name="net[batchSize]">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Outputs</span>
-          </div>
-          <input type="number" class="form-control" placeholder="10"id="net-outputs">
+            <div class="input-group-prepend">
+                <label for="exampleFormControlSelect1"></label>
+                <select id="net-dataset" class="form-control" id="exampleFormControlSelect1">
+                  <option>Digits</option>
+                  <option>Poker</option>
+                </select>
+            </div>
+          <input form="net-training" type="text" class="form-control" placeholder="digits" id="net-datasetName" name="net[dataset]">
         </div>
       </div>
     </div>
     <div class="row pb-4">
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
         <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Instances</span>
-          </div>
-          <input type="number" class="form-control" placeholder="1000000" id="net-instances">
+            <div class="input-group-prepend">
+                <label for="exampleFormControlSelect1"></label>
+                <select id="net-activation" class="form-control" id="exampleFormControlSelect1">
+                  <option>Sigmoid</option>
+                  <option>Relu</option>
+                </select>
+            </div>
+          <input form="net-training" id="net-activationName" type="text" class="form-control" placeholder="sigmoid" name="net[activation]">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -105,7 +115,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Alpha</span>
           </div>
-          <input type="number" class="form-control" placeholder="1" id="net-alpha">
+          <input form="net-training" type="number" class="form-control" placeholder="0.03" name="net[alpha]">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -113,7 +123,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Lambda</span>
           </div>
-          <input type="number" class="form-control" placeholder="0" id="net-lambda">
+          <input form="net-training" type="number" class="form-control" placeholder="0.3" name="net[lambda]">
         </div>
       </div>
     </div>
@@ -123,7 +133,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Layers</span>
           </div>
-          <input type="number" class="form-control" placeholder="3" id="layers">
+          <input form="net-training" type="number" class="form-control" placeholder="5" id="layers" name="net[numlayers]">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -132,24 +142,26 @@
               <label for="exampleFormControlSelect1"></label>
               <select id="nodes" class="form-control" id="exampleFormControlSelect1">
                 <option>Nodes in Hidden Layer 1</option>
+                <option>Nodes in Hidden Layer 2</option>
               </select>
           </div>
-          <input id="nodesLayer" type="number" class="form-control" placeholder="1" id="node-layers">
+          <input form="net-training" id="nodesLayer" type="number" class="form-control" placeholder="16" name="net[nodelayers]">
         </div>
       </div>
     </div>
   </div>
-
 </div>
-	
+
 <h1 class="row justify-content-center">
     Single-Variable Linear Regression Demo
 </h1>
 
 <div class="container round mb-5">
 
-  <div class="py-4 pl-3">
-    <button type="button" id="slin-start" class="btn btn-success mb-3">Start</button>
+  <div class="py-4 pl-3 d-flex">
+    <form class="form" id="slin-training" action="/demos/slin" method="POST">
+      <button type="submit" id="slin-start" class="btn btn-success mb-3">Start</button>
+    </form>
     <button type="button" id="slin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
 
@@ -160,18 +172,22 @@
   <div class="row m-auto pb-4">
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Inputs</span>
-        </div>
-        <input type="number" class="form-control" placeholder="100" id="slin-inputs">
+          <div class="input-group-prepend">
+              <label for="exampleFormControlSelect1"></label>
+              <select id="slin-activation" class="form-control" id="exampleFormControlSelect1">
+                <option>Sigmoid</option>
+                <option>Relu</option>
+              </select>
+          </div>
+        <input form="slin-training" id="slin-activationName" type="text" class="form-control" placeholder="sigmoid" name="slin[activation]">
       </div>
-    </div>
+     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
           <span class="input-group-text">Alpha</span>
         </div>
-        <input type="number" class="form-control" placeholder="1" id="slin-alpha">
+        <input form="slin-training" type="number" class="form-control" placeholder="0.03" name="slin[alpha]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -179,7 +195,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Lambda</span>
         </div>
-        <input type="number" class="form-control" placeholder="0" id="slin-lambda">
+        <input form="slin-training" type="number" class="form-control" placeholder="0.3" name="slin[lambda]">
       </div>
     </div>
   </div>
@@ -189,17 +205,29 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Epochs</span>
         </div>
-        <input type="number" class="form-control" placeholder="10000" id="slin-epochs">
+        <input form="slin-training" type="number" class="form-control" placeholder="1000" name="slin[epochs]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text">Instances</span>
+          <span class="input-group-text">Batch Size</span>
         </div>
-        <input type="number" class="form-control" placeholder="1000000" id="slin-instances">
+        <input form="slin-training" type="number" class="form-control" placeholder="30" name="slin[batchSize]">
       </div>
     </div>
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+            <div class="input-group-prepend">
+                <label for="exampleFormControlSelect1"></label>
+                <select id="slin-dataset" class="form-control" id="exampleFormControlSelect1">
+                  <option>Digits</option>
+                  <option>Poker</option>
+                </select>
+            </div>
+          <input form="slin-training" id="slin-datasetName" type="text" class="form-control" placeholder="Digits" name="slin[dataset]">
+        </div>
+      </div>
   </div>
 
 </div>
@@ -210,8 +238,10 @@
 
 <div class="container round mb-5">
 
-  <div class="py-4 pl-3">
-    <button type="button" id="mlin-start" class="btn btn-success mb-3">Start</button>
+  <div class="py-4 pl-3 d-flex">
+    <form class="form" id="mlin-training" action="/demos/mlin" method="POST">
+      <button type="submit" id="mlin-start" class="btn btn-success mb-3">Start</button>
+    </form>
     <button type="button" id="mlin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
 
@@ -222,18 +252,22 @@
   <div class="row m-auto pb-4">
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
-        <div class="input-group-prepend">
-          <span class="input-group-text">Inputs</span>
-        </div>
-        <input type="number" class="form-control" placeholder="100" id="mlin-inputs">
+          <div class="input-group-prepend">
+              <label for="exampleFormControlSelect1"></label>
+              <select id="mlin-activation" class="form-control" id="exampleFormControlSelect1">
+                <option>Sigmoid</option>
+                <option>Relu</option>
+              </select>
+          </div>
+        <input form="mlin-training" id="mlin-activationName" type="text" class="form-control" placeholder="sigmoid" name="mlin[activation]">
       </div>
-    </div>
+     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
           <span class="input-group-text">Alpha</span>
         </div>
-        <input type="number" class="form-control" placeholder="1" id="mlin-alpha">
+        <input form="mlin-training" type="number" class="form-control" placeholder="0.03" name="mlin[alpha]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -241,7 +275,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Lambda</span>
         </div>
-        <input type="number" class="form-control" placeholder="0" id="mlin-lambda">
+        <input form="mlin-training" type="number" class="form-control" placeholder="0.3" name="mlin[lambda]">
       </div>
     </div>
   </div>
@@ -251,17 +285,29 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Epochs</span>
         </div>
-        <input type="number" class="form-control" placeholder="10000" id="mlin-epochs">
+        <input form="mlin-training" type="number" class="form-control" placeholder="1000" name="mlin[epochs]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
-          <span class="input-group-text">Instances</span>
+          <span class="input-group-text">Batch Size</span>
         </div>
-        <input type="number" class="form-control" placeholder="1000000" id="mlin-instances">
+        <input form="mlin-training" type="number" class="form-control" placeholder="30" name="mlin[batchSize]">
       </div>
     </div>
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+            <div class="input-group-prepend">
+                <label for="exampleFormControlSelect1"></label>
+                <select id="mlin-dataset" class="form-control" id="exampleFormControlSelect1">
+                  <option>Digits</option>
+                  <option>Poker</option>
+                </select>
+            </div>
+          <input form="mlin-training" id="mlin-datasetName" type="text" class="form-control" placeholder="Digits" name="mlin[dataset]">
+        </div>
+      </div>
   </div>
 
 </div>
@@ -272,8 +318,10 @@
 
 <div class="container round mb-5">
 
-  <div class="py-4 pl-3">
-    <button type="button" id="bin-start" class="btn btn-success mb-3">Start</button>
+  <div class="py-4 pl-3 d-flex">
+    <form class="form" id="bin-training" action="/demos/bin" method="POST">
+      <button type="submit" id="bin-start" class="btn btn-success mb-3">Start</button>
+    </form>
     <button type="button" id="bin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
 
@@ -282,55 +330,70 @@
   </div>
 
   <div class="row m-auto pb-4">
-      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
-        <div class="input-group mb-auto">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
           <div class="input-group-prepend">
-            <span class="input-group-text">Inputs</span>
+              <label for="exampleFormControlSelect1"></label>
+              <select id="bin-activation" class="form-control" id="exampleFormControlSelect1">
+                <option>Sigmoid</option>
+                <option>Relu</option>
+              </select>
           </div>
-          <input type="number" class="form-control" placeholder="100" id="bin-inputs">
-        </div>
+        <input form="bin-training" id="bin-activationName" type="text" class="form-control" placeholder="sigmoid" name="bin[activation]">
       </div>
-      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
-        <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Alpha</span>
-          </div>
-          <input type="number" class="form-control" placeholder="1" id="bin-alpha">
+     </div>
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Alpha</span>
         </div>
-      </div>
-      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
-        <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Lambda</span>
-          </div>
-          <input type="number" class="form-control" placeholder="0" id="bin-lambda">
-        </div>
+        <input form="bin-training" type="number" class="form-control" placeholder="0.03" name="bin[alpha]">
       </div>
     </div>
-    <div class="row m-auto pb-4">
-      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
-        <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Epochs</span>
-          </div>
-          <input type="number" class="form-control" placeholder="10000" id="bin-epochs">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Lambda</span>
         </div>
-      </div>
-      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
-        <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Instances</span>
-          </div>
-          <input type="number" class="form-control" placeholder="1000000" id="bin-instances">
-        </div>
+        <input form="bin-training" type="number" class="form-control" placeholder="0.3" name="bin[lambda]">
       </div>
     </div>
-
+  </div>
+  <div class="row m-auto pb-4">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Epochs</span>
+        </div>
+        <input form="bin-training" type="number" class="form-control" placeholder="1000" name="bin[epochs]">
+      </div>
+    </div>
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Batch Size</span>
+        </div>
+        <input form="bin-training" type="number" class="form-control" placeholder="30" name="bin[batchSize]">
+      </div>
+    </div>
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+            <div class="input-group-prepend">
+                <label for="exampleFormControlSelect1"></label>
+                <select id="bin-dataset" class="form-control" id="exampleFormControlSelect1">
+                  <option>Digits</option>
+                  <option>Poker</option>
+                </select>
+            </div>
+          <input form="bin-training" id="bin-datasetName" type="text" class="form-control" placeholder="Digits" name="bin[dataset]">
+        </div>
+      </div>
+  </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.4.0/fabric.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script src="javascript/net-demo.js"></script>

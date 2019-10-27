@@ -1,5 +1,7 @@
 var slinStart = document.querySelector("#slin-start");
 var slinStop = document.querySelector("#slin-stop");
+var slin_dataset = document.getElementById("slin-dataset");
+var slin_activation = document.getElementById("slin-activation");
 
 var ctx = document.getElementById('slin-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
@@ -100,4 +102,26 @@ slinStart.addEventListener('click', function(){
         slinChart.update();
 
     }
+});
+
+slin_dataset.addEventListener('change', function(){
+    slin_dataName = document.getElementById("slin-datasetName");
+    var arr = [];
+    for (var i = slin_dataset.length >>> 0; i--;) { 
+      arr[i] = slin_dataset[i].value;
+    }
+
+    var index = arr.indexOf(slin_dataset.value)
+    slin_dataName.value = slin_dataset[index].value
+});
+
+slin_activation.addEventListener('change', function(){
+    slin_activationName = document.getElementById("slin-activationName");
+    var arr = [];
+    for (var i = slin_activation.length >>> 0; i--;) { 
+      arr[i] = slin_activation[i].value;
+    }
+
+    var index = arr.indexOf(slin_activation.value)
+    slin_activationName.value = slin_activation[index].value
 });

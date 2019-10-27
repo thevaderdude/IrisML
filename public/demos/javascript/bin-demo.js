@@ -1,5 +1,7 @@
 var binStart = document.querySelector("#bin-start");
 var binStop = document.querySelector("#bin-stop");
+var bin_dataset = document.getElementById("bin-dataset");
+var bin_activation = document.getElementById("bin-activation");
 
 var ctx = document.getElementById('bin-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
@@ -68,4 +70,26 @@ binStart.addEventListener('click', function(){
         binChart.update();
 
     }
+});
+
+bin_dataset.addEventListener('change', function(){
+    bin_dataName = document.getElementById("bin-datasetName");
+    var arr = [];
+    for (var i = bin_dataset.length >>> 0; i--;) { 
+      arr[i] = bin_dataset[i].value;
+    }
+
+    var index = arr.indexOf(bin_dataset.value)
+    bin_dataName.value = bin_dataset[index].value
+});
+
+bin_activation.addEventListener('change', function(){
+    bin_activationName = document.getElementById("bin-activationName");
+    var arr = [];
+    for (var i = bin_activation.length >>> 0; i--;) { 
+      arr[i] = bin_activation[i].value;
+    }
+
+    var index = arr.indexOf(bin_activation.value)
+    bin_activationName.value = bin_activation[index].value
 });

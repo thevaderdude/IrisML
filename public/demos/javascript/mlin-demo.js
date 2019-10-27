@@ -1,5 +1,7 @@
 var mlinStart = document.querySelector("#mlin-start");
 var mlinStop = document.querySelector("#mlin-stop");
+var mlin_dataset = document.getElementById("mlin-dataset");
+var mlin_activation = document.getElementById("mlin-activation");
 
 var ctx = document.getElementById('mlin-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
@@ -68,4 +70,26 @@ mlinStart.addEventListener('click', function(){
         mlinChart.update();
 
     }
+});
+
+mlin_dataset.addEventListener('change', function(){
+    mlin_dataName = document.getElementById("mlin-datasetName");
+    var arr = [];
+    for (var i = mlin_dataset.length >>> 0; i--;) { 
+      arr[i] = mlin_dataset[i].value;
+    }
+
+    var index = arr.indexOf(mlin_dataset.value)
+    mlin_dataName.value = mlin_dataset[index].value
+});
+
+mlin_activation.addEventListener('change', function(){
+    mlin_activationName = document.getElementById("mlin-activationName");
+    var arr = [];
+    for (var i = mlin_activation.length >>> 0; i--;) { 
+      arr[i] = mlin_activation[i].value;
+    }
+
+    var index = arr.indexOf(mlin_activation.value)
+    mlin_activationName.value = mlin_activation[index].value
 });
