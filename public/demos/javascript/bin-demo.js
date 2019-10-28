@@ -69,7 +69,7 @@ binStop.addEventListener('click',function(){
     }
 
     $.ajax({
-        url: '/demos/mlin',
+        url: '/demos/bin',
         type: "POST",
         data: {inputs},
         success: function(response){

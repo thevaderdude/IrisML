@@ -116,12 +116,12 @@ netStop.addEventListener('click', function(){
         nodesArray = [16, 16]
     }
     array = [
-        document.getElementById("net-epochs"),
-        document.getElementById("net-batch"),
-        document.getElementById("net-datasetName"),
         document.getElementById("net-activationName"),
         document.getElementById("net-alpha"),
         document.getElementById("net-lambda"),
+		document.getElementById("net-epochs"),
+		document.getElementById("net-batch"),
+        document.getElementById("net-datasetName"),
         document.getElementById("layers"),
         nodesArray
     ]
