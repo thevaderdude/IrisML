@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var bodyParser = require('body-parser');
 
-// neural net
 router.post('/', function(req, res){
     checkData(req.body.net)
 });

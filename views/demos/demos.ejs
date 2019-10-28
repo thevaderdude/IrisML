@@ -35,16 +35,14 @@
 <div class="container round mb-5 px-5">
   
   <div class="py-4 d-flex">
-    <form class="form" id="net-training" action="/demos/net" method="POST">
-      <button type="submit" id="net-start" class="btn btn-success mb-3">Start</button>
-    </form>
+    <button type="submit" id="net-start" class="btn btn-success mb-3">Start</button>
     <button type="button" id="net-stop" class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
   
   <div class="d-flex row justify-content-between">
     <div class="col-4">
-      <div class="mb-2" id='container'>
-        <canvas id='canvas' width='280' height='280'></canvas>
+      <div class="mb-2 border" id='container'>
+        <canvas id='canvasBig' width='280' height='280'></canvas>
       </div>
       <div class="d-flex">
         <div id='buttons'>            
@@ -53,6 +51,9 @@
         <div class='ml-4' id='buttons'>
           <button type="button" id="clear" value='Clear Canvas' class="btn btn-danger mb-3">Clear</button>
         </div>
+      </div>
+      <div class="mb-2 hide" id='container'>
+        <canvas id='canvasSmall' width='28' height='28'></canvas>
       </div>
     </div>
     <div class="col-xl-8">
@@ -103,11 +104,11 @@
             <div class="input-group-prepend">
                 <label for="exampleFormControlSelect1"></label>
                 <select id="net-activation" class="form-control" id="exampleFormControlSelect1">
-                  <option>Sigmoid</option>
                   <option>Relu</option>
+                  <option>Sigmoid</option>
                 </select>
             </div>
-          <input form="net-training" id="net-activationName" type="text" class="form-control" placeholder="sigmoid" name="net_activationName">
+          <input form="net-training" id="net-activationName" type="text" class="form-control" placeholder="Relu" name="net_activationName">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -159,9 +160,7 @@
 <div class="container round mb-5">
 
   <div class="py-4 pl-3 d-flex">
-    <form class="form" id="slin-training" action="/demos/slin" method="POST">
-      <button type="submit" id="slin-start" class="btn btn-success mb-3">Start</button>
-    </form>
+    <button type="submit" id="slin-start" class="btn btn-success mb-3">Start</button>
     <button type="button" id="slin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
 
@@ -170,18 +169,6 @@
   </div>
 
   <div class="row m-auto pb-4">
-    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
-      <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-              <label for="exampleFormControlSelect1"></label>
-              <select id="slin-activation" class="form-control" id="exampleFormControlSelect1">
-                <option>Sigmoid</option>
-                <option>Relu</option>
-              </select>
-          </div>
-        <input form="slin-training" id="slin-activationName" type="text" class="form-control" placeholder="sigmoid" name="slin[activation]">
-      </div>
-     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
@@ -239,9 +226,7 @@
 <div class="container round mb-5">
 
   <div class="py-4 pl-3 d-flex">
-    <form class="form" id="mlin-training" action="/demos/mlin" method="POST">
-      <button type="submit" id="mlin-start" class="btn btn-success mb-3">Start</button>
-    </form>
+    <button type="submit" id="mlin-start" class="btn btn-success mb-3">Start</button>
     <button type="button" id="mlin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
 
@@ -250,18 +235,6 @@
   </div>
 
   <div class="row m-auto pb-4">
-    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
-      <div class="input-group mb-auto">
-          <div class="input-group-prepend">
-              <label for="exampleFormControlSelect1"></label>
-              <select id="mlin-activation" class="form-control" id="exampleFormControlSelect1">
-                <option>Sigmoid</option>
-                <option>Relu</option>
-              </select>
-          </div>
-        <input form="mlin-training" id="mlin-activationName" type="text" class="form-control" placeholder="sigmoid" name="mlin[activation]">
-      </div>
-     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
       <div class="input-group mb-auto">
         <div class="input-group-prepend">
@@ -339,7 +312,7 @@
                 <option>Relu</option>
               </select>
           </div>
-        <input form="bin-training" id="bin-activationName" type="text" class="form-control" placeholder="sigmoid" name="bin[activation]">
+        <input form="bin-training" id="bin-activationName" type="text" class="form-control" placeholder="Sigmoid" name="bin[activation]">
       </div>
      </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
