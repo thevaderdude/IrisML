@@ -10,6 +10,7 @@ var crypto = require('crypto');
 key = "abcd";
 
 /* AWS */
+console.log("Runing auth aws config in authentication.js");
 AWS.config.update({region:"us-west-2",accessKeyId:'',secretAccessKey:''});
 var docClient=new AWS.DynamoDB.DocumentClient();
 

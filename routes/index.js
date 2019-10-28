@@ -5,10 +5,10 @@ var AWS = require('aws-sdk');
 router.get('/', function(req, res) {
 	res.render("home/home.ejs");
 });
-
+/*
 AWS.config.update({
   region: "us-west-2",
-  endpoint: "http://localhost:8000"
+  endpoint: "http://localhost:8090"
 });
 
 var dynamodb = new AWS.DynamoDB();
@@ -36,5 +36,5 @@ dynamodb.createTable(params, function(err, data) {
         console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
     }
 });
-
+*/
 module.exports = router;

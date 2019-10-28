@@ -1,0 +1,13 @@
+{
+	TableName: IrisMLDemosLocal,
+	Item: {
+		"instanceID": "0",
+		"type": "slin",
+		"activation-name": array[0],
+		"alpha": array[1],
+		"lambda": array[2],
+		"epochs": array[3],
+		"batchSize": array[3],
+		"dataSetName": array[4]
+	}
+}

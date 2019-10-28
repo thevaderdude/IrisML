@@ -8,3 +8,5 @@ npm-debug.log
 .vscode/
 .elasticbeanstalk/
 .routes/authentication.js
+
+auth.json
