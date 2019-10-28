@@ -18,7 +18,7 @@ function checkData(params, res){
         params['dataset'] = 'Digits';
     }
     if (params['activation'] === ''){
-        params['activation'] = 'sigmoid';
+        params['activation'] = 'relu';
     }
     if (params['alpha'] === ''){
         params['alpha'] = 0.03;
