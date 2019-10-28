@@ -106,9 +106,6 @@ arrData = [100,150,200,300,320,380,400,600,900,1000]
 var delayInMilliseconds = 1000;
 
 netStart.addEventListener('click', function(){
-    $.post("demos/net", function(nodesArray) {
-        $( ".result" ).html(nodesArray);
-      });
     for(i = 0; i < arrData.length; i++){
         addData(netChart,arrLabels[i],arrData[i]);
         netChart.update();
@@ -116,7 +113,44 @@ netStart.addEventListener('click', function(){
 });
 
 netStop.addEventListener('click', function(){
-    alert("Neural Net Demo");
+    if(nodesArray.length == 0){
+        nodesArray = [16, 16]
+    }
+    array = [
+        document.getElementById("net-epochs"),
+        document.getElementById("net-batch"),
+        document.getElementById("net-datasetName"),
+        document.getElementById("net-activationName"),
+        document.getElementById("net-alpha"),
+        document.getElementById("net-lambda"),
+        document.getElementById("layers"),
+        nodesArray
+    ]
+    inputs = []
+    // checks to see if inputs have been made
+    for(var i = 0; i < array.length - 1; i++){
+        if(array[i].value === ''){
+            inputs.push(array[i].placeholder);
+        } else {
+            inputs.push(array[i].value);
+        }
+    }
+
+    inputs.push(array[array.length - 1]);
+
+    for(var i = 0; i < inputs.length - 1; i++){
+        console.log(inputs[i]);
+    }
+    console.log(inputs[inputs.length - 1]);
+
+    $.ajax({
+        url: '/demos/net',
+        type: "POST",
+        data: {inputs},
+        success: function(response){
+         alert('evaluate response and show alert');
+        }
+    }); 
 });
 
 

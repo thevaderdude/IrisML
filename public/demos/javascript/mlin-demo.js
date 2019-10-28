@@ -49,7 +49,33 @@ var mlinChart = new Chart(ctx, {
 });
 
 mlinStop.addEventListener('click',function(){
-    alert('multi-var linear demo');
+    array = [
+        document.getElementById("mlin-activationName"),
+        document.getElementById("mlin-alpha"),
+        document.getElementById("mlin-lambda"),
+        document.getElementById("mlin-epochs"),
+        document.getElementById("mlin-batchSize"),
+        document.getElementById("mlin-datasetName"),
+    ]
+
+    inputs = []
+    // checks to see if inputs have been made
+    for(var i = 0; i < array.length; i++){
+        if(array[i].value === ''){
+            inputs.push(array[i].placeholder);
+        } else {
+            inputs.push(array[i].value)
+        }
+    }
+
+    $.ajax({
+        url: '/demos/mlin',
+        type: "POST",
+        data: {inputs},
+        success: function(response){
+            alert('evaluate response and show alert');
+        }
+    }); 
 });
 
 function addData(chart, label, data) {

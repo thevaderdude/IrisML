@@ -49,7 +49,33 @@ var binChart = new Chart(ctx, {
 });
 
 binStop.addEventListener('click',function(){
-    alert('binary classification demo');
+    array = [
+        document.getElementById("bin-activationName"),
+        document.getElementById("bin-alpha"),
+        document.getElementById("bin-lambda"),
+        document.getElementById("bin-epochs"),
+        document.getElementById("bin-batchSize"),
+        document.getElementById("bin-datasetName"),
+    ]
+
+    inputs = []
+    // checks to see if inputs have been made
+    for(var i = 0; i < array.length; i++){
+        if(array[i].value === ''){
+            inputs.push(array[i].placeholder);
+        } else {
+            inputs.push(array[i].value)
+        }
+    }
+
+    $.ajax({
+        url: '/demos/mlin',
+        type: "POST",
+        data: {inputs},
+        success: function(response){
+            alert('evaluate response and show alert');
+        }
+    }); 
 });
 
 function addData(chart, label, data) {

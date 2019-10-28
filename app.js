@@ -26,11 +26,23 @@ app.use('/documentation', documentation);
 console.log("Passed");
 app.use('/color', color);
 app.use('/valen', valen);
-app.use('/demos/net', netTrain);
-app.use('/demos/slin', slinTrain);
-app.use('/demos/mlin', mlinTrain);
-app.use('/demos/bin', binTrain);
 console.log("Used");
+
+app.post('/demos/net', (req, res) => {
+	console.log(req.body);
+});
+
+app.post('/demos/slin', (req, res) => {
+	console.log(req.body);
+});
+
+app.post('/demos/mlin', (req, res) => {
+	console.log(req.body);
+});
+
+app.post('/demos/bin', (req, res) => {
+	console.log(req.body);
+});
 
 app.get('*', (req, res) => {
 	res.render("home/home.ejs");

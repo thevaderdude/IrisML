@@ -92,7 +92,33 @@ var slinChart = new Chart(ctx, {
 });
 
 slinStop.addEventListener('click',function(){
-    alert('single-var linear demo');
+    array = [
+        document.getElementById("slin-activationName"),
+        document.getElementById("slin-alpha"),
+        document.getElementById("slin-lambda"),
+        document.getElementById("slin-epochs"),
+        document.getElementById("slin-batchSize"),
+        document.getElementById("slin-datasetName"),
+    ]
+
+    inputs = []
+    // checks to see if inputs have been made
+    for(var i = 0; i < array.length; i++){
+        if(array[i].value === ''){
+            inputs.push(array[i].placeholder);
+        } else {
+            inputs.push(array[i].value)
+        }
+    }
+
+    $.ajax({
+        url: '/demos/slin',
+        type: "POST",
+        data: {inputs},
+        success: function(response){
+            alert('evaluate response and show alert');
+        }
+    }); 
 });
 
 slinStart.addEventListener('click', function(){

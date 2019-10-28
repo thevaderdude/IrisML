@@ -73,7 +73,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Epochs</span>
           </div>
-          <input form="net-training" type="number" class="form-control" placeholder="1000" name="net[epochs]">
+          <input form="net-training" type="number" class="form-control" placeholder="1000" id="net-epochs" name="net_epochs">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -81,7 +81,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Batch Size</span>
           </div>
-          <input form="net-training" type="number" class="form-control" placeholder="30" name="net[batchSize]">
+          <input form="net-training" type="number" class="form-control" placeholder="30" id="net-batch"name="net_batchSize">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -93,7 +93,7 @@
                   <option>Poker</option>
                 </select>
             </div>
-          <input form="net-training" type="text" class="form-control" placeholder="digits" id="net-datasetName" name="net[dataset]">
+          <input form="net-training" type="text" class="form-control" placeholder="digits" id="net-datasetName" name="net_datasetName">
         </div>
       </div>
     </div>
@@ -107,7 +107,7 @@
                   <option>Relu</option>
                 </select>
             </div>
-          <input form="net-training" id="net-activationName" type="text" class="form-control" placeholder="sigmoid" name="net[activation]">
+          <input form="net-training" id="net-activationName" type="text" class="form-control" placeholder="sigmoid" name="net_activationName">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -115,7 +115,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Alpha</span>
           </div>
-          <input form="net-training" type="number" class="form-control" placeholder="0.03" name="net[alpha]">
+          <input form="net-training" type="number" class="form-control" placeholder="0.03" id="net-alpha" name="net_alpha">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -123,7 +123,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Lambda</span>
           </div>
-          <input form="net-training" type="number" class="form-control" placeholder="0.3" name="net[lambda]">
+          <input form="net-training" type="number" class="form-control" placeholder="0.3" id="net-lambda" name="net_lambda">
         </div>
       </div>
     </div>
@@ -133,7 +133,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Layers</span>
           </div>
-          <input form="net-training" type="number" class="form-control" placeholder="5" id="layers" name="net[numlayers]">
+          <input form="net-training" type="number" class="form-control" placeholder="4" id="layers" name="net_numlayers">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -145,7 +145,7 @@
                 <option>Nodes in Hidden Layer 2</option>
               </select>
           </div>
-          <input form="net-training" id="nodesLayer" type="number" class="form-control" placeholder="16" name="net[nodelayers]">
+          <input form="net-training" id="nodesLayer" type="number" class="form-control" placeholder="16" name="nodelayers">
         </div>
       </div>
     </div>
@@ -187,7 +187,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Alpha</span>
         </div>
-        <input form="slin-training" type="number" class="form-control" placeholder="0.03" name="slin[alpha]">
+        <input form="slin-training" type="number" class="form-control" placeholder="0.03" id="slin-alpha" name="slin[alpha]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -195,7 +195,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Lambda</span>
         </div>
-        <input form="slin-training" type="number" class="form-control" placeholder="0.3" name="slin[lambda]">
+        <input form="slin-training" type="number" class="form-control" placeholder="0.3" id="slin-lambda" name="slin[lambda]">
       </div>
     </div>
   </div>
@@ -205,7 +205,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Epochs</span>
         </div>
-        <input form="slin-training" type="number" class="form-control" placeholder="1000" name="slin[epochs]">
+        <input form="slin-training" type="number" class="form-control" placeholder="1000" id="slin-epochs" name="slin[epochs]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -213,7 +213,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Batch Size</span>
         </div>
-        <input form="slin-training" type="number" class="form-control" placeholder="30" name="slin[batchSize]">
+        <input form="slin-training" type="number" class="form-control" placeholder="30" id="slin-batchSize" name="slin[batchSize]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -267,7 +267,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Alpha</span>
         </div>
-        <input form="mlin-training" type="number" class="form-control" placeholder="0.03" name="mlin[alpha]">
+        <input form="mlin-training" id="mlin-alpha" type="number" class="form-control" placeholder="0.03" name="mlin[alpha]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -275,7 +275,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Lambda</span>
         </div>
-        <input form="mlin-training" type="number" class="form-control" placeholder="0.3" name="mlin[lambda]">
+        <input form="mlin-training" id="mlin-lambda" type="number" class="form-control" placeholder="0.3" name="mlin[lambda]">
       </div>
     </div>
   </div>
@@ -285,7 +285,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Epochs</span>
         </div>
-        <input form="mlin-training" type="number" class="form-control" placeholder="1000" name="mlin[epochs]">
+        <input form="mlin-training" id="mlin-epochs" type="number" class="form-control" placeholder="1000" name="mlin[epochs]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -293,7 +293,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Batch Size</span>
         </div>
-        <input form="mlin-training" type="number" class="form-control" placeholder="30" name="mlin[batchSize]">
+        <input form="mlin-training" id="mlin-batchSize" type="number" class="form-control" placeholder="30" name="mlin[batchSize]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -347,7 +347,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Alpha</span>
         </div>
-        <input form="bin-training" type="number" class="form-control" placeholder="0.03" name="bin[alpha]">
+        <input form="bin-training" id="bin-alpha" type="number" class="form-control" placeholder="0.03" name="bin[alpha]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -355,7 +355,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Lambda</span>
         </div>
-        <input form="bin-training" type="number" class="form-control" placeholder="0.3" name="bin[lambda]">
+        <input form="bin-training" id="bin-lambda" type="number" class="form-control" placeholder="0.3" name="bin[lambda]">
       </div>
     </div>
   </div>
@@ -365,7 +365,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Epochs</span>
         </div>
-        <input form="bin-training" type="number" class="form-control" placeholder="1000" name="bin[epochs]">
+        <input form="bin-training" id="bin-epochs" type="number" class="form-control" placeholder="1000" name="bin[epochs]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -373,7 +373,7 @@
         <div class="input-group-prepend">
           <span class="input-group-text">Batch Size</span>
         </div>
-        <input form="bin-training" type="number" class="form-control" placeholder="30" name="bin[batchSize]">
+        <input form="bin-training" id="bin-batchSize" type="number" class="form-control" placeholder="30" name="bin[batchSize]">
       </div>
     </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
