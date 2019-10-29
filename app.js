@@ -87,7 +87,10 @@ app.post('/demos/net', (req, res) => {
 			"epochs": req.body.inputs[3],
 			"batchSize": req.body.inputs[3],
 			"dataSetName": req.body.inputs[4],
-			"layers": req.body.inputs[5]
+			"layers": req.body.inputs[5],
+			"epoch": [],
+			"cost": [],
+			"testing-inputs": []
 		}
 	};
 	
