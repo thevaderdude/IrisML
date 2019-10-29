@@ -19,7 +19,10 @@ router.post('/net', (req, res) => {
 			"epochs": req.body.inputs[3],
 			"batchSize": req.body.inputs[4],
 			"dataSetName": req.body.inputs[5],
-			"layers": req.body.inputs[6]
+			"layers": req.body.inputs[6],
+			"epoch": [],
+			"cost": [],
+			"testing-inputs": []
 		}
 	};
 	
