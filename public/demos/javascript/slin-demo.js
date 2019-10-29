@@ -93,7 +93,6 @@ var slinChart = new Chart(ctx, {
 
 slinStop.addEventListener('click',function(){
     array = [
-        document.getElementById("slin-activationName"),
         document.getElementById("slin-alpha"),
         document.getElementById("slin-lambda"),
         document.getElementById("slin-epochs"),

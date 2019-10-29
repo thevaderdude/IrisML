@@ -7,7 +7,6 @@ var nodesLayer = document.getElementById("nodesLayer");
 var activation = document.getElementById("net-activation");
 var net_dataset = document.getElementById("net-dataset");
 var nodesArray = [];
-var initialized = false;
 
 var netctx = document.getElementById('net-chart').getContext('2d');
 var barctx = document.getElementById('bar-chart').getContext('2d');
@@ -135,14 +134,8 @@ netStop.addEventListener('click', function(){
             inputs.push(array[i].value);
         }
     }
-
     inputs.push(array[array.length - 1]);
-
-    for(var i = 0; i < inputs.length - 1; i++){
-        console.log(inputs[i]);
-    }
-    console.log(inputs[inputs.length - 1]);
-
+    
     $.ajax({
         url: '/demos/net',
         type: "POST",
@@ -181,7 +174,6 @@ numLayers.addEventListener('input', function(){
     nodesArray.length = 0
     num = numLayers.value;
     nodes.innerHTML = '';
-    initialized = true;
 
     //makes sure layers is greater than 3
     if(num < 3){
@@ -208,14 +200,6 @@ nodes.addEventListener('input', function(){
       arr[i] = nodes[i].value;
     }
 
-    //Checks to see if nodesArray is initialized
-    if(!initialized){
-        initialized = true;
-        for(var i = 0; i < numLayers.placeholder - 2; i++){
-            nodesArray.push(1);            
-        }
-    }
-
     //updates shown value to match stored value
     var index = arr.indexOf(nodes.value)
     nodesLayer.value = nodesArray[index]
@@ -229,18 +213,7 @@ nodesLayer.addEventListener('input', function(){
       arr[i] = nodes[i].value;
     }
 
-    //Checks to see if nodesArray is initialized
-    if(!initialized){
-        initialized = true;
-        for(var i = 0; i < numLayers.placeholder - 2; i++){
-            nodesArray.push(1);            
-        }
-    }
-
     //keeps track of nodes in each hiden layer
     var index = arr.indexOf(nodes.value)
-    if(nodesArray[index] === undefined){
-        alert('yo')
-    }
     nodesArray[index] = Number(nodesLayer.value)
 });
