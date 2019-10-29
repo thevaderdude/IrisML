@@ -25,36 +25,10 @@ fs.readFile('auth.json', function(err, data) {
 			region: awsconfigjson.region,
 			endpoint: awsconfigjson.endpoint
 		});
-		//makeTable(); //Uncomment this line if you have never generated the IrisMLDemosLocal table
-		console.log("Added AWS config");
+		console.log("Added AWS authentication info from file.");
 	}
 });
 
-function makeTable() {
-var dynamodb = new AWS.DynamoDB();
-
-var tableinfo = {
-	TableName: "IrisMLDemosLocal",
-	KeySchema: [
-		{ AttributeName: "instanceID", KeyType: "HASH" }
-	],
-	AttributeDefinitions: [
-		{ AttributeName: "instanceID", AttributeType: "N" }
-	],
-	ProvisionedThroughput: {
-		ReadCapacityUnits: 5,
-		WriteCapacityUnits: 5
-	}
-};
-
-dynamodb.createTable(tableinfo, function(err, data) {
-	if (err) {
-		console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
-	} else {
-		console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
-	}	
-});
-}
 //END AWS Config
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -69,126 +43,6 @@ app.use('/demos', demos);
 app.use('/documentation', documentation);
 app.use('/color', color);
 app.use('/valen', valen);
-
-app.post('/demos/net', (req, res) => {
-	var docClient = new AWS.DynamoDB.DocumentClient();
-	var item = {
-		TableName: "IrisMLDemosLocal",
-		Item: {
-			"instanceID": 0,
-			"type": "net",
-			"activation-name": req.body.inputs[0],
-			"alpha": req.body.inputs[1],
-			"lambda": req.body.inputs[2],
-			"epochs": req.body.inputs[3],
-			"batchSize": req.body.inputs[3],
-			"dataSetName": req.body.inputs[4],
-			"layers": req.body.inputs[5]
-		}
-	};
-	
-	docClient.put(item, function(err, data) {
-		if (err) {
-			console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-		} else {
-			console.log("Added item:", JSON.stringify(data, null, 2));
-		}
-	});
-});
-
-app.post('/demos/slin', (req, res) => {
-	var docClient = new AWS.DynamoDB.DocumentClient();
-	var item = {
-		TableName: "IrisMLDemosLocal",
-		Item: {
-			"instanceID": 0,
-			"type": "slin",
-			"alpha": req.body.inputs[0],
-			"lambda": req.body.inputs[1],
-			"epochs": req.body.inputs[2],
-			"batchSize": req.body.inputs[3],
-			"dataSetName": req.body.inputs[4]
-		}
-	};
-	
-	docClient.put(item, function(err, data) {
-		if (err) {
-			console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-		} else {
-			console.log("Added item:", JSON.stringify(data, null, 2));
-		}
-	});
-});
-
-app.post('/demos/mlin', (req, res) => {
-	var docClient = new AWS.DynamoDB.DocumentClient();
-	var item = {
-		TableName: "IrisMLDemosLocal",
-		Item: {
-			"instanceID": 0,
-			"type": "mlin",
-			"alpha": req.body.inputs[0],
-			"lambda": req.body.inputs[1],
-			"epochs": req.body.inputs[2],
-			"batchSize": req.body.inputs[3],
-			"dataSetName": req.body.inputs[4]
-		}
-	};
-	
-	docClient.put(item, function(err, data) {
-		if (err) {
-			console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-		} else {
-			console.log("Added item:", JSON.stringify(data, null, 2));
-		}
-	});
-});
-
-app.post('/demos/bin', (req, res) => {
-	var docClient = new AWS.DynamoDB.DocumentClient();
-	var item = {
-		TableName: "IrisMLDemosLocal",
-		Item: {
-			"instanceID": 0,
-			"type": "bin",
-			"activation-name": req.body.inputs[0],
-			"alpha": req.body.inputs[1],
-			"lambda": req.body.inputs[2],
-			"epochs": req.body.inputs[3],
-			"batchSize": req.body.inputs[4],
-			"dataSetName": req.body.inputs[5]
-		}
-	};
-	
-	docClient.put(item, function(err, data) {
-		if (err) {
-			console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-		} else {
-			console.log("Added item:", JSON.stringify(data, null, 2));
-		}
-	});
-});
-
-app.post('/demos/guess', (req, res) => {
-	var docClient = new AWS.DynamoDB.DocumentClient();
-	var item = {
-		TableName: "IrisMLDemosLocal",
-		Item: {
-			"instanceID": 0,
-			"type": "net",
-			"digit": req.body,
-			// could be 'digit: req.body.data' but idk
-		}
-	};
-	
-	docClient.put(item, function(err, data) {
-		if (err) {
-			console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-		} else {
-			console.log("Added item:", JSON.stringify(data, null, 2));
-		}
-	});
-});
 
 app.get('*', (req, res) => {
 	res.render("home/home.ejs");
