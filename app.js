@@ -29,36 +29,10 @@ fs.readFile('auth.json', function(err, data) {
 			region: awsconfigjson.region,
 			endpoint: awsconfigjson.endpoint
 		});
-		//makeTable(); //Uncomment this line if you have never generated the IrisMLDemosLocal table
-		console.log("Added AWS config");
+		console.log("Added AWS authentication info from file.");
 	}
 });
 
-function makeTable() {
-var dynamodb = new AWS.DynamoDB();
-
-var tableinfo = {
-	TableName: "IrisMLDemosLocal",
-	KeySchema: [
-		{ AttributeName: "instanceID", KeyType: "HASH" }
-	],
-	AttributeDefinitions: [
-		{ AttributeName: "instanceID", AttributeType: "N" }
-	],
-	ProvisionedThroughput: {
-		ReadCapacityUnits: 5,
-		WriteCapacityUnits: 5
-	}
-};
-
-dynamodb.createTable(tableinfo, function(err, data) {
-	if (err) {
-		console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
-	} else {
-		console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
-	}	
-});
-}
 //END AWS Config
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -77,7 +51,7 @@ app.use('/valen', valen);
 app.post('/demos/net', (req, res) => {
 	var docClient = new AWS.DynamoDB.DocumentClient();
 	var item = {
-		TableName: "IrisMLDemosLocal",
+		TableName: "IrisMLDemos",
 		Item: {
 			"instanceID": 0,
 			"type": "net",
@@ -106,7 +80,7 @@ app.post('/demos/net', (req, res) => {
 app.post('/demos/slin', (req, res) => {
 	var docClient = new AWS.DynamoDB.DocumentClient();
 	var item = {
-		TableName: "IrisMLDemosLocal",
+		TableName: "IrisMLDemos",
 		Item: {
 			"instanceID": 0,
 			"type": "slin",
@@ -131,7 +105,7 @@ app.post('/demos/slin', (req, res) => {
 app.post('/demos/mlin', (req, res) => {
 	var docClient = new AWS.DynamoDB.DocumentClient();
 	var item = {
-		TableName: "IrisMLDemosLocal",
+		TableName: "IrisMLDemos",
 		Item: {
 			"instanceID": 0,
 			"type": "mlin",
@@ -156,7 +130,7 @@ app.post('/demos/mlin', (req, res) => {
 app.post('/demos/bin', (req, res) => {
 	var docClient = new AWS.DynamoDB.DocumentClient();
 	var item = {
-		TableName: "IrisMLDemosLocal",
+		TableName: "IrisMLDemos",
 		Item: {
 			"instanceID": 0,
 			"type": "bin",

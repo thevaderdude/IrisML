@@ -50,7 +50,6 @@ var mlinChart = new Chart(ctx, {
 
 mlinStop.addEventListener('click',function(){
     array = [
-        document.getElementById("mlin-activationName"),
         document.getElementById("mlin-alpha"),
         document.getElementById("mlin-lambda"),
         document.getElementById("mlin-epochs"),
