@@ -48,7 +48,9 @@ router.post('/slin', (req, res) => {
 			"epochs": req.body.inputs[2],
 			"batchSize": req.body.inputs[3],
 			"dataSetName": req.body.inputs[4],
-			"started": true
+			"started": true,
+			"epoch": [],
+			"cost": []
 		}
 	};
 	
@@ -72,6 +74,8 @@ router.post('/mlin', (req, res) => {
 			"lambda": req.body.inputs[1],
 			"epochs": req.body.inputs[2],
 			"batchSize": req.body.inputs[3],
+			"epoch": [],
+			"cost": [],
 			"dataSetName": req.body.inputs[4],
 			"started": true
 		}
@@ -99,6 +103,8 @@ router.post('/bin', (req, res) => {
 			"epochs": req.body.inputs[3],
 			"batchSize": req.body.inputs[4],
 			"dataSetName": req.body.inputs[5],
+			"epoch": [],
+			"cost": [],
 			"started": true
 		}
 	};
