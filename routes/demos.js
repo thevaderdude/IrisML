@@ -22,7 +22,8 @@ router.post('/net', (req, res) => {
 			"layers": req.body.inputs[6],
 			"epoch": [],
 			"cost": [],
-			"testing-inputs": []
+			"testing-inputs": [],
+			"started": true
 		}
 	};
 	
