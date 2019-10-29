@@ -6,10 +6,6 @@ var	  bodyParser = require('body-parser'),
 	  demos = require('./routes/demos'),
 	  documentation = require('./routes/documentation'),
 	  color = require('./routes/color'),
-	  netTrain = require('./routes/netTrain'),
-	  slinTrain = require('./routes/slinTrain'),
-	  mlinTrain = require('./routes/mlinTrain'),
-	  binTrain = require('./routes/binTrain.js'),
 	  valen = require('./routes/valen');
 console.log("Did requires");
 const app = express();
