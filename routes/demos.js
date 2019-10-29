@@ -107,7 +107,7 @@ router.post('/bin', (req, res) => {
 			"batchSize": req.body.inputs[4],
 			"dataSetName": req.body.inputs[5],
 			"epoch": [],
-			"cost": [],
+			"cost":  [],
 		}
 	};
 	
