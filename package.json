@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "faker": "^4.1.0",
     "fast-csv": "^3.4.0",
-    "mongoose": "^5.6.0",
+    "mongoose": "^5.7.5",
     "request": "^2.88.0"
   },
   "keywords": [],
