@@ -7,9 +7,7 @@ var ctx = document.getElementById('bin-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
 var binChart = new Chart(ctx, {
-
     type: 'line',
-
     data: {
         labels: ['1','2','3','4','5'],
         datasets: [{
@@ -19,7 +17,6 @@ var binChart = new Chart(ctx, {
         }],
         
     },
-
     options: {
         title:{
             display: true,
@@ -44,8 +41,37 @@ var binChart = new Chart(ctx, {
                     fontSize: 18
                 },
             }],
+        },
+    }
+});
+
+mlinStop.addEventListener('click',function(){
+    array = [
+        document.getElementById("mlin-alpha"),
+        document.getElementById("mlin-lambda"),
+        document.getElementById("mlin-epochs"),
+        document.getElementById("mlin-batchSize"),
+        document.getElementById("mlin-datasetName"),
+    ]
+
+    inputs = []
+    // checks to see if inputs have been made
+    for(var i = 0; i < array.length; i++){
+        if(array[i].value === ''){
+            inputs.push(array[i].placeholder);
+        } else {
+            inputs.push(array[i].value)
         }
     }
+    console.log(inputs)
+    $.ajax({
+        url: '/demos/mlin',
+        type: "POST",
+        data: {inputs},
+        success: function(response){
+            alert('evaluate response and show alert');
+        }
+    }); 
 });
 
 binStop.addEventListener('click',function(){
@@ -67,7 +93,7 @@ binStop.addEventListener('click',function(){
             inputs.push(array[i].value)
         }
     }
-
+    console.log(inputs)
     $.ajax({
         url: '/demos/bin',
         type: "POST",

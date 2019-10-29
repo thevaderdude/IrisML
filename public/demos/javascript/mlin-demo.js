@@ -1,15 +1,12 @@
 var mlinStart = document.querySelector("#mlin-start");
 var mlinStop = document.querySelector("#mlin-stop");
 var mlin_dataset = document.getElementById("mlin-dataset");
-var mlin_activation = document.getElementById("mlin-activation");
 
 var ctx = document.getElementById('mlin-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
 var mlinChart = new Chart(ctx, {
-
     type: 'line',
-
     data: {
         labels: ['1','2','3','4','5'],
         datasets: [{
@@ -19,7 +16,6 @@ var mlinChart = new Chart(ctx, {
         }],
         
     },
-
     options: {
         title:{
             display: true,
@@ -44,7 +40,7 @@ var mlinChart = new Chart(ctx, {
                     fontSize: 18
                 },
             }],
-        }
+        },
     }
 });
 
@@ -66,7 +62,7 @@ mlinStop.addEventListener('click',function(){
             inputs.push(array[i].value)
         }
     }
-
+    console.log(inputs)
     $.ajax({
         url: '/demos/mlin',
         type: "POST",
@@ -90,10 +86,8 @@ var delayInMilliseconds = 1000;
 
 mlinStart.addEventListener('click', function(){
     for(i = 0; i < arrData.length; i++){
-
         addData(mlinChart,arrLabels[i],arrData[i]);
         mlinChart.update();
-
     }
 });
 
@@ -106,15 +100,4 @@ mlin_dataset.addEventListener('change', function(){
 
     var index = arr.indexOf(mlin_dataset.value)
     mlin_dataName.value = mlin_dataset[index].value
-});
-
-mlin_activation.addEventListener('change', function(){
-    mlin_activationName = document.getElementById("mlin-activationName");
-    var arr = [];
-    for (var i = mlin_activation.length >>> 0; i--;) { 
-      arr[i] = mlin_activation[i].value;
-    }
-
-    var index = arr.indexOf(mlin_activation.value)
-    mlin_activationName.value = mlin_activation[index].value
 });
