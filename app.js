@@ -59,9 +59,9 @@ app.post('/demos/net', (req, res) => {
 			"alpha": req.body.inputs[1],
 			"lambda": req.body.inputs[2],
 			"epochs": req.body.inputs[3],
-			"batchSize": req.body.inputs[3],
-			"dataSetName": req.body.inputs[4],
-			"layers": req.body.inputs[5]
+			"batchSize": req.body.inputs[4],
+			"dataSetName": req.body.inputs[5],
+			"layers": req.body.inputs[6]
 		}
 	};
 	
@@ -81,10 +81,9 @@ app.post('/demos/slin', (req, res) => {
 		Item: {
 			"instanceID": 0,
 			"type": "slin",
-			"activation-name": req.body.inputs[0],
-			"alpha": req.body.inputs[1],
-			"lambda": req.body.inputs[2],
-			"epochs": req.body.inputs[3],
+			"alpha": req.body.inputs[0],
+			"lambda": req.body.inputs[1],
+			"epochs": req.body.inputs[2],
 			"batchSize": req.body.inputs[3],
 			"dataSetName": req.body.inputs[4]
 		}
@@ -106,10 +105,9 @@ app.post('/demos/mlin', (req, res) => {
 		Item: {
 			"instanceID": 0,
 			"type": "mlin",
-			"activation-name": req.body.inputs[0],
-			"alpha": req.body.inputs[1],
-			"lambda": req.body.inputs[2],
-			"epochs": req.body.inputs[3],
+			"alpha": req.body.inputs[0],
+			"lambda": req.body.inputs[1],
+			"epochs": req.body.inputs[2],
 			"batchSize": req.body.inputs[3],
 			"dataSetName": req.body.inputs[4]
 		}
@@ -135,8 +133,8 @@ app.post('/demos/bin', (req, res) => {
 			"alpha": req.body.inputs[1],
 			"lambda": req.body.inputs[2],
 			"epochs": req.body.inputs[3],
-			"batchSize": req.body.inputs[3],
-			"dataSetName": req.body.inputs[4]
+			"batchSize": req.body.inputs[4],
+			"dataSetName": req.body.inputs[5]
 		}
 	};
 	
