@@ -33,6 +33,19 @@ router.post('/net', (req, res) => {
 				console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
 			} else {
 				console.log("Added item:", JSON.stringify(data, null, 2));
+				var params = {
+					docClient: docClient,
+					instanceID: item.Item.instanceID
+				};
+				console.log("checking completion for instanceID: " + params.instanceID);
+				checkTrainCompletion(params, function(err, data) {
+					if (err) {
+						console.log("Error checking for completed data. Error Message: " + err);
+					} else {
+						console.log("Checked train completion. Length of cost array: " + data);
+						//TODO: put new data into the chart
+					}
+				});
 			}
 		});
 	});
@@ -63,8 +76,23 @@ router.post('/slin', (req, res) => {
 				console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
 			} else {
 				console.log("Added item:", JSON.stringify(data, null, 2));
+				var params = {
+					docClient: docClient,
+					instanceID: item.Item.instanceID
+				};
+				console.log("checking completion for instanceID: " + params.instanceID);
+				checkTrainCompletion(params, function(err, data) {
+					if (err) {
+						console.log("Error checking for completed data. Error Message: " + err);
+					} else {
+						console.log("Checked train completion. Length of cost array: " + data);
+						//TODO: put new data into the chart
+					}
+				});
 			}
 		});
+		
+		
 	});
 });
 
@@ -92,6 +120,19 @@ router.post('/mlin', (req, res) => {
 				console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
 			} else {
 				console.log("Added item:", JSON.stringify(data, null, 2));
+				var params = {
+					docClient: docClient,
+					instanceID: item.Item.instanceID
+				};
+				console.log("checking completion for instanceID: " + params.instanceID);
+				checkTrainCompletion(params, function(err, data) {
+					if (err) {
+						console.log("Error checking for completed data. Error Message: " + err);
+					} else {
+						console.log("Checked train completion. Length of cost array: " + data);
+						//TODO: put new data into the chart
+					}
+				});
 			}
 		});
 	});
@@ -122,9 +163,24 @@ router.post('/bin', (req, res) => {
 				console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
 			} else {
 				console.log("Added item:", JSON.stringify(data, null, 2));
+				var params = {
+					docClient: docClient,
+					instanceID: item.Item.instanceID
+				};
+				console.log("checking completion for instanceID: " + params.instanceID);
+				checkTrainCompletion(params, function(err, data) {
+					if (err) {
+						console.log("Error checking for completed data. Error Message: " + err);
+					} else {
+						console.log("Checked train completion. Length of cost array: " + data);
+						//TODO: put new data into the chart
+					}
+				});
 			}
 		});
 	});
+	
+	
 });
 
 function generateInstanceID(callback) {
@@ -138,6 +194,35 @@ function generateInstanceID(callback) {
 			callback(null, data.Count);
 		}
 	});
+}
+
+function checkTrainCompletion(data, callback) {
+	setTimeout(function() {
+		data.docClient.query({
+			TableName: "IrisMLDemos",
+			ConsistentRead: true,
+			KeyConditionExpression: "instanceID = :id",
+			ExpressionAttributeValues: {
+				":id": data.instanceID
+			}		
+		}, function(err, dbdata) {
+			if (err) {
+				callback("Could not read DynamoDB table. Error Message: " + err, null);
+			} else {
+				
+				if(dbdata.Count < 1) {
+					callback("0 results for instanceID when checking for train completion.", null);
+				} else {
+					if(dbdata.Items[0].cost.length) {
+						callback(null, dbdata.Items[0]);
+					} else {
+						console.log("No change in Train data");
+						checkTrainCompletion(data, callback);
+					}
+				}
+			}
+		});
+	}, 1000);
 }
 
 module.exports = router;
