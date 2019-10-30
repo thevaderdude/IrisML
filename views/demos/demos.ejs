@@ -41,8 +41,8 @@
   
   <div class="d-flex row justify-content-between">
     <div class="col-4">
-      <div class="mb-2 border" id='container'>
-        <canvas id='canvasBig' width='280' height='280'></canvas>
+      <div class="mb-2" id='container'>
+        <canvas class="border" id='canvasBig' width='280' height='280'></canvas>
       </div>
       <div class="d-flex">
         <div id='buttons'>            
@@ -52,7 +52,7 @@
           <button type="button" id="clear" value='Clear Canvas' class="btn btn-danger mb-3">Clear</button>
         </div>
       </div>
-      <div class="mb-2 hide" id='container'>
+      <div class="mb-2 hidden" id='container'>
         <canvas id='canvasSmall' width='28' height='28'></canvas>
       </div>
     </div>
@@ -104,11 +104,11 @@
             <div class="input-group-prepend">
                 <label for="exampleFormControlSelect1"></label>
                 <select id="net-activation" class="form-control" id="exampleFormControlSelect1">
-                  <option>Relu</option>
-                  <option>Sigmoid</option>
+                  <option>relu</option>
+                  <option>sigmoid</option>
                 </select>
             </div>
-          <input form="net-training" id="net-activationName" type="text" class="form-control" placeholder="Relu" name="net_activationName">
+          <input form="net-training" id="net-activationName" type="text" class="form-control" placeholder="relu" name="net_activationName">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -160,11 +160,13 @@
 <div class="container round mb-5">
 
   <div class="py-4 pl-3 d-flex">
+    <input type="file" id="footage" class="hidden">
     <button type="submit" id="slin-start" class="btn btn-success mb-3">Start</button>
     <button type="button" id="slin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
 
   <div class="row justify-content-center pb-5 px-4">
+    <div id="scatter" class="white"></div>
     <canvas id="slin-chart" width='100'></canvas>
   </div>
 
@@ -203,18 +205,6 @@
         <input form="slin-training" type="number" class="form-control" placeholder="30" id="slin-batchSize" name="slin[batchSize]">
       </div>
     </div>
-    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
-        <div class="input-group mb-auto">
-            <div class="input-group-prepend">
-                <label for="exampleFormControlSelect1"></label>
-                <select id="slin-dataset" class="form-control" id="exampleFormControlSelect1">
-                  <option>Digits</option>
-                  <option>Poker</option>
-                </select>
-            </div>
-          <input form="slin-training" id="slin-datasetName" type="text" class="form-control" placeholder="Digits" name="slin[dataset]">
-        </div>
-      </div>
   </div>
 
 </div>
@@ -308,11 +298,11 @@
           <div class="input-group-prepend">
               <label for="exampleFormControlSelect1"></label>
               <select id="bin-activation" class="form-control" id="exampleFormControlSelect1">
-                <option>Sigmoid</option>
-                <option>Relu</option>
+                <option>sigmoid</option>
+                <option>relu</option>
               </select>
           </div>
-        <input form="bin-training" id="bin-activationName" type="text" class="form-control" placeholder="Sigmoid" name="bin[activation]">
+        <input form="bin-training" id="bin-activationName" type="text" class="form-control" placeholder="sigmoid" name="bin[activation]">
       </div>
      </div>
     <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -365,6 +355,7 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.4.0/fabric.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -374,5 +365,6 @@
 <script src="javascript/slin-demo.js"></script>
 <script src="javascript/bin-demo.js"></script>
 <script src="javascript/canvas-demo.js"></script>
+<script src="javascript/fitLine.js"></script>
 </body>
 </html>
