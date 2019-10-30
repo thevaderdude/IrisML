@@ -22,6 +22,7 @@ router.post('/net', (req, res) => {
 			"epoch": [],
 			"cost": [],
 			"testing-inputs": [],
+			"testing-outputs": []
 		}
 	};
 	
