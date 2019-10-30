@@ -1,5 +1,5 @@
 var binStart = document.querySelector("#bin-start");
-var binStop = document.querySelector("#bin-stop");
+var binReset = document.querySelector("#bin-reset");
 var bin_dataset = document.getElementById("bin-dataset");
 var bin_activation = document.getElementById("bin-activation");
 
@@ -45,36 +45,18 @@ var binChart = new Chart(ctx, {
     }
 });
 
-mlinStop.addEventListener('click',function(){
-    array = [
-        document.getElementById("mlin-alpha"),
-        document.getElementById("mlin-lambda"),
-        document.getElementById("mlin-epochs"),
-        document.getElementById("mlin-batchSize"),
-        document.getElementById("mlin-datasetName"),
-    ]
-
-    inputs = []
-    // checks to see if inputs have been made
-    for(var i = 0; i < array.length; i++){
-        if(array[i].value === ''){
-            inputs.push(array[i].placeholder);
-        } else {
-            inputs.push(array[i].value)
-        }
-    }
-    console.log(inputs)
-    $.ajax({
-        url: '/demos/mlin',
-        type: "POST",
-        data: {inputs},
-        success: function(response){
-            alert('evaluate response and show alert');
-        }
-    }); 
+binReset.addEventListener('click', function(){
+    document.getElementById("bin-epochs").value = document.getElementById("bin-epochs").placeholder;
+    document.getElementById("bin-batchSize").value = document.getElementById("bin-batchSize").placeholder;
+    document.getElementById("bin-alpha").value = document.getElementById("bin-alpha").placeholder;
+    document.getElementById("bin-lambda").value = document.getElementById("bin-lambda").placeholder;
+    document.getElementById("bin-datasetName").value = document.getElementById("bin-datasetName").placeholder;
+    document.getElementById("bin-dataset").value = document.getElementById("bin-dataset").options[0].value;
+    document.getElementById("bin-activationName").value = document.getElementById("bin-activationName").placeholder;
+    document.getElementById("bin-activation").value = document.getElementById("bin-activation").options[0].value;
 });
 
-binStop.addEventListener('click',function(){
+binStart.addEventListener('click',function(){
     array = [
         document.getElementById("bin-activationName"),
         document.getElementById("bin-alpha"),
@@ -110,19 +92,6 @@ function addData(chart, label, data) {
         dataset.data.push(data);
     });
 }
-
-arrLabels = [6,7,8,9,10,11,12,13,14,15]
-arrData = [100,150,200,300,320,380,400,600,900,1000]
-var delayInMilliseconds = 1000;
-
-binStart.addEventListener('click', function(){
-    for(i = 0; i < arrData.length; i++){
-
-        addData(binChart,arrLabels[i],arrData[i]);
-        binChart.update();
-
-    }
-});
 
 bin_dataset.addEventListener('change', function(){
     bin_dataName = document.getElementById("bin-datasetName");

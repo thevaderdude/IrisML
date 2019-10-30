@@ -1,7 +1,6 @@
 var slinStart = document.querySelector("#slin-start");
-var slinStop = document.querySelector("#slin-stop");
 
-slinStop.addEventListener('click',function(){
+slinStart.addEventListener('click',function(){
     array = [
         document.getElementById("slin-alpha"),
         document.getElementById("slin-lambda"),
