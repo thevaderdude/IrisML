@@ -1,5 +1,5 @@
 var mlinStart = document.querySelector("#mlin-start");
-var mlinStop = document.querySelector("#mlin-stop");
+var mlinReset = document.querySelector("#mlin-reset");
 var mlin_dataset = document.getElementById("mlin-dataset");
 
 var ctx = document.getElementById('mlin-chart').getContext('2d');
@@ -44,7 +44,16 @@ var mlinChart = new Chart(ctx, {
     }
 });
 
-mlinStop.addEventListener('click',function(){
+mlinReset.addEventListener('click', function(){
+    document.getElementById("mlin-epochs").value = document.getElementById("mlin-epochs").placeholder;
+    document.getElementById("mlin-batchSize").value = document.getElementById("mlin-batchSize").placeholder;
+    document.getElementById("mlin-alpha").value = document.getElementById("mlin-alpha").placeholder;
+    document.getElementById("mlin-lambda").value = document.getElementById("mlin-lambda").placeholder;
+    document.getElementById("mlin-datasetName").value = document.getElementById("mlin-datasetName").placeholder;
+    document.getElementById("mlin-dataset").value = document.getElementById("mlin-dataset").options[0].value;
+});
+
+mlinStart.addEventListener('click',function(){
     array = [
         document.getElementById("mlin-alpha"),
         document.getElementById("mlin-lambda"),
@@ -79,17 +88,6 @@ function addData(chart, label, data) {
         dataset.data.push(data);
     });
 }
-
-arrLabels = [6,7,8,9,10,11,12,13,14,15]
-arrData = [100,150,200,300,320,380,400,600,900,1000]
-var delayInMilliseconds = 1000;
-
-mlinStart.addEventListener('click', function(){
-    for(i = 0; i < arrData.length; i++){
-        addData(mlinChart,arrLabels[i],arrData[i]);
-        mlinChart.update();
-    }
-});
 
 mlin_dataset.addEventListener('change', function(){
     mlin_dataName = document.getElementById("mlin-datasetName");

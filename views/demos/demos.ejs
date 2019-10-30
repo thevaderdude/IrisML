@@ -36,7 +36,7 @@
   
   <div class="py-4 d-flex">
     <button type="submit" id="net-start" class="btn btn-success mb-3">Start</button>
-    <button type="button" id="net-stop" class="btn btn-danger ml-3 mb-3">Stop</button>
+    <button type="button" id="net-reset" class="btn btn-danger ml-3 mb-3">Reset</button>
   </div>
   
   <div class="d-flex row justify-content-between">
@@ -82,7 +82,7 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Batch Size</span>
           </div>
-          <input form="net-training" type="number" class="form-control" placeholder="30" id="net-batch"name="net_batchSize">
+          <input form="net-training" type="number" class="form-control" placeholder="30" id="net-batchSize" name="net_batchSize">
         </div>
       </div>
       <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
@@ -160,10 +160,16 @@
 <div class="container round mb-5">
 
   <div class="py-4 pl-3 d-flex">
-    <input type="file" id="footage" class="hidden">
-    <button type="submit" id="slin-start" class="btn btn-success mb-3">Start</button>
-    <button type="button" id="slin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
+    <button type="submit" id="slin-start" class="btn btn-success">Start</button>
+    <button type="button" id="slin-reset"class="btn btn-danger ml-3">Reset</button>
   </div>
+
+  <form class="mb-2 pl-3">
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Upload Personal Dataset</label>
+      <input type="file" class="form-control-file" id="slin-file">
+    </div>
+  </form>
 
   <div class="row justify-content-center pb-5 px-4">
     <div id="scatter" class="white"></div>
@@ -217,7 +223,7 @@
 
   <div class="py-4 pl-3 d-flex">
     <button type="submit" id="mlin-start" class="btn btn-success mb-3">Start</button>
-    <button type="button" id="mlin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
+    <button type="button" id="mlin-reset"class="btn btn-danger ml-3 mb-3">Reset</button>
   </div>
 
   <div class="row justify-content-center pb-5 px-4">
@@ -282,10 +288,8 @@
 <div class="container round mb-5">
 
   <div class="py-4 pl-3 d-flex">
-    <form class="form" id="bin-training" action="/demos/bin" method="POST">
-      <button type="submit" id="bin-start" class="btn btn-success mb-3">Start</button>
-    </form>
-    <button type="button" id="bin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
+    <button type="submit" id="bin-start" class="btn btn-success mb-3">Start</button>
+    <button type="button" id="bin-reset"class="btn btn-danger ml-3 mb-3">Reset</button>
   </div>
 
   <div class="row justify-content-center pb-5 px-4">
