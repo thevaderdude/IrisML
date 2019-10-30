@@ -1,5 +1,5 @@
 var netStart = document.querySelector("#net-start");
-var netStop = document.querySelector("#net-stop");
+var netReset = document.querySelector("#net-reset");
 var guess = document.getElementById("guess");
 var numLayers = document.getElementById('layers');
 var nodes = document.getElementById("nodes");
@@ -100,18 +100,18 @@ function addData(chart, label, data) {
     });
 }
 
-arrLabels = [6,7,8,9,10,11,12,13,14,15]
-arrData = [100,150,200,300,320,380,400,600,900,1000]
-var delayInMilliseconds = 1000;
-
-netStart.addEventListener('click', function(){
-    for(i = 0; i < arrData.length; i++){
-        addData(netChart,arrLabels[i],arrData[i]);
-        netChart.update();
-    }
+netReset.addEventListener('click', function(){
+    document.getElementById("net-epochs").value = document.getElementById("net-epochs").placeholder;
+    document.getElementById("net-batchSize").value = document.getElementById("net-batchSize").placeholder;
+    document.getElementById("net-datasetName").value = document.getElementById("net-datasetName").placeholder;
+    document.getElementById("net-activationName").value = document.getElementById("net-activationName").placeholder;
+    document.getElementById("net-alpha").value = document.getElementById("net-alpha").placeholder;
+    document.getElementById("net-lambda").value = document.getElementById("net-lambda").placeholder;
+    document.getElementById("layers").value = document.getElementById("layers").placeholder; 
+    document.getElementById("net-activation").value = document.getElementById("net-activation").options[0].value;
 });
 
-netStop.addEventListener('click', function(){
+netStart.addEventListener('click', function(){
     if(nodesArray.length == 0){
         nodesArray = [16, 16]
     }
@@ -170,7 +170,7 @@ activation.addEventListener('change', function(){
 });
 
 //handles num of layers
-numLayers.addEventListener('input', function(){
+numLayers.addEventListener('change', function(){
     nodesArray.length = 0
     num = numLayers.value;
     nodes.innerHTML = '';

@@ -42,8 +42,8 @@ router.post('/net', (req, res) => {
 					if (err) {
 						console.log("Error checking for completed data. Error Message: " + err);
 					} else {
-						console.log("Checked train completion. Length of cost array: " + data);
-						//TODO: put new data into the chart
+						console.log("Training data complete. Length of cost array: " + data);
+						res.item = data;
 					}
 				});
 			}
@@ -86,8 +86,8 @@ router.post('/slin', (req, res) => {
 					if (err) {
 						console.log("Error checking for completed data. Error Message: " + err);
 					} else {
-						console.log("Checked train completion. Length of cost array: " + data);
-						//TODO: put new data into the chart
+						console.log("Training data complete. Length of cost array: " + data);
+						res.item = data;
 					}
 				});
 			}
@@ -129,8 +129,8 @@ router.post('/mlin', (req, res) => {
 					if (err) {
 						console.log("Error checking for completed data. Error Message: " + err);
 					} else {
-						console.log("Checked train completion. Length of cost array: " + data);
-						//TODO: put new data into the chart
+						console.log("Training data complete. Length of cost array: " + data);
+						res.item = data;
 					}
 				});
 			}
@@ -171,8 +171,8 @@ router.post('/bin', (req, res) => {
 					if (err) {
 						console.log("Error checking for completed data. Error Message: " + err);
 					} else {
-						console.log("Checked train completion. Length of cost array: " + data);
-						//TODO: put new data into the chart
+						console.log("Training data complete. Length of cost array: " + data);
+						res.item = data;
 					}
 				});
 			}

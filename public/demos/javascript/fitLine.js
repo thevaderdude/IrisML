@@ -1,6 +1,16 @@
 var slinStart = document.querySelector("#slin-start");
+var slinReset = document.querySelector("#slin-reset");
+var fileInput = document.getElementById('slin-file')
+var margin = {
+     top: 20,
+     right: 20,
+     bottom: 30,
+     left: 30
+    }
+var width = 650
+var height = 500
 
-data = [{x: 4335.0, y: 4167.0}, {x: 4216.0, y: 3920.0}, {x: 679.0, y: 673.0}, {x: 4466.0, y: 4714.0}, 
+defaultData = [{x: 4335.0, y: 4167.0}, {x: 4216.0, y: 3920.0}, {x: 679.0, y: 673.0}, {x: 4466.0, y: 4714.0}, 
      {x: 2465.0, y: 2512.0}, {x: 2826.0, y: 2569.0}, {x: 2605.0, y: 2329.0}, {x: 4260.0, y: 4249.0}, 
      {x: 1442.0, y: 1353.0}, {x: 2584.0, y: 2647.0}, {x: 4291.0, y: 4392.0}, {x: 3348.0, y: 3631.0}, 
      {x: 553.0, y: 691.0}, {x: 1367.0, y: 1608.0}, {x: 2210.0, y: 2363.0}, {x: 4096.0, y: 4369.0}, 
@@ -24,106 +34,142 @@ data = [{x: 4335.0, y: 4167.0}, {x: 4216.0, y: 3920.0}, {x: 679.0, y: 673.0}, {x
      {x: 4426.0, y: 4583.0}, {x: 1333.0, y: 1177.0}, {x: 1115.0, y: 1257.0}, {x: 2221.0, y: 2386.0}, 
      {x: 930.0, y: 751.0}, {x: 1363.0, y: 1474.0}, {x: 963.0, y: 1041.0}, {x: 1712.0, y: 1625.0}, 
      {x: 1317.0, y: 1109.0}, {x: 4199.0, y: 4344.0}, {x: 2498.0, y: 2535.0}, {x: 2491.0, y: 2328.0}, 
-     {x: 2648.0, y: 2383.0}, {x: 1128.0, y: 1158.0}, {x: 3687.0, y: 3698.0}, {x: 3017.0, y: 3215.0}, ]
-
-var margin = {
- top: 20,
- right: 20,
- bottom: 30,
- left: 30
-}
-var width = 700
-var height = 500
-
-slinStart.addEventListener('click', function(){
-
-     // y = a + bx
-     b = 1
-     a = 0
-     // insert here ^^^^^
-
-     var y1 = ((b * 600) + a) / 9
-     var y2 = ((b * 4300) + a) / 9
-
-     svg.append("line")
-     .style("stroke", "rgba(255,223,0,0.8)")
-     .attr("x1", 0)
-     .attr("y1", height - y1)
-     .attr("x2", width)
-     .attr("y2", height - y2);
-})
-
-function trendLine(){
-}
-
-
-data.forEach(function (d) {
-    parseData = d3.timeParse("%Y");
-    d.x = parseData(d.x);
-    d.y = +d.y;
-});
-
-var x = d3.scaleTime().range([0, width]);
-var y = d3.scaleLinear().range([height, 0]);
-
-x.domain(d3.extent(data, function (d) {
-     return d.x;
-}));
-
-y.domain([0, d3.max(data, function (d) {
-     return d.y;
-})]);
+     {x: 2648.0, y: 2383.0}, {x: 1128.0, y: 1158.0}, {x: 3687.0, y: 3698.0}, {x: 3017.0, y: 3215.0} ]
 
 var svg = d3.select("#scatter").append("svg")
      .attr("width", width + margin.left + margin.right)
      .attr("height", height + margin.top + margin.bottom)
      .append("g")
      .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-    
-    
-var path = svg.selectAll("dot")
-     .data(data)
-     .enter().append("circle")
-     .attr("r", 5)
-     .attr("cx", function (d) {
-           return x(d.x);
-     })
-     .attr("cy", function (d) {
-          return y(d.y);
-     })
-     .attr("stroke", "rgba(255,223,0,0.8)")
-     .attr("stroke-width", 1.5)
-     .attr("fill", "rgba(255,223,0,0.8)");
-
-
-svg.append("g")
-     .attr("transform", "translate(0," + height + ")")
-     .call(d3.axisBottom(x));
-
-svg.append("g")
-     .call(d3.axisLeft(y).tickFormat(function (d) {
-          return + d3.format("")(d)
-     }));
-
-svg.append("text")
-    .attr("class", "x label")
-    .attr("text-anchor", "end")
-    .attr("x", width)
-    .attr("y", height - 6)
-    .text("Square Footage");
-
-svg.append("text")
-    .attr("class", "y label")
-    .attr("text-anchor", "end")
-    .attr("y", 6)
-    .attr("dy", ".75em")
-    .attr("transform", "rotate(-90)")
-    .text("Price (thousand)");
-
-svg.append("text")
-   .attr("x", width/2)             
-   .attr("y", 0)
-   .attr("text-anchor", "middle")  
-   .text("Square Footage of a house vs Price");
 
 d3.selectAll(".white").style("fill", "white");
+
+fileInput.addEventListener('change', function(){
+     var reader = new FileReader();
+     reader.onload = function () {
+         var arr = reader.result;
+     };
+     
+     reader.readAsBinaryString(fileInput.files[0]);
+     svg.selectAll("text").remove();
+     svg.selectAll("circle").remove();
+
+     // var xAxis = prompt("What is the name of the x-axis?")
+     // var yAxis = prompt("What is the name of the y-axis?")
+     // var title = prompt("What is the title of the graph")
+
+     genGraph(defaultData, 'xAxis', 'yAxis', 'title');
+});
+
+slinReset.addEventListener('click', function(){
+     svg.selectAll("line").remove();
+     svg.selectAll("text").remove();
+     svg.selectAll("circle").remove();
+     genGraph(defaultData, "Square Footage", "Prices (Thousand)", "House Square Footage vs Price");
+     document.getElementById("slin-alpha").value = document.getElementById("slin-alpha").placeholder;
+     document.getElementById("slin-lambda").value = document.getElementById("slin-lambda").placeholder
+     document.getElementById("slin-epochs").value = document.getElementById("slin-epochs").placeholder
+     document.getElementById("slin-batchSize").value = document.getElementById("slin-batchSize").placeholder
+     document.getElementById("slin-file").value = ''
+})
+
+slinStart.addEventListener('click', function(){
+     // y = a + bx
+     b = 1
+     a = 0
+     // insert here ^^^^^
+     var maxX = max(defaultData);
+     var minX = min(defaultData);
+     var y1 = ((b * minX) + a) * (height / maxX)
+     var y2 = ((b * maxX) + a)  * (height / maxX)
+
+     svg.append("line")
+        .style("stroke", "rgba(255,223,0,0.8)")
+        .attr("x1", 0)
+        .attr("y1", height - y1)
+        .attr("x2", width)
+        .attr("y2", height - y2);
+})
+
+function max(dataset){
+     var max = 0;
+     for(var i = 0; i < dataset.length; i++){
+          if(dataset[i].x > max){
+               max = dataset[i].x;
+          }
+     }
+     return max
+}
+
+function min(dataset){
+     var min = dataset[0].x;
+     for(var i = 0; i < dataset.length; i++){
+          if(dataset[i].x < min){
+               min = dataset[i].x;
+          }
+     }
+     return min
+}
+
+window.onload = genGraph(defaultData, "Square Footage", "Prices (Thousand)", "House Square Footage vs Price");
+
+function genGraph(data, xAxis, yAxis, title){
+     var x = d3.scaleLinear().range([0, width]);
+     var y = d3.scaleLinear().range([height, 0]);
+
+     x.domain(d3.extent(data, function (d) {
+          return d.x;
+     }));
+
+     y.domain([0, d3.max(data, function (d) {
+          return d.y;
+     })]);
+     
+     var path = svg.selectAll("dot")
+          .data(data)
+          .enter().append("circle")
+          .attr("r", 5)
+          .attr("cx", function (d) {
+               return x(d.x);
+          })
+          .attr("cy", function (d) {
+               return y(d.y);
+          })
+          .attr("stroke", "rgba(255,223,0,0.8)")
+          .attr("stroke-width", 1)
+          .attr("fill", "rgba(255,223,0,0.8)");
+
+
+     svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
+
+     svg.append("g")
+          .call(d3.axisLeft(y).tickFormat(function (d) {
+               return + d3.format("")(d)
+          }));
+
+     svg.append("text")
+     .attr("class", "x label")
+     .attr("text-anchor", "end")
+     .attr("x", width)
+     .attr("y", height - 6)
+     .text(xAxis);
+
+     svg.append("text")
+     .attr("class", "y label")
+     .attr("text-anchor", "end")
+     .attr("y", 6)
+     .attr("dy", ".75em")
+     .attr("transform", "rotate(-90)")
+     .text(yAxis);
+
+     svg.append("text")
+     .attr("x", width/2)             
+     .attr("y", 0)
+     .attr("text-anchor", "middle")  
+     .text(title);
+
+     svg.selectAll('line').remove();
+}
+    
