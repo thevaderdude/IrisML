@@ -18,16 +18,10 @@ guess.addEventListener('click', function(){
   ctxSmall.drawImage(canvasBig, 0, 0, canvasBig.width, canvasBig.height, 0, 0, 28, 28);
   var image = ctxSmall.getImageData(0,0, canvasSmall.width, canvasSmall.height).data;
   var data = [];
-  var location = [];
   for(var i = 0; i < image.length; i++){
     if((i + 1) % 4 == 0){
       data.push(image[i] / 255);
     }
-  }
-  for(var i = 0; i < data.length; i++){
-      if(data[i] > 0){
-        location.push(i)
-      }
   }
 
   $.ajax({

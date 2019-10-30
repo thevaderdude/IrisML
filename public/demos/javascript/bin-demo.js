@@ -45,6 +45,21 @@ var binChart = new Chart(ctx, {
     }
 });
 
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+}
+
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
 binReset.addEventListener('click', function(){
     document.getElementById("bin-epochs").value = document.getElementById("bin-epochs").placeholder;
     document.getElementById("bin-batchSize").value = document.getElementById("bin-batchSize").placeholder;
@@ -80,8 +95,9 @@ binStart.addEventListener('click',function(){
         url: '/demos/bin',
         type: "POST",
         data: {inputs},
-        success: function(response){
-            alert('evaluate response and show alert');
+        success: function(res){
+            removeData(binChart);
+            addData(binChart, res.item.epoch, res.item.cost);
         }
     }); 
 });

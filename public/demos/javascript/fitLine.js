@@ -1,14 +1,14 @@
 var slinStart = document.querySelector("#slin-start");
 var slinReset = document.querySelector("#slin-reset");
-var fileInput = document.getElementById('slin-file')
+var fileInput = document.getElementById('slin-file');
 var margin = {
      top: 20,
      right: 20,
      bottom: 30,
      left: 30
-    }
-var width = 650
-var height = 500
+}; 
+var width = 650;
+var height = 500;
 
 defaultData = [{x: 4335.0, y: 4167.0}, {x: 4216.0, y: 3920.0}, {x: 679.0, y: 673.0}, {x: 4466.0, y: 4714.0}, 
      {x: 2465.0, y: 2512.0}, {x: 2826.0, y: 2569.0}, {x: 2605.0, y: 2329.0}, {x: 4260.0, y: 4249.0}, 
@@ -45,20 +45,18 @@ var svg = d3.select("#scatter").append("svg")
 d3.selectAll(".white").style("fill", "white");
 
 fileInput.addEventListener('change', function(){
-     var reader = new FileReader();
-     reader.onload = function () {
-         var arr = reader.result;
-     };
-     
-     reader.readAsBinaryString(fileInput.files[0]);
-     svg.selectAll("text").remove();
-     svg.selectAll("circle").remove();
+     graphData = []
+     Papa.parse(fileInput.files[0], {
+          complete: function(results) {
+               for(var i = 0; i < results.data.length - 1; i++){
+                    graphData.push({x: parseInt(results.data[i][0]), y: parseInt(results.data[i][1])})
+               } 
+               svg.selectAll("text").remove();
+               svg.selectAll("circle").remove();
 
-     // var xAxis = prompt("What is the name of the x-axis?")
-     // var yAxis = prompt("What is the name of the y-axis?")
-     // var title = prompt("What is the title of the graph")
-
-     genGraph(defaultData, 'xAxis', 'yAxis', 'title');
+               genGraph(graphData, 'xAxis', 'yAxis', 'title');
+          }
+     });
 });
 
 slinReset.addEventListener('click', function(){
@@ -84,7 +82,7 @@ slinStart.addEventListener('click', function(){
      var y2 = ((b * maxX) + a)  * (height / maxX)
 
      svg.append("line")
-        .style("stroke", "rgba(255,223,0,0.8)")
+        .style("stroke", "black")
         .attr("x1", 0)
         .attr("y1", height - y1)
         .attr("x2", width)

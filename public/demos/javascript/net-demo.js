@@ -100,6 +100,14 @@ function addData(chart, label, data) {
     });
 }
 
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
 netReset.addEventListener('click', function(){
     document.getElementById("net-epochs").value = document.getElementById("net-epochs").placeholder;
     document.getElementById("net-batchSize").value = document.getElementById("net-batchSize").placeholder;
@@ -140,8 +148,9 @@ netStart.addEventListener('click', function(){
         url: '/demos/net',
         type: "POST",
         data: {inputs},
-        success: function(response){
-         alert('evaluate response and show alert');
+        success: function(res){
+            removeData(netChart);
+            addData(netChart, res.item.epoch, res.item.cost);
         }
     }); 
 });

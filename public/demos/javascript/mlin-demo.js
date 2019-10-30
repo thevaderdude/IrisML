@@ -44,6 +44,21 @@ var mlinChart = new Chart(ctx, {
     }
 });
 
+function addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data);
+    });
+}
+
+function removeData(chart) {
+    chart.data.labels.pop();
+    chart.data.datasets.forEach((dataset) => {
+        dataset.data.pop();
+    });
+    chart.update();
+}
+
 mlinReset.addEventListener('click', function(){
     document.getElementById("mlin-epochs").value = document.getElementById("mlin-epochs").placeholder;
     document.getElementById("mlin-batchSize").value = document.getElementById("mlin-batchSize").placeholder;
@@ -76,8 +91,9 @@ mlinStart.addEventListener('click',function(){
         url: '/demos/mlin',
         type: "POST",
         data: {inputs},
-        success: function(response){
-            alert('evaluate response and show alert');
+        success: function(res){
+            removeData(mlinChart)
+            addData(mlinChart, res.item.epoch, res.item.cost)
         }
     }); 
 });
