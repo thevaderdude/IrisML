@@ -9,8 +9,6 @@ var net_dataset = document.getElementById("net-dataset");
 var nodesArray = [];
 
 var netctx = document.getElementById('net-chart').getContext('2d');
-var barctx = document.getElementById('bar-chart').getContext('2d');
-Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
 var netChart = new Chart(netctx, {
 
@@ -53,58 +51,26 @@ var netChart = new Chart(netctx, {
     }
 });
 
-var barChart = new Chart(barctx, {
-    type: 'bar',
-    data: {
-        labels: ['0','1','2','3','4','5','6','7','8','9'],
-        datasets: [{
-            data: [4,23,11,5,1,3,3,87,8,1],
-            backgroundColor: 'rgba(255,223,0,0.7)',
-            borderColor: 'rgb(255,255,255)',
-        }],
-        
-    },
-    options: {
-        title:{
-            display: true,
-            text: 'Guess',
-            fontSize: 24
-        },
-        legend:{
-            display: false
-        },
-        scales:{
-            yAxes:[{
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Probability',
-                    fontSize: 18
-                },
-                interval: 20
-            }],
-            xAxes:[{
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Number Guessed',
-                    fontSize: 18
-                },
-            }],
-        }
-    }
-});
-
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
+function addNetData(chart, labels, dataPoints) {
+    labels.forEach((label) => {
+        chart.data.labels.push(label);
+    })
     chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
+        dataPoints.forEach((point) => {
+            dataset.data.push(point);
+        })
     });
+    chart.update();
 }
 
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
+function removeNetData(chart) {
+    var length = chart.data.labels.length;
+    for(var i = 0; i < length; i++){
+        chart.data.labels.pop();
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.pop();
+        });
+    }
     chart.update();
 }
 
@@ -128,7 +94,7 @@ netStart.addEventListener('click', function(){
         document.getElementById("net-alpha"),
         document.getElementById("net-lambda"),
 		document.getElementById("net-epochs"),
-		document.getElementById("net-batch"),
+		document.getElementById("net-batchSize"),
         document.getElementById("net-datasetName"),
         document.getElementById("layers"),
         nodesArray
@@ -149,8 +115,8 @@ netStart.addEventListener('click', function(){
         type: "POST",
         data: {inputs},
         success: function(res){
-            removeData(netChart);
-            addData(netChart, res.item.epoch, res.item.cost);
+            removeNetData(netChart);
+            addNetData(netChart, res.item.epoch, res.item.cost);
         }
     }); 
 });

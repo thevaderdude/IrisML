@@ -45,21 +45,28 @@ var binChart = new Chart(ctx, {
     }
 });
 
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
+function addBinData(chart, labels, dataPoints) {
+    labels.forEach((label) => {
+        chart.data.labels.push(label);
+    })
     chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-}
-
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
+        dataPoints.forEach((point) => {
+            dataset.data.push(point);
+        })
     });
     chart.update();
 }
 
+function removeBinData(chart) {
+    var length = chart.data.labels.length;
+    for(var i = 0; i < length; i++){
+        chart.data.labels.pop();
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.pop();
+        });
+    }
+    chart.update();
+}
 binReset.addEventListener('click', function(){
     document.getElementById("bin-epochs").value = document.getElementById("bin-epochs").placeholder;
     document.getElementById("bin-batchSize").value = document.getElementById("bin-batchSize").placeholder;
@@ -96,18 +103,12 @@ binStart.addEventListener('click',function(){
         type: "POST",
         data: {inputs},
         success: function(res){
-            removeData(binChart);
-            addData(binChart, res.item.epoch, res.item.cost);
+            removeBinData(binChart);
+            addBinData(binChart, res.item.epoch, res.item.cost);
         }
     }); 
 });
 
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-}
 
 bin_dataset.addEventListener('change', function(){
     bin_dataName = document.getElementById("bin-datasetName");

@@ -44,18 +44,26 @@ var mlinChart = new Chart(ctx, {
     }
 });
 
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
+function addMlinData(chart, labels, dataPoints) {
+    labels.forEach((label) => {
+        chart.data.labels.push(label);
+    })
     chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
+        dataPoints.forEach((point) => {
+            dataset.data.push(point);
+        })
     });
+    chart.update();
 }
 
-function removeData(chart) {
-    chart.data.labels.pop();
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.pop();
-    });
+function removeMlinData(chart) {
+    var length = chart.data.labels.length;
+    for(var i = 0; i < length; i++){
+        chart.data.labels.pop();
+        chart.data.datasets.forEach((dataset) => {
+            dataset.data.pop();
+        });
+    }
     chart.update();
 }
 
@@ -92,18 +100,11 @@ mlinStart.addEventListener('click',function(){
         type: "POST",
         data: {inputs},
         success: function(res){
-            removeData(mlinChart)
-            addData(mlinChart, res.item.epoch, res.item.cost)
+            removeMlinData(mlinChart)
+            addMlinData(mlinChart, res.item.epoch, res.item.cost)
         }
     }); 
 });
-
-function addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets.forEach((dataset) => {
-        dataset.data.push(data);
-    });
-}
 
 mlin_dataset.addEventListener('change', function(){
     mlin_dataName = document.getElementById("mlin-datasetName");
