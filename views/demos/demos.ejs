@@ -160,12 +160,13 @@
 <div class="container round mb-5">
 
   <div class="py-4 pl-3 d-flex">
+    <input type="file" id="footage" class="hidden">
     <button type="submit" id="slin-start" class="btn btn-success mb-3">Start</button>
     <button type="button" id="slin-stop"class="btn btn-danger ml-3 mb-3">Stop</button>
   </div>
 
   <div class="row justify-content-center pb-5 px-4">
-    <div id="scatter"></div>
+    <div id="scatter" class="white"></div>
     <canvas id="slin-chart" width='100'></canvas>
   </div>
 
@@ -204,18 +205,6 @@
         <input form="slin-training" type="number" class="form-control" placeholder="30" id="slin-batchSize" name="slin[batchSize]">
       </div>
     </div>
-    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
-        <div class="input-group mb-auto">
-            <div class="input-group-prepend">
-                <label for="exampleFormControlSelect1"></label>
-                <select id="slin-dataset" class="form-control" id="exampleFormControlSelect1">
-                  <option>Digits</option>
-                  <option>Poker</option>
-                </select>
-            </div>
-          <input form="slin-training" id="slin-datasetName" type="text" class="form-control" placeholder="Digits" name="slin[dataset]">
-        </div>
-      </div>
   </div>
 
 </div>
