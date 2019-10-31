@@ -211,7 +211,7 @@ function updateGraph(data) {
         .attr("y2", height - y2);
 
     removeSlinData(netChart);
-    addSlinData(netChart, res.item.epoch, res.item.cost);
+    addSlinData(netChart, data.epoch, data.cost);
 }
 
 fileInput.addEventListener('change', function(){
