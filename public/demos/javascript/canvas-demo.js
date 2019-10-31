@@ -40,7 +40,10 @@ var barChart = new Chart(barctx, {
                   labelString: 'Probability',
                   fontSize: 18
               },
-              interval: 20
+              ticks: {
+                max: 100,
+                min: 0
+              }
           }],
           xAxes:[{
               scaleLabel: {
