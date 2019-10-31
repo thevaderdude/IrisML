@@ -8,17 +8,24 @@ router.get('/', function(req, res, next) {
 
 router.post('/net', (req, res) => {
 	var docClient = new AWS.DynamoDB.DocumentClient();
+
+	numLayers = req.body.inputs[7];
+	layers = []
+	for(var i = 0; i < numLayers.length; i++){
+		layers[i] = parseInt(numLayers[i])
+	}
+	
 	var item = {
 		TableName: "IrisMLDemos",
 		Item: {
 			"type": "net",
 			"activation-name": req.body.inputs[0],
-			"alpha": req.body.inputs[1],
-			"lambda": req.body.inputs[2],
-			"epochs": req.body.inputs[3],
-			"batchSize": req.body.inputs[4],
+			"alpha": parseFloat(req.body.inputs[1]),
+			"lambda": parseFloat(req.body.inputs[2]),
+			"epochs": parseInt(req.body.inputs[3]),
+			"batchSize": parseInt(req.body.inputs[4]),
 			"dataSetName": req.body.inputs[5],
-			"layers": req.body.inputs[6],
+			"layers": layers,
 			"epoch": [],
 			"cost": [],
 			"testing-inputs": [],
@@ -52,22 +59,20 @@ router.post('/net', (req, res) => {
 });
 
 router.post('/slin', (req, res) => {
-
 	var docClient = new AWS.DynamoDB.DocumentClient();
 	var item = {
 		TableName: "IrisMLDemos",
 		Item: {
 			"type": "slin",
-			"alpha": req.body.inputs[0],
-			"lambda": req.body.inputs[1],
-			"epochs": req.body.inputs[2],
-			"batchSize": req.body.inputs[3],
+			"alpha": parseFloat(req.body.inputs[0]),
+			"lambda": parseFloat(req.body.inputs[1]),
+			"epochs": parseInt(req.body.inputs[2]),
+			"batchSize": parseInt(req.body.inputs[3]),
 			"dataset": req.body.inputs[4],
 			"slope": 10,
 			"intercept": 10,
 			"epoch": [],
 			"cost": []
-
 		}
 	};
 	
@@ -93,8 +98,6 @@ router.post('/slin', (req, res) => {
 				});
 			}
 		});
-		
-		
 	});
 });
 
@@ -104,10 +107,10 @@ router.post('/mlin', (req, res) => {
 		TableName: "IrisMLDemos",
 		Item: {
 			"type": "mlin",
-			"alpha": req.body.inputs[0],
-			"lambda": req.body.inputs[1],
-			"epochs": req.body.inputs[2],
-			"batchSize": req.body.inputs[3],
+			"alpha": parseFloat(req.body.inputs[0]),
+			"lambda": parseFloat(req.body.inputs[1]),
+			"epochs": parseInt(req.body.inputs[2]),
+			"batchSize": parseInt(req.body.inputs[3]),
 			"epoch": [],
 			"cost": [],
 			"dataSetName": req.body.inputs[4],
@@ -126,7 +129,7 @@ router.post('/mlin', (req, res) => {
 					instanceID: item.Item.instanceID
 				};
 				console.log("checking completion for instanceID: " + params.instanceID);
-				checkTrainCompletion(params, function(err, data) {
+				checkTrainCompletion(params, function(err, res, data) {
 					if (err) {
 						console.log("Error checking for completed data. Error Message: " + err);
 					} else {
@@ -146,10 +149,10 @@ router.post('/bin', (req, res) => {
 		Item: {
 			"type": "bin",
 			"activation-name": req.body.inputs[0],
-			"alpha": req.body.inputs[1],
-			"lambda": req.body.inputs[2],
-			"epochs": req.body.inputs[3],
-			"batchSize": req.body.inputs[4],
+			"alpha": parseFloat(req.body.inputs[1]),
+			"lambda": parseFloat(req.body.inputs[2]),
+			"epochs": parseInt(req.body.inputs[3]),
+			"batchSize": parseInt(req.body.inputs[4]),
 			"dataSetName": req.body.inputs[5],
 			"epoch": [],
 			"cost":  [],
@@ -179,8 +182,6 @@ router.post('/bin', (req, res) => {
 			}
 		});
 	});
-	
-	
 });
 
 function generateInstanceID(callback) {
