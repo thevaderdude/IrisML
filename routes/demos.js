@@ -41,14 +41,11 @@ router.post('/slin', (req, res) => {
 			"epochs": req.body.inputs[2],
 			"batchSize": req.body.inputs[3],
 			"dataset": req.body.inputs[4],
-			"slope": 10,
-			"intercept": 10,
 			"epoch": [],
 			"cost": []
 
 		}
 	};
-	
 	generateItem(item, function(err, data) {
 		console.log("Returned instanceID: " + data);
 		res.send(data.toString());
@@ -96,6 +93,29 @@ router.post('/bin', (req, res) => {
 		console.log("Returned instanceID: " + data);
 		res.send(data.toString());
 	});
+});
+
+router.get('/newdata', (req, res) => {
+	var docClient = new AWS.DynamoDB.DocumentClient();
+	docClient.query({
+		TableName: "IrisMLDemos",
+		ConsistentRead: true,
+		KeyConditionExpression: "instanceID = :id",
+		ExpressionAttributeValues: {
+			":id": Number(req.query.instanceID)
+		}
+	}, function(err, data) {
+		if (err) {
+			console.log("Couldn't read table. Error: " + err);
+			return;
+		}
+		if (data.Count < 1) {
+			console.log("0 results for instanceID.");
+			return;
+		}
+		res.send(data.Items[0]);
+	});
+		
 });
 
 function generateItem(data, callback) {

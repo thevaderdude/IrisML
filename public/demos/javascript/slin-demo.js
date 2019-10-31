@@ -11,6 +11,13 @@ var width = 650;
 var height = 500;
 graphData = []
 
+var slope;
+var intercept;
+
+var instanceID;
+var dataChecker;
+var sameCounter = 0;
+
 defaultData = [{x: 4335.0, y: 4167.0}, {x: 4216.0, y: 3920.0}, {x: 679.0, y: 673.0}, {x: 4466.0, y: 4714.0}, 
     {x: 2465.0, y: 2512.0}, {x: 2826.0, y: 2569.0}, {x: 2605.0, y: 2329.0}, {x: 4260.0, y: 4249.0}, 
     {x: 1442.0, y: 1353.0}, {x: 2584.0, y: 2647.0}, {x: 4291.0, y: 4392.0}, {x: 3348.0, y: 3631.0}, 
@@ -76,32 +83,61 @@ slinStart.addEventListener('click',function(){
     inputs[3] = parseInt(inputs[3]);
     inputs.push(array[array.length - 1]);
 
-    
-
     console.log(inputs);
     $.ajax({
         url: '/demos/slin',
         type: "POST",
         data: {inputs},
-        success: function(res){
+        success: function(res) {
             // y = a + bx
-            b = res.item.slope
-            a = res.item.intercept
-            
-            var maxX = max(defaultData);
-            var minX = min(defaultData);
-            var y1 = ((b * minX) + a) * (height / maxX)
-            var y2 = ((b * maxX) + a)  * (height / maxX)
 
-            svg.append("line")
-               .style("stroke", "black")
-               .attr("x1", 0)
-               .attr("y1", height - y1)
-               .attr("x2", width)
-               .attr("y2", height - y2);
+			alert("Ajax callback: ");
+			instanceID = Number(res);
+			console.log("instanceID is " + instanceID);
+			dataChecker = setInterval(checkNewData, 1000);
         }
     }); 
 });
+
+function checkNewData() {
+	console.log("Checking new data from " + instanceID);
+	$.ajax({
+		url: '/demos/newdata',
+		type: "GET",
+		data: {instanceID},
+		success: function(res) {
+			console.log("Checked new data");
+			if (res.slope != slope || res.intercept != intercept) {
+				updateGraph(res);
+			} else {
+				sameCounter += 1;
+				console.log("Same data");
+				if (sameCounter > 5) {
+					clearInterval(dataChecker);
+					console.log("Canceled datachecker");
+				}
+			}
+		}
+	});
+			
+}
+
+function updateGraph(data) {
+	b = data.slope
+    a = data.intercept
+    
+    var maxX = max(defaultData);
+    var minX = min(defaultData);
+    var y1 = ((b * minX) + a) * (height / maxX)
+    var y2 = ((b * maxX) + a)  * (height / maxX)
+
+    svg.append("line")
+        .style("stroke", "black")
+        .attr("x1", 0)
+        .attr("y1", height - y1)
+        .attr("x2", width)
+        .attr("y2", height - y2);
+}
 
 fileInput.addEventListener('change', function(){
     Papa.parse(fileInput.files[0], {
