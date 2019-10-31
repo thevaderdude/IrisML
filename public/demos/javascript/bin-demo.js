@@ -33,6 +33,9 @@ var binChart = new Chart(ctx, {
                     labelString: 'Cost',
                     fontSize: 18
                 },
+                ticks: {
+                    min: 0
+                }
             }],
             xAxes:[{
                 scaleLabel: {
