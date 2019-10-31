@@ -52,10 +52,10 @@ var svg = d3.select("#scatter").append("svg")
 
 d3.selectAll(".white").style("fill", "white");
 
-var ctx = document.getElementById('slin-chart').getContext('2d');
+var slinctx = document.getElementById('slin-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
-var slinChart = new Chart(ctx, {
+var slinChart = new Chart(slinctx, {
     type: 'line',
     data: {
         labels: ['1','2','3','4','5'],
@@ -145,14 +145,11 @@ slinStart.addEventListener('click',function(){
             inputs.push(array[i].value)
         }
     }
-    inputs[0] = parseFloat(inputs[0]);
-    inputs[1] = parseFloat(inputs[1]);
-    inputs[2] = parseInt(inputs[2]);
-    inputs[3] = parseInt(inputs[3]);
     inputs.push(array[array.length - 1]);
 
     console.log(inputs);
     removeSlinData(netChart);
+    
     $.ajax({
         url: '/demos/slin',
         type: "POST",
