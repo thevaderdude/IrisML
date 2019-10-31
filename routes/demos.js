@@ -64,7 +64,10 @@ router.post('/slin', (req, res) => {
 			"batchSize": req.body.inputs[3],
 			"dataset": req.body.inputs[4],
 			"slope": 10,
-			"intercept": 10
+			"intercept": 10,
+			"epoch": [],
+			"cost": []
+
 		}
 	};
 	
