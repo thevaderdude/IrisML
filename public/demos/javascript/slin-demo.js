@@ -183,7 +183,7 @@ function checkNewData() {
 			} else {
 				sameCounter += 1;
 				console.log("Same data");
-				if (sameCounter > 5) {
+				if (sameCounter > 30) {
 					clearInterval(dataChecker);
 					console.log("Canceled datachecker");
 				}
