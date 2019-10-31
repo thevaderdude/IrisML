@@ -7,7 +7,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/net', (req, res) => {
-	var docClient = new AWS.DynamoDB.DocumentClient();
 	var item = {
 		TableName: "IrisMLDemos",
 		Item: {
@@ -26,34 +25,13 @@ router.post('/net', (req, res) => {
 		}
 	};
 	
-	generateInstanceID(function(err, data) {
-		item.Item.instanceID = data;
-		docClient.put(item, function(err, data) {
-			if (err) {
-				console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-			} else {
-				console.log("Added item:", JSON.stringify(data, null, 2));
-				var params = {
-					docClient: docClient,
-					instanceID: item.Item.instanceID
-				};
-				console.log("checking completion for instanceID: " + params.instanceID);
-				checkTrainCompletion(params, function(err, data) {
-					if (err) {
-						console.log("Error checking for completed data. Error Message: " + err);
-					} else {
-						console.log("Training data complete. Length of cost array: " + data);
-						res.item = data;
-					}
-				});
-			}
-		});
+	generateItem(item, function(err, data) {
+		console.log("Returned instanceID: " + data);
+		res.send(data.toString());
 	});
 });
 
 router.post('/slin', (req, res) => {
-
-	var docClient = new AWS.DynamoDB.DocumentClient();
 	var item = {
 		TableName: "IrisMLDemos",
 		Item: {
@@ -71,35 +49,13 @@ router.post('/slin', (req, res) => {
 		}
 	};
 	
-	generateInstanceID(function(err, data) {
-		item.Item.instanceID = data;
-		docClient.put(item, function(err, data) {
-			if (err) {
-				console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-			} else {
-				console.log("Added item:", JSON.stringify(data, null, 2));
-				var params = {
-					docClient: docClient,
-					instanceID: item.Item.instanceID
-				};
-				console.log("checking completion for instanceID: " + params.instanceID);
-				checkTrainCompletion(params, function(err, data) {
-					if (err) {
-						console.log("Error checking for completed data. Error Message: " + err);
-					} else {
-						console.log("Training data complete. Length of cost array: " + data);
-						res.item = data;
-					}
-				});
-			}
+	generateItem(item, function(err, data) {
+		console.log("Returned instanceID: " + data);
+		res.send(data.toString());
 		});
-		
-		
-	});
 });
 
 router.post('/mlin', (req, res) => {
-	var docClient = new AWS.DynamoDB.DocumentClient();
 	var item = {
 		TableName: "IrisMLDemos",
 		Item: {
@@ -114,33 +70,13 @@ router.post('/mlin', (req, res) => {
 		}
 	};
 	
-	generateInstanceID(function(err, data) {
-		item.Item.instanceID = data;
-		docClient.put(item, function(err, data) {
-			if (err) {
-				console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-			} else {
-				console.log("Added item:", JSON.stringify(data, null, 2));
-				var params = {
-					docClient: docClient,
-					instanceID: item.Item.instanceID
-				};
-				console.log("checking completion for instanceID: " + params.instanceID);
-				checkTrainCompletion(params, function(err, data) {
-					if (err) {
-						console.log("Error checking for completed data. Error Message: " + err);
-					} else {
-						console.log("Training data complete. Length of cost array: " + data);
-						res.item = data;
-					}
-				});
-			}
-		});
+	generateItem(item, function(err, data) {
+		console.log("Returned instanceID: " + data);
+		res.send(data.toString());
 	});
 });
 
 router.post('/bin', (req, res) => {
-	var docClient = new AWS.DynamoDB.DocumentClient();
 	var item = {
 		TableName: "IrisMLDemos",
 		Item: {
@@ -156,43 +92,31 @@ router.post('/bin', (req, res) => {
 		}
 	};
 	
-	generateInstanceID(function(err, data) {
-		item.Item.instanceID = data;
-		docClient.put(item, function(err, data) {
-			if (err) {
-				console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
-			} else {
-				console.log("Added item:", JSON.stringify(data, null, 2));
-				var params = {
-					docClient: docClient,
-					instanceID: item.Item.instanceID
-				};
-				console.log("checking completion for instanceID: " + params.instanceID);
-				checkTrainCompletion(params, function(err, data) {
-					if (err) {
-						console.log("Error checking for completed data. Error Message: " + err);
-					} else {
-						console.log("Training data complete. Length of cost array: " + data);
-						res.item = data;
-					}
-				});
-			}
-		});
+	generateItem(item, function(err, data) {
+		console.log("Returned instanceID: " + data);
+		res.send(data.toString());
 	});
-	
-	
 });
 
-function generateInstanceID(callback) {
+function generateItem(data, callback) {
 	var dynamodb = new AWS.DynamoDB();
-	var id;
-	dynamodb.scan({ TableName: "IrisMLDemos" }, function(err, data) {
+	var docClient = new AWS.DynamoDB.DocumentClient();
+	dynamodb.scan({ TableName: "IrisMLDemos" }, function(err, scanData) {
 		if (err) {
-			callback(err, null);
-		} else {
-			console.log("Itemcount: " + data.Count);
-			callback(null, data.Count);
+			callback("Unable to read table. Error JSON: " + JSON.stringify(err, null, 2), null);
+			return;
 		}
+		console.log("Itemcount: " + scanData.Count);
+		var instanceID = scanData.Count;
+		data.Item.instanceID = instanceID;
+		docClient.put(data, function(err, putData) {
+			if (err) {
+				callback("Unable to add item. Error JSON: " + JSON.stringify(err, null, 2), null);
+				return;
+			}
+			console.log("Added item: " + JSON.stringify(putData, null, 2));
+			callback(null, instanceID);
+		});
 	});
 }
 
@@ -204,22 +128,19 @@ function checkTrainCompletion(data, callback) {
 			KeyConditionExpression: "instanceID = :id",
 			ExpressionAttributeValues: {
 				":id": data.instanceID
-			}		
+			}
 		}, function(err, dbdata) {
 			if (err) {
 				callback("Could not read DynamoDB table. Error Message: " + err, null);
+			}				
+			if(dbdata.Count < 1) {
+				callback("0 results for instanceID when checking for train completion.", null);
+			}
+			if(dbdata.Items[0].cost.length) {
+				callback(null, dbdata.Items[0]);
 			} else {
-				
-				if(dbdata.Count < 1) {
-					callback("0 results for instanceID when checking for train completion.", null);
-				} else {
-					if(dbdata.Items[0].cost.length) {
-						callback(null, dbdata.Items[0]);
-					} else {
-						console.log("No change in Train data");
-						checkTrainCompletion(data, callback);
-					}
-				}
+				console.log("No change in Train data");
+				checkTrainCompletion(data, callback);
 			}
 		});
 	}, 1000);
