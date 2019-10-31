@@ -108,6 +108,9 @@ mlinStart.addEventListener('click',function(){
         success: function(res){
             removeMlinData(mlinChart)
             addMlinData(mlinChart, res.item.epoch, res.item.cost)
+        },
+        error: function(err){
+            console.log(err)
         }
     }); 
 });

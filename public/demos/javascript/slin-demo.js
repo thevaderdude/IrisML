@@ -52,6 +52,71 @@ var svg = d3.select("#scatter").append("svg")
 
 d3.selectAll(".white").style("fill", "white");
 
+var ctx = document.getElementById('slin-chart').getContext('2d');
+Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
+
+var slinChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: ['1','2','3','4','5'],
+        datasets: [{
+            data: [1000,500,200,100,50],
+            pointBorderColor: 'rgb(255,223,0)',
+            borderColor: 'rgb(255,223,0)',
+        }],
+        
+    },
+    options: {
+        title:{
+            display: true,
+            text: 'Epoch vs Cost',
+            fontSize: 24
+        },
+        legend:{
+            display: false
+        },
+        scales:{
+            yAxes:[{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Cost',
+                    fontSize: 18
+                },
+            }],
+            xAxes:[{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Epoch',
+                    fontSize: 18
+                },
+            }],
+        },
+    }
+});
+
+function addSlinData(chart, labels, dataPoints) {
+     labels.forEach((label) => {
+         chart.data.labels.push(label);
+     })
+     chart.data.datasets.forEach((dataset) => {
+         dataPoints.forEach((point) => {
+             dataset.data.push(point);
+         })
+     });
+     chart.update();
+ }
+ 
+function removeSlinData(chart) {
+     var length = chart.data.labels.length;
+     for(var i = 0; i < length; i++){
+         chart.data.labels.pop();
+         chart.data.datasets.forEach((dataset) => {
+             dataset.data.pop();
+         });
+     }
+     chart.update();
+}
+
 slinStart.addEventListener('click',function(){
     data = [];
     if(graphData[0] === undefined){
@@ -84,10 +149,12 @@ slinStart.addEventListener('click',function(){
     inputs.push(array[array.length - 1]);
 
     console.log(inputs);
+
     $.ajax({
         url: '/demos/slin',
         type: "POST",
         data: {inputs},
+		async: true,
         success: function(res) {
             // y = a + bx
 
@@ -95,6 +162,9 @@ slinStart.addEventListener('click',function(){
 			instanceID = Number(res);
 			console.log("instanceID is " + instanceID);
 			dataChecker = setInterval(checkNewData, 1000);
+        },
+        error: function(err){
+            console.log(err)
         }
     }); 
 });
@@ -147,7 +217,7 @@ fileInput.addEventListener('change', function(){
               } 
               svg.selectAll("text").remove();
               svg.selectAll("circle").remove();
-
+              
               xAxis = prompt("What is the name of the x-axis?")
               yAxis = prompt("What is the name of the y-axis?")
               title = prompt("What is the title of the graph")
