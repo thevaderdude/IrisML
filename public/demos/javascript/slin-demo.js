@@ -150,7 +150,7 @@ slinStart.addEventListener('click',function(){
     inputs.push(array[array.length - 1]);
 
     console.log(inputs);
-    removeSlinData(netChart);
+    removeSlinData(slinChart);
 
     $.ajax({
         url: '/demos/slin',
@@ -209,7 +209,7 @@ function updateGraph(data) {
         .attr("x2", width)
         .attr("y2", height - y2);
 
-    addSlinData(netChart, data.epoch, data.cost);
+    addSlinData(slinChart, data.epoch, data.cost);
 }
 
 fileInput.addEventListener('change', function(){
