@@ -111,6 +111,9 @@ binStart.addEventListener('click',function(){
         success: function(res){
             removeBinData(binChart);
             addBinData(binChart, res.item.epoch, res.item.cost);
+        },
+        error: function(err){
+            console.log(err)
         }
     }); 
 });

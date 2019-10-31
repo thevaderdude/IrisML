@@ -18,7 +18,7 @@ var barChart = new Chart(barctx, {
   data: {
       labels: ['0','1','2','3','4','5','6','7','8','9'],
       datasets: [{
-          data: [4,23,11,5,1,3,3,87,8,1],
+          data: [10,10,10,10,10,10,10,10,10,10],
           backgroundColor: 'rgba(255,223,0,0.7)',
           borderColor: 'rgb(255,255,255)',
       }],
@@ -70,10 +70,13 @@ guess.addEventListener('click', function(){
   $.ajax({
     url: '/demos/guess',
     type: "POST",
-    data: data,
+    data: {data},
     success: function(res){
         removeGuessData(barChart)
         addGuessData(barChart, ['0','1','2','3','4','5','6','7','8','9'], res.item.guesses)
+    },
+    error: function(err){
+      console.log(err)
     }
   }); 
 });
