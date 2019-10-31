@@ -158,7 +158,7 @@ slinStart.addEventListener('click',function(){
         type: "POST",
         data: {inputs},
         success: function(res) {
-
+        
 			alert("Ajax callback: ");
 			instanceID = Number(res);
 			console.log("instanceID is " + instanceID);
@@ -209,6 +209,9 @@ function updateGraph(data) {
         .attr("y1", height - y1)
         .attr("x2", width)
         .attr("y2", height - y2);
+
+    removeSlinData(netChart);
+    addSlinData(netChart, res.item.epoch, res.item.cost);
 }
 
 fileInput.addEventListener('change', function(){
