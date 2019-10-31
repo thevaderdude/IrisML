@@ -152,7 +152,7 @@ slinStart.addEventListener('click',function(){
     inputs.push(array[array.length - 1]);
 
     console.log(inputs);
-
+    removeSlinData(netChart);
     $.ajax({
         url: '/demos/slin',
         type: "POST",
@@ -210,7 +210,6 @@ function updateGraph(data) {
         .attr("x2", width)
         .attr("y2", height - y2);
 
-    removeSlinData(netChart);
     addSlinData(netChart, data.epoch, data.cost);
 }
 
