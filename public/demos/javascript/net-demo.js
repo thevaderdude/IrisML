@@ -55,6 +55,7 @@ var netChart = new Chart(netctx, {
 });
 
 function addNetData(chart, labels, dataPoints) {
+    alert('added net')
     labels.forEach((label) => {
         chart.data.labels.push(label);
     })
@@ -67,6 +68,7 @@ function addNetData(chart, labels, dataPoints) {
 }
 
 function removeNetData(chart) {
+    alert('cleared net')
     var length = chart.data.labels.length;
     for(var i = 0; i < length; i++){
         chart.data.labels.pop();
