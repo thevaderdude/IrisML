@@ -157,9 +157,7 @@ slinStart.addEventListener('click',function(){
         url: '/demos/slin',
         type: "POST",
         data: {inputs},
-		async: true,
         success: function(res) {
-            // y = a + bx
 
 			alert("Ajax callback: ");
 			instanceID = Number(res);
@@ -191,11 +189,11 @@ function checkNewData() {
 				}
 			}
 		}
-	});
-			
+	});		
 }
 
 function updateGraph(data) {
+    svg.selectAll("line").remove();
 	b = data.slope
     a = data.intercept
     
@@ -206,6 +204,7 @@ function updateGraph(data) {
 
     svg.append("line")
         .style("stroke", "black")
+        .attr("stroke-width", 3)
         .attr("x1", 0)
         .attr("y1", height - y1)
         .attr("x2", width)
