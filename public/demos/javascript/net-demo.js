@@ -109,6 +109,13 @@ netStart.addEventListener('click', function(){
         }
     }
     inputs.push(array[array.length - 1]);
+
+    inputs[1] = parseFloat(inputs[1]);
+    inputs[2] = parseFloat(inputs[2]);
+    inputs[3] = parseInt(inputs[3]);
+    inputs[4] = parseInt(inputs[4]);
+    inputs[6] = parseInt(inputs[6]);
+    console.log(inputs)
     
     $.ajax({
         url: '/demos/net',

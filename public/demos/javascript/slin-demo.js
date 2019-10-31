@@ -70,7 +70,13 @@ slinStart.addEventListener('click',function(){
             inputs.push(array[i].value)
         }
     }
+    inputs[0] = parseFloat(inputs[0]);
+    inputs[1] = parseFloat(inputs[1]);
+    inputs[2] = parseInt(inputs[2]);
+    inputs[3] = parseInt(inputs[3]);
     inputs.push(array[array.length - 1]);
+
+    
 
     console.log(inputs);
     $.ajax({
@@ -79,8 +85,8 @@ slinStart.addEventListener('click',function(){
         data: {inputs},
         success: function(res){
             // y = a + bx
-            b = res.item.b
-            a = res.item.a
+            b = res.item.slope
+            a = res.item.intercept
             
             var maxX = max(defaultData);
             var minX = min(defaultData);

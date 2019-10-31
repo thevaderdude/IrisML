@@ -97,7 +97,13 @@ binStart.addEventListener('click',function(){
             inputs.push(array[i].value)
         }
     }
+
+    inputs[1] = parseFloat(inputs[1]);
+    inputs[2] = parseFloat(inputs[2]);
+    inputs[3] = parseInt(inputs[3]);
+    inputs[4] = parseInt(inputs[4]);
     console.log(inputs)
+  
     $.ajax({
         url: '/demos/bin',
         type: "POST",

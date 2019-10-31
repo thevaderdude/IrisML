@@ -94,7 +94,13 @@ mlinStart.addEventListener('click',function(){
             inputs.push(array[i].value)
         }
     }
+
+    inputs[0] = parseFloat(inputs[0]);
+    inputs[1] = parseFloat(inputs[1]);
+    inputs[2] = parseInt(inputs[2]);
+    inputs[3] = parseInt(inputs[3]);
     console.log(inputs)
+    
     $.ajax({
         url: '/demos/mlin',
         type: "POST",
