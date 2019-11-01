@@ -18,7 +18,7 @@ var barChart = new Chart(barctx, {
   data: {
       labels: ['0','1','2','3','4','5','6','7','8','9'],
       datasets: [{
-          data: [10,10,10,10,10,10,10,10,10,10],
+          data: [0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1,0.1],
           backgroundColor: 'rgba(255,223,0,0.7)',
           borderColor: 'rgb(255,255,255)',
       }],
@@ -41,7 +41,7 @@ var barChart = new Chart(barctx, {
                   fontSize: 18
               },
               ticks: {
-                max: 100,
+                max: 1,
                 min: 0
               }
           }],

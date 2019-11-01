@@ -98,7 +98,6 @@ var slinChart = new Chart(slinctx, {
 });
 
 function addSlinData(chart, labels, dataPoints) {
-    alert('added slin')
      labels.forEach((label) => {
          chart.data.labels.push(label);
      })
@@ -111,7 +110,6 @@ function addSlinData(chart, labels, dataPoints) {
  }
  
 function removeSlinData(chart) {
-    alert('cleared slin')
      var length = chart.data.labels.length;
      for(var i = 0; i < length; i++){
          chart.data.labels.pop();
@@ -150,7 +148,6 @@ slinStart.addEventListener('click',function(){
     inputs.push(array[array.length - 1]);
 
     console.log(inputs);
-    removeSlinData(slinChart);
 
     $.ajax({
         url: '/demos/slin',
@@ -208,7 +205,8 @@ function updateGraph(data) {
         .attr("y1", height - y1)
         .attr("x2", width)
         .attr("y2", height - y2);
-
+        
+    removeSlinData(slinChart);
     addSlinData(slinChart, data.epoch, data.cost);
 }
 
