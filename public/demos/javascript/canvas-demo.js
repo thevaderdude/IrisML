@@ -5,14 +5,14 @@ var ctxBig = canvasBig.getContext('2d');
 var canvasSmall= document.getElementById('canvasSmall');
 var ctxSmall = canvasBig.getContext('2d');
 
-var oldGuessGraph;
+var oldGuessGraph = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var guessDataChecker;
 var guessSameCounter = 0;
 
 var canvas = new fabric.Canvas('canvasBig', {
   isDrawingMode: true,
 });
-canvas.freeDrawingBrush.width = 20;
+canvas.freeDrawingBrush.width = 15;
 
 var barctx = document.getElementById('bar-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
