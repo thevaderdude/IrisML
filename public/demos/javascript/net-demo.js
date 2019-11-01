@@ -146,11 +146,12 @@ function checkNewNetData() {
 			if (netLastEpoch != res.epoch[res.epoch.length-1]) {
 				netLastEpoch = res.epoch[res.epoch.length-1];
 				updateNetGraph(res);
-				console.log("Got new data and updated graph");
+                console.log("Got new data and updated graph");
+                netSameCounter = 0
 			} else {
 				netSameCounter += 1;
 				console.log("Same data");
-				if (netSameCounter > 20) {
+				if (netSameCounter > 60) {
 					clearInterval(netDataChecker);
 					console.log("Canceled netDataChecker");
 				}
