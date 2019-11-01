@@ -118,6 +118,34 @@ mlinStart.addEventListener('click',function(){
     }); 
 });
 
+function checkNewMlinData() {
+	$.ajax({
+		url: '/demos/newdata',
+		type: "GET",
+		data: {instanceID: mlinInstanceID},
+		success: function(res) {
+			console.log(res);
+			if(mlinLastEpoch != res.epoch[res.epoch.length-1]) {
+				mlinLastEpoch = res.epoch[res.epoch.length-1];
+				updateMlinGraph(res);
+				console.log("Got new data and updated graph");
+			} else {
+				mlinSameCounter += 1;
+				console.log("Same data");
+				if(mlinSameCounter > 20) {
+					clearInterval(mlinDataChecker);
+					console.log("Canceled mlinDataChecker");
+				}
+			}
+		}
+	});
+}
+
+function updateMlinGraph(data) {
+	removeMlinData(mlinChart);
+	addMlinData(mlinChart, data.epoch, data.cost);
+}
+
 mlin_dataset.addEventListener('change', function(){
     mlin_dataName = document.getElementById("mlin-datasetName");
     var arr = [];
