@@ -1,44 +1,53 @@
 const express = require('express');
+const fs = require('fs');
+
+var	  bodyParser = require('body-parser'),
+	  index = require('./routes/index'),
+	  demos = require('./routes/demos'),
+	  documentation = require('./routes/documentation'),
+	  color = require('./routes/color'),
+	  valen = require('./routes/valen');
+console.log("Did requires");
 const app = express();
-const mongoose = require('mongoose');
+
+//AWS Config
+var AWS = require("aws-sdk");
+
+fs.readFile('auth.json', function(err, data) {
+	if (err) {
+		console.log("Couldn't read AWS auth data from file. Error Message: " + err);
+	} else {
+		var awsconfigjson = JSON.parse(data);
+		console.log(awsconfigjson);
+		AWS.config.update({
+			accessKeyID: awsconfigjson.accessKeyID,
+			secretAccessKey: awsconfigjson.secretAccessKey,
+			region: awsconfigjson.region,
+			endpoint: awsconfigjson.endpoint
+		});
+		console.log("Added AWS authentication info from file.");
+	}
+});
+
+//END AWS Config
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true, parameterLimit: 1000000}));
+app.use(bodyParser.json());
+app.use(express.json({
+	type: 'application/json',
+}));
 app.use(express.static('public'));
 
-mongoose.connect('mongodb+srv://bobbyd:Amonalbus1!@cluster0-saber.mongodb.net/test?retryWrites=true&w=majority', {
-	useNewUrlParser: true,
-	useCreateIndex: true
-}).then(() => {
-	console.log('connected to db!?!');
-}).catch(err => {
-	console.log('error:', err.message);
-});
+app.use('/', index);
+app.use('/demos', demos);
+app.use('/documentation', documentation);
+app.use('/color', color);
+app.use('/valen', valen);
 
-app.get('/', (req, res) => {
+app.get('*', (req, res) => {
 	res.render("home/home.ejs");
+	console.log('404');
 });
-
-app.get('/demos', (req, res) => {
-	res.render("demos/demos.ejs");
-});
-
-app.get('/documentation', (req, res) => {
-	res.render("documentation/documentation.ejs");
-});
-
-app.get('/color', (req, res) => {
-	res.render("color/color.ejs");
-});
-
-app.get('/valen', (req, res) => {
-	res.render("valen.ejs");
-});
-
-app.get('/valen/timing', (req, res) => {
-	res.render("valen/timing.ejs")
-});
-
-//app.get('*', (req, res) => {
-//	res.render("home.ejs");
-//});
 
 var port = process.env.PORT || 8081;
 

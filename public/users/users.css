@@ -1,0 +1,31 @@
+html, body {
+    margin: 0;
+    height: 100%;
+  }
+  
+  body { 
+    background: url("../images/About-bg.png") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    overflow-x: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .jumbotron {
+      opacity: 0.97;
+      text-align: center;
+      text-shadow: 0px 4px 3px rgba(0,0,0,0.15),
+                   0px 8px 13px rgba(0,0,0,0.1),
+                   0px 18px 23px rgba(0,0,0,0.1);
+  }
+  
+  .navbar {
+    background-color: rgb(107, 130, 152);
+  }
+
+  .welcome {
+    font-size: 18px;
+  }
