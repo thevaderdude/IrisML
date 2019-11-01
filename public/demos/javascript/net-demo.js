@@ -8,6 +8,12 @@ var activation = document.getElementById("net-activation");
 var net_dataset = document.getElementById("net-dataset");
 var nodesArray = [];
 
+var netLastEpoch;
+
+var netInstanceID;
+var netDataChecker;
+var netSameCounter = 0;
+
 var netctx = document.getElementById('net-chart').getContext('2d');
 
 var netChart = new Chart(netctx, {
@@ -118,8 +124,13 @@ netStart.addEventListener('click', function(){
         type: "POST",
         data: {inputs},
         success: function(res){
-            removeNetData(netChart);
-            addNetData(netChart, res.item.epoch, res.item.cost);
+            
+			netInstanceID = Number(res);
+			console.log("netInstanceID is " + netInstanceID);
+			alert("Starting checkNewNetData for net");
+			netDataChecker = setInterval(checkNewNetData, 1000);
+			//removeNetData(netChart);
+            //addNetData(netChart, res.item.epoch, res.item.cost);
         },
         error: function(err){
             console.log(err)
@@ -127,6 +138,34 @@ netStart.addEventListener('click', function(){
     }); 
 });
 
+function checkNewNetData() {
+	$.ajax({
+		url: '/demos/newdata',
+		type: "GET",
+		data: {instanceID: netInstanceID},
+		success: function(res) {
+			console.log(res);
+			if (netLastEpoch != res.epoch[res.epoch.length-1]) {
+				netLastEpoch = res.epoch[res.epoch.length-1];
+				updateNetGraph(res);
+				console.log("Got new data and updated graph");
+			} else {
+				netSameCounter += 1;
+				console.log("Last epoch was same twice");
+				if (netSameCounter > 20) {
+					clearInterval(netDataChecker);
+					console.log("Canceled datachecker");
+				}
+			}
+		}
+	});
+}
+
+function updateNetGraph(data) {
+	//TODO
+	removeNetData(netChart);
+    addNetData(netChart, data.epoch, data.cost);
+}
 
 net_dataset.addEventListener('change', function(){
     net_dataName = document.getElementById("net-datasetName");
