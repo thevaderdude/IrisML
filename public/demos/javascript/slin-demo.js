@@ -11,12 +11,11 @@ var width = 650;
 var height = 500;
 graphData = []
 
-var slope;
-var intercept;
+var slinLastEpoch;
 
-var instanceID;
-var dataChecker;
-var sameCounter = 0;
+var slinInstanceID;
+var slinDataChecker;
+var slinSameCounter = 0;
 
 defaultData = [{x: 4335.0, y: 4167.0}, {x: 4216.0, y: 3920.0}, {x: 679.0, y: 673.0}, {x: 4466.0, y: 4714.0}, 
     {x: 2465.0, y: 2512.0}, {x: 2826.0, y: 2569.0}, {x: 2605.0, y: 2329.0}, {x: 4260.0, y: 4249.0}, 
@@ -154,11 +153,9 @@ slinStart.addEventListener('click',function(){
         type: "POST",
         data: {inputs},
         success: function(res) {
-        
-			alert("Ajax callback: ");
-			instanceID = Number(res);
-			console.log("instanceID is " + instanceID);
-			dataChecker = setInterval(checkNewData, 1000);
+			slinInstanceID = Number(res);
+			console.log("slinInstanceID is " + slinInstanceID);
+			slinDataChecker = setInterval(checkNewSlinData, 1000);
         },
         error: function(err){
             console.log(err)
@@ -166,29 +163,30 @@ slinStart.addEventListener('click',function(){
     }); 
 });
 
-function checkNewData() {
-	console.log("Checking new data from " + instanceID);
+function checkNewSlinData() {
 	$.ajax({
 		url: '/demos/newdata',
 		type: "GET",
-		data: {instanceID},
+		data: {instanceID: slinInstanceID},
 		success: function(res) {
-			console.log("Checked new data");
-			if (res.slope != slope || res.intercept != intercept) {
-				updateGraph(res);
+			console.log(res);
+			if (slinLastEpoch != res.epoch[res.epoch.length-1]) {
+				slinLastEpoch = res.epoch[res.epoch.length-1]
+				updateSlinGraph(res);
+				console.log("Got new data and updated graph");
 			} else {
-				sameCounter += 1;
+				slinSameCounter += 1;
 				console.log("Same data");
-				if (sameCounter > 30) {
-					clearInterval(dataChecker);
-					console.log("Canceled datachecker");
+				if (slinSameCounter > 20) {
+					clearInterval(slinDataChecker);
+					console.log("Canceled slinDataChecker");
 				}
 			}
 		}
 	});		
 }
 
-function updateGraph(data) {
+function updateSlinGraph(data) {
     svg.selectAll("line").remove();
 	b = data.slope
     a = data.intercept
@@ -205,7 +203,6 @@ function updateGraph(data) {
         .attr("y1", height - y1)
         .attr("x2", width)
         .attr("y2", height - y2);
-        
     removeSlinData(slinChart);
     addSlinData(slinChart, data.epoch, data.cost);
 }
