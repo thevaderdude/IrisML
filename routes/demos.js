@@ -25,8 +25,8 @@ router.post('/net', (req, res) => {
 			"layers": layers,
 			"epoch": [],
 			"cost": [],
-			"testing-inputs": [],
-			"testing-outputs": []
+			"testingInputs": [],
+			"testingOutputs": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 		}
 	};
 	
@@ -120,6 +120,30 @@ router.get('/newdata', (req, res) => {
 		res.send(data.Items[0]);
 	});
 		
+});
+
+router.post('/guess', (req, res) => {
+	var docClient = new AWS.DynamoDB.DocumentClient();
+	
+	for(var i = 0; i < req.body.data.length; i++) {
+		req.body.data[i] = Number(req.body.data[i]);
+	}
+	
+	docClient.update({
+		TableName: "IrisMLDemos",
+		Key: {"instanceID": Number(req.body.instanceID)},
+		UpdateExpression: "set #ti = :d",
+		ExpressionAttributeValues: {":d": req.body.data},
+		ExpressionAttributeNames: { "#ti": "testingInputs"},
+		ReturnValues: "UPDATED_NEW"
+	}, function(err, data) {
+		if (err) {
+			console.log("Unable to write testing data to server. Error: " + err);
+			return;
+		}
+		console.log("Sent testing data");
+		res.end();
+	});
 });
 
 function generateItem(data, callback) {

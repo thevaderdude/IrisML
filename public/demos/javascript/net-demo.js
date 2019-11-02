@@ -129,8 +129,6 @@ netStart.addEventListener('click', function(){
 			console.log("netInstanceID is " + netInstanceID);
 			alert("Starting checkNewNetData for net");
 			netDataChecker = setInterval(checkNewNetData, 1000);
-			//removeNetData(netChart);
-            //addNetData(netChart, res.item.epoch, res.item.cost);
         },
         error: function(err){
             console.log(err)
@@ -148,13 +146,14 @@ function checkNewNetData() {
 			if (netLastEpoch != res.epoch[res.epoch.length-1]) {
 				netLastEpoch = res.epoch[res.epoch.length-1];
 				updateNetGraph(res);
-				console.log("Got new data and updated graph");
+                console.log("Got new data and updated graph");
+                netSameCounter = 0
 			} else {
 				netSameCounter += 1;
-				console.log("Last epoch was same twice");
-				if (netSameCounter > 20) {
+				console.log("Same data");
+				if (netSameCounter > 60) {
 					clearInterval(netDataChecker);
-					console.log("Canceled datachecker");
+					console.log("Canceled netDataChecker");
 				}
 			}
 		}
@@ -162,7 +161,6 @@ function checkNewNetData() {
 }
 
 function updateNetGraph(data) {
-	//TODO
 	removeNetData(netChart);
     addNetData(netChart, data.epoch, data.cost);
 }

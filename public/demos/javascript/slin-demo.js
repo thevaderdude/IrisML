@@ -173,7 +173,8 @@ function checkNewSlinData() {
 			if (slinLastEpoch != res.epoch[res.epoch.length-1]) {
 				slinLastEpoch = res.epoch[res.epoch.length-1]
 				updateSlinGraph(res);
-				console.log("Got new data and updated graph");
+                console.log("Got new data and updated graph");
+                slinSameCounter = 0
 			} else {
 				slinSameCounter += 1;
 				console.log("Same data");
