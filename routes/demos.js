@@ -31,8 +31,13 @@ router.post('/net', (req, res) => {
 	};
 	
 	generateItem(item, function(err, data) {
-		console.log("Returned instanceID: " + data);
-		res.send(data.toString());
+		if (err) {
+			console.log("Error generating item: " + err);
+			res.end();
+		} else {
+			console.log("Returned instanceID: " + data);
+			res.send(data.toString());
+		}
 	});
 });
 
@@ -51,8 +56,13 @@ router.post('/slin', (req, res) => {
 		}
 	};
 	generateItem(item, function(err, data) {
-		console.log("Returned instanceID: " + data);
-		res.send(data.toString());
+		if (err) {
+			console.log("Error generating item: " + err);
+			res.end();
+		} else {
+			console.log("Returned instanceID: " + data);
+			res.send(data.toString());
+		}
 	});
 });
 
@@ -72,8 +82,13 @@ router.post('/mlin', (req, res) => {
 	};
 	
 	generateItem(item, function(err, data) {
-		console.log("Returned instanceID: " + data);
-		res.send(data.toString());
+		if (err) {
+			console.log("Error generating item: " + err);
+			res.end();
+		} else {
+			console.log("Returned instanceID: " + data);
+			res.send(data.toString());
+		}
 	});
 });
 
@@ -94,8 +109,13 @@ router.post('/bin', (req, res) => {
 	};
 	
 	generateItem(item, function(err, data) {
-		console.log("Returned instanceID: " + data);
-		res.send(data.toString());
+		if (err) {
+			console.log("Error generating item: " + err);
+			res.end();
+		} else {
+			console.log("Returned instanceID: " + data);
+			res.send(data.toString());
+		}
 	});
 });
 
