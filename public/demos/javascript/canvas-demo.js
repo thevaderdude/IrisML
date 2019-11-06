@@ -68,11 +68,31 @@ guess.addEventListener('click', function(){
   ctxSmall.drawImage(canvasBig, 0, 0, canvasBig.width, canvasBig.height, 0, 0, 28, 28);
   var image = ctxSmall.getImageData(0,0, canvasSmall.width, canvasSmall.height).data;
   var imgarr = [1];
-  for(var i = 0; i < image.length; i++){
-    if((i + 1) % 4 == 0){
-      imgarr.push(image[i] / 255);
+
+  //get canvasBig into a usable array
+  var bigArr = [];
+  var bigImg = ctxBig.getImageData(0, 0, canvasBig.width, canvasBig.height).data;
+  for(i = 3; i < bigImg.length; i+=4){
+    bigArr.push(bigImg[i]);
+  }
+  //downscale to 28x28 array
+  for(var i = 0; i < 420; i += 15){
+    for(var j = 0; j < 420; j += 15){
+      var arrTemp = []
+      for(var k = 0; k < 15; k++){
+        for(var l = 0; l < 15; l++){
+          arrTemp.push(bigArr[(420 * (l + j)) + (i + k)]); 
+        }
+      }
+      var avg = 0;
+      for(var k = 0; k < 225; k++){
+        avg += arrTemp[k];
+      }
+      avg /= 225;
+      imgarr.push(avg / 255);
     }
   }
+  console.log(imgarr);
 
   $.ajax({
     url: '/demos/guess',
