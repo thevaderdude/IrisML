@@ -26,6 +26,39 @@
 </nav>
 
 <h1 class="row justify-content-center">
+  Handwritten Digits Pddre-trained Demo
+</h1>
+
+<div class="container round mb-5 px-5">
+<div class="py-4 d-flex">
+<div class="d-flex row justify-content-between">
+  <div class="col-4">
+    <div class="mb-2" id='container'>
+      <canvas class="border" id='canvasBig' width='280' height='280'></canvas>
+    </div>
+    <div class="d-flex">
+      <div id='buttons'>            
+        <button type="button" id="guess" value='Clear Canvas' class="btn btn-success mb-3">Guess</button>
+      </div>
+      <div class='ml-4' id='buttons'>
+        <button type="button" id="clear" value='Clear Canvas' class="btn btn-danger mb-3">Clear</button>
+      </div>
+    </div>
+    <div class="mb-2 hidden" id='container'>
+      <canvas id='canvasSmall' width='28' height='28'></canvas>
+    </div>
+  </div>
+  <div class="col-xl-8">
+    <div class="row">
+      <canvas id="bar-chart" width='100'></canvas>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+<h1 class="row justify-content-center">
     Classification Neural Network Demo
 </h1>
 
