@@ -12,7 +12,7 @@ var guessSameCounter = 0;
 var canvas = new fabric.Canvas('canvasBig', {
   isDrawingMode: true,
 });
-canvas.freeDrawingBrush.width = 15;
+canvas.freeDrawingBrush.width = 45;
 
 var barctx = document.getElementById('bar-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
@@ -72,6 +72,7 @@ guess.addEventListener('click', function(){
   //get canvasBig into a usable array
   var bigArr = [];
   var bigImg = ctxBig.getImageData(0, 0, canvasBig.width, canvasBig.height).data;
+  console.log(bigImg);
   for(i = 3; i < bigImg.length; i+=4){
     bigArr.push(bigImg[i]);
   }

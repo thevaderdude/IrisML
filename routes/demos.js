@@ -6,6 +6,25 @@ router.get('/', function(req, res, next) {
 	res.render("demos/demos.ejs");
 });
 
+router.post('/preguess', (req, res) => {
+	var inputs = [];
+	for(var i = 0; i < req.body.data.length; i++) {
+		inputs.push(Number(req.body.data[i]));
+	}
+	var item = {
+		TableName: "IrisMLDemos",
+		Item: {
+			"type": "digitsPreGuess",
+			"testingInputs": inputs,
+		}
+	};
+
+	generateItem(item, function(err, data) {
+		console.log("Returned instanceID: " + data);
+		res.send(data.toString());
+	});
+});
+
 router.post('/net', (req, res) => {
 	numLayers = req.body.inputs[7];
 	layers = []
@@ -122,6 +141,28 @@ router.get('/newdata', (req, res) => {
 		
 });
 
+router.get('/prenewdata', (req, res) => {
+	var docClient = new AWS.DynamoDB.DocumentClient();
+	docClient.query({
+		TableName: "IrisMLDemos",
+		ConsistentRead: true,
+		KeyConditionExpression: "instanceID = :id",
+		ExpressionAttributeValues: {
+			":id": Number(req.query.instanceID)
+		}
+	}, function(err, data) {
+		if (err) {
+			console.log("Couldn't read table. Error: " + err);
+			return;
+		}
+		if (data.Count < 1) {
+			console.log("0 results for instanceID.");
+			return;
+		}
+		res.send(data.Items[0]);
+	});
+		
+});
 router.post('/guess', (req, res) => {
 	var docClient = new AWS.DynamoDB.DocumentClient();
 	
