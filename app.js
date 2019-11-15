@@ -6,7 +6,12 @@ var	  bodyParser = require('body-parser'),
 	  demos = require('./routes/demos'),
 	  documentation = require('./routes/documentation'),
 	  color = require('./routes/color'),
-	  valen = require('./routes/valen');
+	  valen = require('./routes/valen'),
+	  digitsDemo = require('./routes/digitsDemo.js'),
+	  slinDemo = require('./routes/slinDemo.js'),
+	  mlinDemo = require('./routes/mlinDemo.js'),
+	  binDemo = require('./routes/binDemo.js');
+	  preDigitsDemo = require('./routes/preDigitsDemo.js')
 console.log("Did requires");
 const app = express();
 
@@ -43,6 +48,11 @@ app.use('/demos', demos);
 app.use('/documentation', documentation);
 app.use('/color', color);
 app.use('/valen', valen);
+app.use('/demos/digits', digitsDemo);
+app.use('/demos/slin', slinDemo);
+app.use('/demos/mlin', mlinDemo);
+app.use('/demos/log', binDemo);
+app.use('/demos/pretraineddigits', preDigitsDemo);
 
 app.get('*', (req, res) => {
 	res.render("home/home.ejs");

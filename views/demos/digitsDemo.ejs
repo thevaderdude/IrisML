@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IrisML</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="demos.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="text-white">
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="/">IrisML</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Demos</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/demos/digits">Digits Demo</a>
+          <a class="dropdown-item" href="/demos/Slin">Slin Demo</a>
+          <a class="dropdown-item" href="/demos/Mlin">Mlin Demo</a>
+          <a class="dropdown-item" href="/demos/bin">Log Demo</a>
+          <a class="dropdown-item" href="/demos/pretraineddigits">Pre-Trained Digits Demo</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/documentation">Documentation</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<h1 class="row justify-content-center">
+    Classification Neural Network Demo
+</h1>
+
+<div class="container round mb-5 px-5">
+  
+  <div class="py-4 d-flex">
+    <button type="submit" id="net-start" class="btn btn-success mb-3">Start</button>
+    <button type="button" id="net-reset" class="btn btn-danger ml-3 mb-3">Reset</button>
+  </div>
+  
+  <div class="d-flex row justify-content-between">
+    <div class="col-4">
+      <div class="mb-2" id='container'>
+        <canvas class="border" id='canvasBig' width='280' height='280'></canvas>
+      </div>
+      <div class="d-flex">
+        <div id='buttons'>            
+          <button type="button" id="guess" value='Clear Canvas' class="btn btn-success mb-3">Guess</button>
+        </div>
+        <div class='ml-4' id='buttons'>
+          <button type="button" id="clear" value='Clear Canvas' class="btn btn-danger mb-3">Clear</button>
+        </div>
+      </div>
+      <div class="mb-2 hidden" id='container'>
+        <canvas id='canvasSmall' width='28' height='28'></canvas>
+      </div>
+    </div>
+    <div class="col-xl-8">
+      <div class="row">
+        <canvas id="bar-chart" width='100'></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center pb-5">
+    <canvas id="net-chart" width='100'></canvas>
+  </div>
+
+  <div>
+    <div class="row pb-4">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Epochs</span>
+          </div>
+          <input form="net-training" type="number" class="form-control" placeholder="1000" id="net-epochs" name="net_epochs">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Batch Size</span>
+          </div>
+          <input form="net-training" type="number" class="form-control" placeholder="30" id="net-batchSize" name="net_batchSize">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+            <div class="input-group-prepend">
+                <label for="exampleFormControlSelect1"></label>
+                <select id="net-dataset" class="form-control" id="exampleFormControlSelect1">
+                  <option>Digits</option>
+                </select>
+            </div>
+          <input form="net-training" type="text" class="form-control" placeholder="Digits" id="net-datasetName" name="net_datasetName">
+        </div>
+      </div>
+    </div>
+    <div class="row pb-4">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+            <div class="input-group-prepend">
+                <label for="exampleFormControlSelect1"></label>
+                <select id="net-activation" class="form-control" id="exampleFormControlSelect1">
+                  <option>relu</option>
+                  <option>sigmoid</option>
+                </select>
+            </div>
+          <input form="net-training" id="net-activationName" type="text" class="form-control" placeholder="relu" name="net_activationName">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Alpha</span>
+          </div>
+          <input form="net-training" type="number" class="form-control" placeholder="0.03" id="net-alpha" name="net_alpha">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Lambda</span>
+          </div>
+          <input form="net-training" type="number" class="form-control" placeholder="0.3" id="net-lambda" name="net_lambda">
+        </div>
+      </div>
+    </div>
+    <div class="row pb-4">
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Layers</span>
+          </div>
+          <input form="net-training" type="number" class="form-control" placeholder="4" id="layers" name="net_numlayers">
+        </div>
+      </div>
+      <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+              <label for="exampleFormControlSelect1"></label>
+              <select id="nodes" class="form-control" id="exampleFormControlSelect1">
+                <option>Nodes in Hidden Layer 1</option>
+                <option>Nodes in Hidden Layer 2</option>
+              </select>
+          </div>
+          <input form="net-training" id="nodesLayer" type="number" class="form-control" placeholder="16" name="nodelayers">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.4.0/fabric.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="javascript/net-demo.js"></script>
+<script src="javascript/canvas-demo.js"></script>
+</body>
+</html>

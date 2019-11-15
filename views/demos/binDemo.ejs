@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>IrisML</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="demos.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body class="text-white">
+
+<nav class="navbar fixed-top navbar-expand-lg navbar-light">
+  <a class="navbar-brand" href="/">IrisML</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Demos</a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/demos/digits">Digits Demo</a>
+          <a class="dropdown-item" href="/demos/slin">Slin Demo</a>
+          <a class="dropdown-item" href="/demos/mlin">Mlin Demo</a>
+          <a class="dropdown-item" href="/demos/log">Log Demo</a>
+          <a class="dropdown-item" href="/demos/pretraineddigits">Pre-Trained Digits Demo</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/documentation">Documentation</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<h1 class="row justify-content-center">
+    Logistic Regression Demo
+</h1>
+
+<div class="container round mb-5">
+
+  <div class="py-4 pl-3 d-flex">
+    <button type="submit" id="bin-start" class="btn btn-success mb-3">Start</button>
+    <button type="button" id="bin-reset"class="btn btn-danger ml-3 mb-3">Reset</button>
+  </div>
+
+  <div class="row justify-content-center pb-5 px-4">
+    <canvas id="bin-chart" width='100'></canvas>
+  </div>
+
+  <div class="row m-auto pb-4">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
+          <div class="input-group-prepend">
+              <label for="exampleFormControlSelect1"></label>
+              <select id="bin-activation" class="form-control" id="exampleFormControlSelect1">
+                <option>sigmoid</option>
+                <option>relu</option>
+              </select>
+          </div>
+        <input form="bin-training" id="bin-activationName" type="text" class="form-control" placeholder="sigmoid" name="bin[activation]">
+      </div>
+     </div>
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Alpha</span>
+        </div>
+        <input form="bin-training" id="bin-alpha" type="number" class="form-control" placeholder="0.03" name="bin[alpha]">
+      </div>
+    </div>
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Lambda</span>
+        </div>
+        <input form="bin-training" id="bin-lambda" type="number" class="form-control" placeholder="0.3" name="bin[lambda]">
+      </div>
+    </div>
+  </div>
+  <div class="row m-auto pb-4">
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Epochs</span>
+        </div>
+        <input form="bin-training" id="bin-epochs" type="number" class="form-control" placeholder="1000" name="bin[epochs]">
+      </div>
+    </div>
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+      <div class="input-group mb-auto">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Batch Size</span>
+        </div>
+        <input form="bin-training" id="bin-batchSize" type="number" class="form-control" placeholder="30" name="bin[batchSize]">
+      </div>
+    </div>
+    <div class="col d-flex flex-row justify-content-center mx-xl-5 mx-lg-5 mx-md-0">
+        <div class="input-group mb-auto">
+            <div class="input-group-prepend">
+                <label for="exampleFormControlSelect1"></label>
+                <select id="bin-dataset" class="form-control" id="exampleFormControlSelect1">
+                  <option>IRIS</option>
+                </select>
+            </div>
+          <input form="bin-training" id="bin-datasetName" type="text" class="form-control" placeholder="IRIS" name="bin[dataset]">
+        </div>
+      </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.12.0/d3.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/3.4.0/fabric.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="javascript/bin-demo.js"></script>
+</body>
+</html>

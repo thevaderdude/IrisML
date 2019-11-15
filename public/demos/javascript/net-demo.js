@@ -127,7 +127,6 @@ netStart.addEventListener('click', function(){
             
 			netInstanceID = Number(res);
 			console.log("netInstanceID is " + netInstanceID);
-			alert("Starting checkNewNetData for net");
 			netDataChecker = setInterval(checkNewNetData, 1000);
         },
         error: function(err){
