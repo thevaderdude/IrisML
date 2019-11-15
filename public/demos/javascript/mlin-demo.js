@@ -2,6 +2,12 @@ var mlinStart = document.querySelector("#mlin-start");
 var mlinReset = document.querySelector("#mlin-reset");
 var mlin_dataset = document.getElementById("mlin-dataset");
 
+var mlinLastEpoch;
+
+var mlinInstanceID;
+var mlinDataChecker;
+var mlinSameCounter = 0;
+
 var ctx = document.getElementById('mlin-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
@@ -109,8 +115,9 @@ mlinStart.addEventListener('click',function(){
         type: "POST",
         data: {inputs},
         success: function(res){
-            removeMlinData(mlinChart)
-            addMlinData(mlinChart, res.item.epoch, res.item.cost)
+            mlinInstanceID = Number(res);
+			console.log("mlinInstanceID is " + mlinInstanceID);
+			mlinDataChecker = setInterval(checkNewMlinData, 1000);
         },
         error: function(err){
             console.log(err)

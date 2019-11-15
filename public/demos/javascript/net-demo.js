@@ -124,7 +124,6 @@ netStart.addEventListener('click', function(){
         type: "POST",
         data: {inputs},
         success: function(res){
-            
 			netInstanceID = Number(res);
 			console.log("netInstanceID is " + netInstanceID);
 			netDataChecker = setInterval(checkNewNetData, 1000);
