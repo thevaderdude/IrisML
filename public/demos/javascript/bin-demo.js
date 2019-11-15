@@ -3,6 +3,12 @@ var binReset = document.querySelector("#bin-reset");
 var bin_dataset = document.getElementById("bin-dataset");
 var bin_activation = document.getElementById("bin-activation");
 
+var binLastEpoch;
+
+var binInstanceID;
+var binDataChecker;
+var binSameCounter = 0;
+
 var ctx = document.getElementById('bin-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
 
@@ -112,8 +118,9 @@ binStart.addEventListener('click',function(){
         type: "POST",
         data: {inputs},
         success: function(res){
-            removeBinData(binChart);
-            addBinData(binChart, res.item.epoch, res.item.cost);
+            binInstanceID = Number(res);
+			console.log("binInstanceID is " + binInstanceID);
+			binDataChecker = setInterval(checkNewBinData, 1000);
         },
         error: function(err){
             console.log(err)
@@ -121,6 +128,34 @@ binStart.addEventListener('click',function(){
     }); 
 });
 
+function checkNewBinData() {
+	$.ajax({
+		url: '/demos/newdata',
+		type: "GET",
+		data: {instanceID: binInstanceID},
+		success: function(res) {
+			console.log(res);
+			if (binLastEpoch != res.epoch[res.epoch.length-1]) {
+				binLastEpoch = res.epoch[res.epoch.length-1];
+				updateBinGraph(res);
+                console.log("Got new data and updated graph");
+                binSameCounter = 0
+			} else {
+				binSameCounter += 1;
+				console.log("Same data");
+				if (binSameCounter > 60) {
+					clearInterval(binDataChecker);
+					console.log("Canceled binDataChecker");
+				}
+			}
+		}
+	});
+}
+
+function updateBinGraph(data) {
+	removeBinData(binChart);
+    addBinData(binChart, data.epoch, data.cost);
+}
 
 bin_dataset.addEventListener('change', function(){
     bin_dataName = document.getElementById("bin-datasetName");
