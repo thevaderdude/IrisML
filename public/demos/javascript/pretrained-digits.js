@@ -2,18 +2,17 @@ var clear = document.getElementById('preClear');
 var guess = document.getElementById('preGuess');
 var canvasBig = document.getElementById('preCanvasBig');
 var ctxBig = canvasBig.getContext('2d');
-var canvasSmall= document.getElementById('preCanvasSmall');
 var ctxSmall = canvasBig.getContext('2d');
 
 var oldGuessGraph = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var guessDataChecker;
-var guessSameCounter = 0;
-var guessInstanceId;
+var preGuessSameCounter = 0;
+var guessInstanceID;
 
 var canvas = new fabric.Canvas('preCanvasBig', {
     isDrawingMode: true,
 });
-canvas.freeDrawingBrush.width = 45; //this width works! :)
+canvas.freeDrawingBrush.width = 30; //this width works! :)
 
 var barctx = document.getElementById('preBar-chart').getContext('2d');
 Chart.defaults.global.defaultFontColor = 'rgb(255,255,255)';
@@ -66,8 +65,6 @@ var barChart = new Chart(barctx, {
   });
   
   guess.addEventListener('click', function(){
-    ctxSmall.drawImage(canvasBig, 0, 0, canvasBig.width, canvasBig.height, 0, 0, 28, 28);
-    var image = ctxSmall.getImageData(0,0, canvasSmall.width, canvasSmall.height).data;
     var imgarr = [1];
   
     //get canvasBig into a usable array
@@ -80,19 +77,21 @@ var barChart = new Chart(barctx, {
     }
     console.log(bigArr);
     //downscale to 28x28 array
-    for(var i = 0; i < 560; i += 20){
-      for(var j = 0; j < 560; j += 20){
+    var size = 420;
+    var step = size / 28;
+    for(var i = 0; i < size; i += step){
+      for(var j = 0; j < size; j += step){
         var arrTemp = []
-        for(var k = 0; k < 20; k++){
-          for(var l = 0; l < 20; l++){
-            arrTemp.push(bigArr[(560 * (l + j)) + (i + k)]); 
+        for(var k = 0; k < step; k++){
+          for(var l = 0; l < step; l++){
+            arrTemp.push(bigArr[(size * (i + k)) + (l + j)]); 
           }
         }
         var avg = 0;
-        for(var k = 0; k < 400; k++){
+        for(var k = 0; k < Math.pow(step, 2); k++){
           avg += arrTemp[k];
         }
-        avg /= 400;
+        avg /= Math.pow(step, 2);
         imgarr.push(avg / 255);
       }
     }
@@ -103,15 +102,15 @@ var barChart = new Chart(barctx, {
       type: "POST",
       data: {data: imgarr},
       success: function(res){
-          guessInstanceId = Number(res);
+          guessInstanceID = Number(res);
           //TODO: Read graph instead of DB
           $.ajax({
               url: '/demos/prenewdata',
               type: "GET",
-              data: {instanceID: guessInstanceId},
+              data: {instanceID: guessInstanceID},
               success: function(res) {
-
-                  oldGuessGraph = res.testingOutputs;
+                console.log('preguess post request works! instanceID ' + guessInstanceID);
+                oldGuessGraph = res.testingOutputs;
               },
           });
           
@@ -128,11 +127,19 @@ var barChart = new Chart(barctx, {
           url: '/demos/prenewdata',
           type: "GET",
           data: {instanceID: guessInstanceID},
-          success: function(res) {
+          success: function(res) {  
               if (res.testingOutputs != oldGuessGraph) {
                   updateGuessGraph(res)
                   console.log("Updated guess graph");
                   clearInterval(guessDataChecker);
+              }
+              else {
+                preGuessSameCounter += 1;
+                console.log("Same data");
+                if (netSameCounter > 60) {
+                  clearInterval(guessDataChecker);
+                  console.log("Canceled preGuessDataChecker");
+                }
               }
           },
       });
