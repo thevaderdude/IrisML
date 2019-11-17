@@ -1,0 +1,12 @@
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+node_modules/
+npm-debug.log
+.vscode/
+.elasticbeanstalk/
+.routes/authentication.js
+
+auth.json

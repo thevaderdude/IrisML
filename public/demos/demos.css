@@ -1,0 +1,45 @@
+body { 
+  background: url("../images/About-bg.png") no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  overflow-x: hidden;
+  padding-top: 80px
+}
+
+#black {
+  color: rgb(33,40,48);
+}
+
+.navbar {
+  background-color: rgb(107, 130, 152);
+}
+
+.container {
+  background: rgb(10, 38, 99);
+  overflow: hidden;
+}
+
+.round {
+  border-radius: 3%;
+}
+
+.welcome {
+  font-size: 18px;
+}
+
+.hidden {
+  display: none
+}
+
+#container {
+  width: 300px;
+  height: 300px;
+  position: relative;
+  border: rgb(255,223,0);
+}
+#canvas {
+  position: absolute;
+  background-color: white;
+}
